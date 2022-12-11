@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/11 14:44:39 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/11 15:42:42 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 # define NEWLINE std::cout << std::endl;
 # define BORDER std::cout << "------------------------------------------------------------------" << std::endl;
 # define HEADLINE std::cout << "\033[38;5;81m ";
-// colour, font, underlined
 # define BOLD std::cout << "\033[0;1m";
 # define RESET std::cout << "\033[0m" << std::endl;
-
 
 # include "include/containers.hpp"
 # include <string>
@@ -96,7 +94,7 @@ void test_vector()
 		BOLD std::cout << "[] OPERATOR:"; RESET
 		ft::vector<int>::iterator it0(vec.begin());
 		std::cout << "it(vec.begin());       print it[3]: \'" << it0[3] << "\'" << std::endl;
-		ft::vector<int>::iterator it1(&vec[1]);
+		ft::vector<int>::iterator it1(++vec.begin());
 		std::cout << "it(&vec[1]);           print it[3]: \'" << it1[3] << "\'" << std::endl;
 
 		NEWLINE NEWLINE NEWLINE
@@ -190,6 +188,22 @@ void test_vector()
 			std::cout << "MOD[" << i << "] = \"" << clear[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
+		BOLD std::cout << "--> .SWAP():\t\t\t\t(swapping default && other)"; RESET
+		ft::vector<std::string> other(2, "Other stuff");
+		BOLD std::cout << "--> OTHER VECTOR:"; RESET
+		for (size_t i = 0; i < other.size(); i++)
+			std::cout << "OTH[" << i << "] = \"" << other[i] << "\"" << std::endl;
+		NEWLINE
+		def.swap(other);
+		std::cout << "DEFAULT:\n";
+		for (size_t i = 0; i < def.size(); i++)
+			std::cout << "\tDEF[" << i << "] = \"" << def[i] << "\"" << std::endl;
+		std::cout << "OTHER:\n";
+		for (size_t i = 0; i < other.size(); i++)
+			std::cout << "\tOTH[" << i << "] = \"" << other[i] << "\"" << std::endl;
+		NEWLINE BORDER
+
+
 		// ft::vector<std::string> insert(def);
 		// BOLD std::cout << "--> .INSERT(1, \"inserted string\"):\t\t\t\t()"; RESET
 		// insert.insert();
@@ -235,6 +249,8 @@ void test_vector()
 		
 	}
 }
+
+
 	// }
 	// TESTS WITH ORIGINAL
 	// {

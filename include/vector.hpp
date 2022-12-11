@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/11 14:45:33 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/11 15:40:44 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,20 +113,20 @@ namespace ft
 			size_type			_size;
 			size_type			_capacity;
 
-			// void	grow(void)
-			// {
-			// 	_capacity = (_capacity) ? _capacity * 2 : 1;
+			void	grow(void)
+			{
+				_capacity = (_capacity) ? _capacity * 2 : 1;
 		
-			// 	pointer new_data = _alloc.allocate(_capacity);
-			// 	for (size_type i = 0; i < _size; i++)
-			// 		_alloc.construct(&_data[i], src[i]);
+				pointer new_data = _alloc.allocate(_capacity);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.construct(&new_data[i], &_data[i]);
 
-			// 	for (size_type i = 0; i < _size; i++)
-			// 		_alloc.destroy(&_data[i]);
-			// 	_alloc.deallocate(_data, _capacity);
-				
-			// 	_data = new_data;
-			// }
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&_data[i]);
+				_alloc.deallocate(_data, _capacity);
+
+				_data = new_data;
+			}
 
 		public:
 		// EXPLICIT:
@@ -238,8 +238,8 @@ namespace ft
 		const_reference		operator[](size_type n) const	{ return _data[n]; }
 
 		// as -> Checks whether n is in the bounds and throws an exception and accesses element
-		reference 			at(size_type n)			{ return (n >= _size) ? throw std::out_of_range("ft::vector") : _data[n]; }
-		const_reference		at(size_type n) const	{ return (n >= _size) ? throw std::out_of_range("ft::vector") :  _data[n]; }
+		reference 			at(size_type n)			{ if (n >= _size) throw std::out_of_range("ft::vector"); return _data[n]; }
+		const_reference		at(size_type n) const	{ if (n >= _size) throw std::out_of_range("ft::vector"); return _data[n]; }
 		
 		// front -> Accesses first element, if empty its UNDEFINED
 		reference			front()			{ return _data[0]; }
@@ -258,31 +258,32 @@ namespace ft
 			_size = 0;
 		}
 
-		// insert -> inserts the specified elements into the container
-
-		// erase -> erases the specified elements from the container
-		
-		
-		// assign -> Any elements held in the container before the call are destroyed and replaced by newly constructed elements 
-		// template <class Iterator>
-		// void assign (Iterator first, Iterator last)
-		// {
+		// swap -> Exchanges the contents of the container with those of the other
+		// ALSO COULD CALL Calls lhs.swap(rhs) MAYBE
+		void	swap( vector& other )
+		{
+			allocator_type tmp_alloc = _alloc;
+			_alloc = other._alloc;
+			other._alloc = tmp_alloc;
 			
-		// }
-
-		// void assign (size_type n, const value_type& val)
-		// {
-		// 	clear();
-		// 	_size = n;
-		// 	for (size_type i = 0; i < _size; i++)
-		// 		 _alloc.construct(&_data[i], val);
-		// }
-		
-		// swap -> Exchanges the contents of the container with those of other
-		// void	swap( vector& other )
-		// {
+			pointer tmp_data = _data;
+			_data = other._data;
+			other._data = tmp_data;
 			
-		// }
+			if (_size != other.size())
+			{
+				_size ^= other._size;
+				other._size ^= _size;
+				_size ^= other._size;
+			}
+
+			if (_capacity != other.capacity())
+			{
+				_capacity ^= other._capacity;
+				other._capacity ^= _capacity;
+				_capacity ^= other._capacity;
+			}
+		}
 		
 		// ----------------------- ALLOCATOR --------------------
 	
