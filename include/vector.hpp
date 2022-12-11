@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/11 15:40:44 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/11 20:04:58 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ namespace ft
 		bool	operator!=(const VectorIterator& other) const { return _ptr != other._ptr; }
 
 	};
-
 
 	// need to do the other overloads
 	// it needs to be comatible with STL containers
@@ -128,12 +127,30 @@ namespace ft
 				_data = new_data;
 			}
 
+			//  template< typename InputIterator >
+			// void	_assign_range( InputIterator first, InputIterator last, input_iterator_tag  )
+			// {
+			// 	clear();
+			// 	for ( ; first != last; first++)
+			// 		push_back(*first);
+			// }
+
+			// template< typename InputIterator >
+			// void	_assign_range( InputIterator first, InputIterator last, random_access_iterator_tag )
+			// {
+			// 	clear();
+			// 	reserve(ft::distance(first, last));
+			// 	for (_size = 0; first != last; _size++, first++)
+			// 		_alloc.construct(_ptr + _size, *first);
+			// }
+
 		public:
 		// EXPLICIT:
 		// used to mark constructors to not implicitly convert types in C++.
 		// It is optional for constructors that take exactly one argument
 		// and work on constructors(with a single argument)
 		// since those are the only constructors that can be used in typecasting -> (BEING ABLE TO CAST TO STD CONTAINER???)
+		// ====> converting constructor
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		
@@ -149,6 +166,7 @@ namespace ft
 		}
 		
 		// fill constructor
+		// LATER USE ASSIGN
 		explicit vector(size_type n, value_type val ,const allocator_type& alloc = allocator_type())
 			: _alloc(alloc), _size(n), _capacity(n)
 		{
@@ -158,14 +176,14 @@ namespace ft
 				_alloc.construct(&_data[i], val);
 		}
 
-
 		// range constructor
-		// explicit vector(iterator begin, iterator end, value_type val, const allocator_type& alloc = allocator_type())
-		// 	: _alloc(alloc), _size(end - begin), _capacity(end - begin)
+		// template <class InputIterator>
+		// vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+		// 	: _alloc(alloc), _size(0), _capacity(0)
 		// {
-			
+		// 	assign(first, last);
 		// }
-		
+
 		// copy constructor -> creates a container that keeps and uses a copy of src's allocator
 		explicit vector( const vector &src)
 			: _alloc(src.get_allocator()), _size(src.size()), _capacity(src.capacity())
@@ -202,34 +220,12 @@ namespace ft
 		size_type	max_size() const	{ return _alloc.max_size(); }
 
 		// // reserve -> Increase the capacity of the vector   STRONG EXECPTION GARANTIE
-		// void	reserve(size_type new_capacity)
-		// {
-		// 	try
-		// 	{
-		// 		if (new_capacity > max_size())
-		// 			throw std::length_error("ft::vector");
-		// 		else if (new_capacity > _capacity)
-		// 		{
-		// 			pointer new_data = realloc(_data, new_capacity);
-		// 			if (new_data != NULL)
-		// 				_data 
-		// 			_capacity = new_capacity;
-		// 		}
-		// 	}
-		// 	catch(const std::exception& e)
-		// 	{
-		// 		std::cerr << e.what() << '\n';
-		// 	}
-		// }
 
 		// capacity -> Return size of allocated storage capacity
 		size_type	capacity() const	{ return _capacity; };
 
 		// empty -> Test wheter vector is empty
 		bool		empty() const		{ return _size == 0; }
-
-		// reserve -> 	Request a change in capacity
-		// void		reserve(size_type n) {}
 
 		// ----------------------- ELEMENT ACCESS --------------------
 		
@@ -250,6 +246,17 @@ namespace ft
 		const_reference		back() const	{ return _data[_size - 1]; }
 
 		// ----------------------- MODIFIERS --------------------
+		// assign -> assignsn ew contents to the vector (1) Range
+		// template <class InputIterator>
+		// void assign (InputIterator first, InputIterator last)
+		// {
+		// 	_assign_range(first, last, typename ft::iterator_traits<InputIterator>::iterator_category());
+		// }
+		
+		// void assign (size_type n, const value_type& val)
+		// {
+		// }
+		
 		// clear -> clears the elements
 		void	clear()
 		{
@@ -258,8 +265,15 @@ namespace ft
 			_size = 0;
 		}
 
+
+		// pop_back -> Removes the last element in the vector
+		void	pop_back()
+		{
+			_alloc.destroy(&_data[_size-1]);
+			_size -= 1;
+		}
+
 		// swap -> Exchanges the contents of the container with those of the other
-		// ALSO COULD CALL Calls lhs.swap(rhs) MAYBE
 		void	swap( vector& other )
 		{
 			allocator_type tmp_alloc = _alloc;
@@ -290,6 +304,36 @@ namespace ft
 		// get_allocator -> Returns a copy of the allocator object associated with the vector.
 		allocator_type get_allocator() const { return allocator_type(_alloc); }
 	};
+
+
+	// NEED TO CHANGE IT TO FT::EQUAL
+	// template <class T, class Alloc>
+	// bool	operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	// {
+	// 	return (lhs.size() == rhs.size() && std::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	// }
+
+	// template <class T, class Alloc>
+	// bool	operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	// {
+	// 	return !(lhs == rhs);
+	// }
+	
+	// template <class T, class Alloc>
+	// bool	operator< (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	// {
+		
+	// }
+
+	// template <class T, class Alloc>
+	// bool	operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+
+	// template <class T, class Alloc>
+	// bool	operator>	(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	
+	// template <class T, class Alloc> 
+	// bool	operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+
 }	//namespace ft
 
 #endif

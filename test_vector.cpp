@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/11 15:42:42 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/11 20:05:28 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,23 @@
 # include "include/containers.hpp"
 # include <string>
 # include <vector>
+
+/*
+	TO DO:
+	RANGE CONSTRUCTOR:
+	-> assign
+		-> reserve
+			-> realloc
+		-> private _assign_range
+			-> push_back
+				-> reserve
+			-> ft::distance
+	-> resize
+		-> push_back
+	RELATIONAL OPERATORS
+		-> ft::equal
+		-> ft::lexographical_compare
+*/
 
 void test_vector()
 {
@@ -97,7 +114,7 @@ void test_vector()
 		ft::vector<int>::iterator it1(++vec.begin());
 		std::cout << "it(&vec[1]);           print it[3]: \'" << it1[3] << "\'" << std::endl;
 
-		NEWLINE NEWLINE NEWLINE
+		NEWLINE NEWLINE
 	}
 	HEADLINE
 	std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<< CAPACITY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
@@ -188,6 +205,13 @@ void test_vector()
 			std::cout << "MOD[" << i << "] = \"" << clear[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
+		ft::vector<std::string> pop_back(def);
+		BOLD std::cout << "--> .POP_BACK():"; RESET
+		pop_back.pop_back();
+		for (size_t i = 0; i < pop_back.size(); i++)
+			std::cout << "POP[" << i << "] = \"" << pop_back[i] << "\"" << std::endl;
+		NEWLINE BORDER
+
 		BOLD std::cout << "--> .SWAP():\t\t\t\t(swapping default && other)"; RESET
 		ft::vector<std::string> other(2, "Other stuff");
 		BOLD std::cout << "--> OTHER VECTOR:"; RESET
@@ -202,7 +226,6 @@ void test_vector()
 		for (size_t i = 0; i < other.size(); i++)
 			std::cout << "\tOTH[" << i << "] = \"" << other[i] << "\"" << std::endl;
 		NEWLINE BORDER
-
 
 		// ft::vector<std::string> insert(def);
 		// BOLD std::cout << "--> .INSERT(1, \"inserted string\"):\t\t\t\t()"; RESET
@@ -249,29 +272,3 @@ void test_vector()
 		
 	}
 }
-
-
-	// }
-	// TESTS WITH ORIGINAL
-	// {
-		// std::vector<int> test(5, 15);
-		// int i = 0;
-		// for (std::vector<int>::iterator it = test.begin(); it != test.end(); it++)
-		// {
-		// 	std::cout  << *it << ", ";
-		// 	*it = i;
-		// 	i++;
-		// }
-		// NEWLINE
-		// for (std::vector<int>::iterator it = test.begin(); it != test.end(); it++)
-		// {
-		// 	std::cout  << *it << ", ";
-		// }
-		// NEWLINE
-		// std::vector<int> test1(5, 11);
-		// test1.assign(6, 69);
-		// for (std::vector<int>::iterator it = test1.begin(); it != test1.end(); it++)
-		// {
-		// 	std::cout  << *it << ", ";
-		// }
-	// }
