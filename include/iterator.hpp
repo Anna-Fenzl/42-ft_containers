@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:26:08 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/09 14:23:37 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/13 14:15:34 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,34 @@ namespace ft
 		typedef Difference		difference_type;
 		typedef Category		iterator_category;
 	};
-}
+
+	// <<<<<<<<<<<<<<<<<<<<<<<<<< Iterator distance >>>>>>>>>>>>>>>>>>>>>>>>>>
+	
+	template<class It>
+	typename iterator_traits<It>::difference_type 
+		do_distance(It first, It last, input_iterator_tag)
+	{
+		typename std::iterator_traits<It>::difference_type result = 0;
+		while (first != last) {
+			++first;
+			++result;
+		}
+		return result;
+	}
+ 
+	template<class It>
+	typename iterator_traits<It>::difference_type 
+		do_distance(It first, It last, random_access_iterator_tag)
+	{
+		return last - first;
+	}
+	
+	template<class It>
+	typename std::iterator_traits<It>::difference_type 
+		distance(It first, It last)
+	{
+		return do_distance(first, last, typename iterator_traits<It>::iterator_category());
+	}
+}	//namespace ft
 
 #endif

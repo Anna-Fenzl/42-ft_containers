@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/11 20:05:28 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/13 16:01:36 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,22 @@
 	TO DO:
 	RANGE CONSTRUCTOR:
 	-> assign
-		-> reserve
 			-> realloc
 		-> private _assign_range
-			-> push_back
-				-> reserve
 			-> ft::distance
-	-> resize
-		-> push_back
 	RELATIONAL OPERATORS
 		-> ft::equal
 		-> ft::lexographical_compare
+	REVERSE ITERATORS
+	max_size exception
 */
 
 void test_vector()
 {
-	HEADLINE
-	std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< CONSTRUCTORS >>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 	{
+		HEADLINE
+		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< CONSTRUCTORS >>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
 		ft::vector<std::string> empty;								// -> default constructor
 		BOLD std::cout << "--> EMPTY VECTOR:"; RESET
 		for (size_t i = 0; i < empty.size(); i++)
@@ -68,9 +66,13 @@ void test_vector()
 			std::cout << "COPY[" << i << "] = " << copy[i] << ", ";
 		NEWLINE NEWLINE
 	}
-	HEADLINE
-	std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<<<< ITERATORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
+
+	
 	{
+		HEADLINE
+		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<<<< ITERATORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
 		ft::vector<int> vec(5, 6);
 		vec[0] = 0;
 		vec[1] = 1;
@@ -116,11 +118,12 @@ void test_vector()
 
 		NEWLINE NEWLINE
 	}
-	HEADLINE
-	std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<< CAPACITY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
+
+	
 	{
-		// change size
-		// reserve
+		HEADLINE
+		std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<< CAPACITY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 
 		ft::vector<char> cap(5, '!');
 		BOLD std::cout << "--> DEFAULT VECTOR:"; RESET
@@ -140,11 +143,49 @@ void test_vector()
 		std::cout << "max_size() = " << empty.max_size() << std::endl;
 		std::cout << "capacity() = " << empty.capacity() << std::endl;
 		std::cout << "empty()    = " << empty.empty() << std::endl;
+		NEWLINE BORDER
+
+		ft::vector<char> resize(cap);
+		BOLD std::cout << "--> RESIZE VECTOR:\t\t\t\t()" << std::endl; RESET
+		std::cout << "> resize to smaller size (2)" << std::endl;
+		resize.resize(2);
+		std::cout << "size()     = " << resize.size() << std::endl;
+		std::cout << "capacity() = " << resize.capacity() << std::endl;
+		for (size_t i = 0; i < resize.size(); i++)
+			std::cout << "RES[" << i << "] = \'" << resize[i] << "\', ";
+		NEWLINE NEWLINE
+		
+		std::cout << "> resize to bigger size 9, 'X')" << std::endl;
+		resize.resize(9, 'X');
+		std::cout << "size()     = " << resize.size() << std::endl;
+		std::cout << "capacity() = " << resize.capacity() << std::endl;
+		for (size_t i = 0; i < resize.size(); i++)
+			std::cout << "RES[" << i << "] = \'" << resize[i] << "\', ";
+		NEWLINE NEWLINE BORDER
+
+		ft::vector<char> res(cap);
+		BOLD std::cout << "--> RESERVE VECTOR:\t\t\t\t(throws when requested capacity > max_size())" << std::endl; RESET
+		std::cout << "reserving 1000 for DEFAULT" << std::endl;
+		try
+		{
+			res.reserve(1000);
+			std::cout << "size()     = " << res.size() << std::endl;
+			std::cout << "capacity() = " << res.capacity() << std::endl;
+			res.reserve(res.max_size() + 2);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << "CATCHED EXCEPTION: "<<  e.what() << std::endl;
+		}
 		NEWLINE NEWLINE
 	}
-	HEADLINE
-	std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< ELEMENT ACCESS >>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
+
+	
 	{
+		HEADLINE
+		std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< ELEMENT ACCESS >>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
 		ft::vector<std::string> def(3, "DEFAULT STRING");
 		BOLD std::cout << "--> DEFAULT VECTOR:"; RESET
 		for (size_t i = 0; i < def.size(); i++)
@@ -152,14 +193,14 @@ void test_vector()
 		NEWLINE BORDER
 
 		ft::vector<std::string> mod(def);
-		std::cout << "--> []OPERATOR:\t\t\t\t(undefined behavior when out of bounds)" << std::endl;
+		BOLD std::cout << "--> []OPERATOR:\t\t\t\t(undefined behavior when out of bounds)" << std::endl; RESET
 		mod[1] = "non default, used: mod[i]";
 		for (size_t i = 0; i < mod.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << mod[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
 		ft::vector<std::string> op(def);
-		std::cout << "--> .AT():\t\t\t\t(throws when out of bounds)" << std::endl;
+		BOLD std::cout << "--> .AT():\t\t\t\t(throws when out of bounds)" << std::endl; RESET
 		op.at(1) = "non default, used: mod.at(i)";
 		for (size_t i = 0; i < op.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << op.at(i) << "\"" << std::endl;
@@ -179,37 +220,63 @@ void test_vector()
 		ends[0] = "first string";
 		ends[2] = "last string";
 
-		std::cout << "--> .FRONT():\t\t\t\t(undefined behavior when out of bounds)" << std::endl;
+		BOLD std::cout << "--> .FRONT():\t\t\t\t(undefined behavior when out of bounds)" << std::endl; RESET
 		std::cout << "MOD[0] == MOD.FRONT() is " << (ends[0] == ends.front()) << std::endl;
 		std::cout << "MOD[1] == MOD.FRONT() is " << (ends[1] == ends.front()) << std::endl;
 		NEWLINE BORDER
 
-		std::cout << "--> .BACK():\t\t\t\t(undefined behavior when out of bounds)" << std::endl;
+		BOLD std::cout << "--> .BACK():\t\t\t\t(undefined behavior when out of bounds)" << std::endl; RESET
 		std::cout << "MOD[2] == MOD.BACK() is " << (ends[2] == ends.back()) << std::endl;
 		std::cout << "MOD[1] == MOD.BACK() is " << (ends[1] == ends.back());
 		NEWLINE NEWLINE
 	}
+
+
+	
 	{
 		HEADLINE
-		std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< MODIFIERS >>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+		std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<< MODIFIERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
 		ft::vector<std::string> def(3, "DEFAULT STRING");
 		BOLD std::cout << "--> DEFAULT VECTOR:"; RESET
 		for (size_t i = 0; i < def.size(); i++)
 			std::cout << "DEF[" << i << "] = \"" << def[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
+		ft::vector<std::string> as(def);
+		BOLD std::cout << "--> .ASSIGN(4, \"assigned string\"):\t\t\t(fill version)"; RESET
+		as.assign(4, "assigned string (fill)");
+		for (size_t i = 0; i < as.size(); i++)
+			std::cout << "FILL[" << i << "] = \"" << as[i] << "\"" << std::endl;
+		NEWLINE BORDER
+
+		ft::vector<std::string> range(def);
+		BOLD std::cout << "--> .ASSIGN(as.begin()+1, as.end()):\t\t\t(range version)"; RESET
+		range.assign(as.begin()+1, as.end());
+		for (size_t i = 0; i < range.size(); i++)
+			std::cout << "RANGE[" << i << "] = \"" << range[i] << "\"" << std::endl;
+		NEWLINE BORDER
+
+		ft::vector<std::string> push(def);
+		BOLD std::cout << "--> .PUSH_BACK(\"pushed string\"):"; RESET
+		push.push_back("pushed string");
+		push.push_back("another pushed string");
+		for (size_t i = 0; i < push.size(); i++)
+			std::cout << "PUSH[" << i << "] = \"" << push[i] << "\"" << std::endl;
+		NEWLINE BORDER
+
+		ft::vector<std::string> pop(push);
+		BOLD std::cout << "--> .POP_BACK():"; RESET
+		push.pop_back();
+		for (size_t i = 0; i < push.size(); i++)
+			std::cout << "POP[" << i << "] = \"" << push[i] << "\"" << std::endl;
+		NEWLINE BORDER
+		
 		ft::vector<std::string> clear(def);
 		BOLD std::cout << "--> .CLEAR():"; RESET
 		clear.clear();
 		for (size_t i = 0; i < clear.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << clear[i] << "\"" << std::endl;
-		NEWLINE BORDER
-
-		ft::vector<std::string> pop_back(def);
-		BOLD std::cout << "--> .POP_BACK():"; RESET
-		pop_back.pop_back();
-		for (size_t i = 0; i < pop_back.size(); i++)
-			std::cout << "POP[" << i << "] = \"" << pop_back[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
 		BOLD std::cout << "--> .SWAP():\t\t\t\t(swapping default && other)"; RESET
@@ -257,18 +324,17 @@ void test_vector()
 	}
 	// {
 		
-	# include <algorithm>
-	{
-		HEADLINE
-		std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< ALGORITHM >>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+	// # include <algorithm>
+	// {
+	// 	HEADLINE
+	// 	std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< ALGORITHM >>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 		
-		BOLD std::cout << "--> std::transform:\t\t\t\t(adding contents of two vectors)"; RESET
-		ft::vector<int> foo(5, 4);
-		ft::vector<int> bar(5, 2);
-		std::transform(foo.begin(), foo.end(), bar.begin(), foo.begin(), std::plus<int>());
-		for (size_t i = 0; i < foo.size(); i++)
-			std::cout << "MOD[" << i << "] = \"" << foo[i] << "\"" << std::endl;
-		NEWLINE BORDER
-		
-	}
+	// 	BOLD std::cout << "--> std::transform:\t\t\t\t(adding contents of two vectors)"; RESET
+	// 	ft::vector<int> foo(5, 4);
+	// 	ft::vector<int> bar(5, 2);
+	// 	std::transform(foo.begin(), foo.end(), bar.begin(), foo.begin(), std::plus<int>());
+	// 	for (size_t i = 0; i < foo.size(); i++)
+	// 		std::cout << "MOD[" << i << "] = \"" << foo[i] << "\"" << std::endl;
+	// 	NEWLINE BORDER
+	// }
 }

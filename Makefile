@@ -6,14 +6,14 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2022/12/11 13:59:08 by afenzl           ###   ########.fr        #
+#    Updated: 2022/12/12 11:42:05 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_containers
 
 CPP = c++
-CPP_FLAGS =  -Wall -Wextra -Werror -std=c++98
+CPP_FLAGS =  -std=c++98
 RM := rm -f
 
 HEADER = ./include/containers.hpp ./include/vector.hpp ./tests/test.hpp
