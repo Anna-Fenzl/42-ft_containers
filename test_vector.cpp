@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/13 16:01:36 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/14 17:45:46 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void test_vector()
 			std::cout << "FILL[" << i << "] = " << fill[i] << ", ";
 		NEWLINE BORDER
 		
-		// ft::vector<int> range(fill.begin(), fill.end());			// -> range constructor
-		// BOLD std::cout << "--> RANGE VECTOR:"; RESET
-		// for (size_t i = 0; i < range.size(); i++)
-		// 	std::cout << "RANGE[" << i << "] = " << range[i] << ", ";
-		// NEWLINE BORDER
+		ft::vector<char> range(fill.begin()+1, fill.end());			// -> range constructor
+		BOLD std::cout << "--> RANGE VECTOR:\t(fill.begin()+1, fill.end())"; RESET
+		for (size_t i = 0; i < range.size(); i++)
+			std::cout << "RANGE[" << i << "] = " << range[i] << ", ";
+		NEWLINE BORDER
 		
 		ft::vector<char> copy(fill);								// -> copy constructor
-		BOLD std::cout << "--> COPIED VECTOR: (from fill)"; RESET 
+		BOLD std::cout << "--> COPIED VECTOR:\t(from fill)"; RESET 
 		for (size_t i = 0; i < copy.size(); i++)
 			std::cout << "COPY[" << i << "] = " << copy[i] << ", ";
 		NEWLINE NEWLINE
@@ -239,6 +239,7 @@ void test_vector()
 
 		ft::vector<std::string> def(3, "DEFAULT STRING");
 		BOLD std::cout << "--> DEFAULT VECTOR:"; RESET
+		def.assign(4, "strng");
 		for (size_t i = 0; i < def.size(); i++)
 			std::cout << "DEF[" << i << "] = \"" << def[i] << "\"" << std::endl;
 		NEWLINE BORDER

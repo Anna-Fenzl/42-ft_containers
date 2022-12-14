@@ -6,7 +6,7 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2022/12/12 11:42:05 by afenzl           ###   ########.fr        #
+#    Updated: 2022/12/14 17:22:50 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,7 @@ CPP = c++
 CPP_FLAGS =  -std=c++98
 RM := rm -f
 
-HEADER = ./include/containers.hpp ./include/vector.hpp ./tests/test.hpp
-
-# TESTS = ./tests/test_vector.cpp
+HEADER = ./include/containers.hpp ./include/vector.hpp ./include/vector_iterator.hpp ./include/type_traits.hpp ./tests/test.hpp
 
 SRC = ./main.cpp ./test_vector.cpp
 
