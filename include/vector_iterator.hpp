@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:10:48 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/13 16:12:40 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/16 14:53:45 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,14 @@ namespace ft
 
 		VectorIterator	operator-(difference_type n ) const	{ return _ptr - n; }
 
-		VectorIterator	&operator=(const VectorIterator &other )	{ return (_ptr == other.base()) ? *this : _ptr = other.base(); *this; }
-
+		VectorIterator	&operator=(const VectorIterator &other )
+		{
+			if (_ptr != other.base())
+			{
+				_ptr = other.base();
+			}
+			return *this;
+		}
 	};
 		
 		// ----------------------- OPERATOR OVERLOAD --------------------
