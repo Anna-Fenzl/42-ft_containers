@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:08:05 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/14 12:19:00 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/16 14:05:44 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,6 @@ int main()
 {
 	test_vector();
 
-	// std::vector<int> i(4, 6);
-	
-	// std::cout << i.max_size() << std::endl;
-	// try
-	// {
-	// 	i.reserve(i.max_size() + 1);
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	
 	return (0);
 }
 

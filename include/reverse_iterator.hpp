@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:48:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/16 17:10:04 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/17 15:11:29 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ namespace ft
 		
 		reverse_iterator&	operator--() { ++_current; return *this; }
 
-		reverse_iterator&	operator++(int) { reverse_iterator _tmp = *this; --_current; return _tmp; }
+		reverse_iterator	operator++(int) { reverse_iterator _tmp = *this; --_current; return _tmp; }
 
-		reverse_iterator&	operator--(int) { reverse_iterator _tmp = *this; ++_current; return _tmp; }
+		reverse_iterator	operator--(int) { reverse_iterator _tmp = *this; ++_current; return _tmp; }
 
 		reverse_iterator	operator+ (difference_type n) const	{ return reverse_iterator(_current - n); }
 

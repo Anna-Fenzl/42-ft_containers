@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/16 17:55:42 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/17 17:29:01 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ namespace ft
 // □ allocator						✓
 // □ std::enable if					✓
 // □ std::is_integral				✓
-// □ std::pair					
-// □ std::make_pair				
-// □ std::equal
-// □ std::lexicographical_compare
+// □ std::pair						✓
+// □ std::make_pair					✓
+// □ std::equal						✓
+// □ std::lexicographical_compare	✓
 // □ non_member function overloads	✓
 
 
@@ -147,6 +147,24 @@ namespace ft
 	
 		const_reverse_iterator	rend() const	{ return const_reverse_iterator(begin()); };
 
+		// ----------------------- OPERATOR --------------------
+
+		vector& operator=( const vector& other )
+		{
+			clear();
+			_alloc.deallocate(_data, _capacity);
+
+			_alloc = other.get_allocator();
+			_capacity = other.capacity();
+			_size = other.size();
+			_data = _alloc.allocate(_capacity);
+			
+			for (size_type i = 0; i < _size; i++)
+				 _alloc.construct(&_data[i], other[i]);
+			
+			return *this;
+		}
+		
 		// ----------------------- CAPACITY --------------------
 		// size -> Return size
 		size_type	size() const		{ return _size; }
@@ -468,12 +486,15 @@ namespace ft
 		return !(lhs < rhs);
 	}
 
-	// template< class T, class Alloc >
-	// void swap( ft::vector<T,Alloc>& lhs,
-	// 		ft::vector<T,Alloc>& rhs )
-	// {
-		
-	// }
+	template< class T, class Alloc >
+	void swap( ft::vector<T,Alloc>& lhs,
+			ft::vector<T,Alloc>& rhs )
+	{
+		ft::vector<T> tmp(lhs);
+		lhs = rhs;
+		rhs = tmp;
+	}
+
 }	//namespace ft
 
 #endif
