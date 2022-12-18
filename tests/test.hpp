@@ -6,16 +6,14 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:02 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/05 13:22:34 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:48:37 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_HPP
 # define TEST_HPP
 
-# include <vector>
-# include <string>
-
 void	test_vector();
+void	test_stack();
 
 #endif

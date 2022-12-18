@@ -6,16 +6,16 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:08:05 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/16 14:05:44 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/18 15:04:19 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "./include/containers.hpp"
 # include "./tests/test.hpp"
 
 int main()
 {
 	test_vector();
+	test_stack();
 
 	return (0);
 }

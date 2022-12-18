@@ -6,16 +6,16 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/17 17:29:01 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:58:56 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-# include "vector_iterator.hpp"
-# include "reverse_iterator.hpp"
-# include "type_traits.hpp"
+# include "./iterators/vector_iterator.hpp"
+# include "./iterators/reverse_iterator.hpp"
+# include "./utils/type_traits.hpp"
 # include <iostream>
 # include <stdexcept>
 # include <limits>
@@ -272,21 +272,15 @@ namespace ft
 		// push_back -> Adds a new element at the end of the vector, after its current last element
 		void push_back (const value_type& val)
 		{
-			if (_size < _capacity)
-				_alloc.construct(&_data[_size], val);
-			else
-			{
-				reserve(_capacity * 2);
-				_alloc.construct(&_data[_size], val);
-			}
-			_size += 1;
+			if (_size >= _capacity)
+				reserve((_capacity) ? _capacity * 2 : 1);
+			_alloc.construct(&_data[_size++], val);
 		}
 
 		// pop_back -> Removes the last element in the vector
 		void	pop_back()
 		{
-			_alloc.destroy(&_data[_size-1]);
-			_size -= 1;
+			_alloc.destroy(&_data[--_size]);
 		}
 
 		// insert -> Inserts value before pos
@@ -408,7 +402,6 @@ namespace ft
 				other._capacity ^= _capacity;
 				_capacity ^= other._capacity;
 			}
-
 		}
 
 		// clear -> clears the elements

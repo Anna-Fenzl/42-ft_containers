@@ -6,19 +6,22 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2022/12/14 17:22:50 by afenzl           ###   ########.fr        #
+#    Updated: 2022/12/18 15:07:31 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_containers
 
 CPP = c++
-CPP_FLAGS =  -std=c++98
+CPP_FLAGS = -Wall -Werror -Wextra -std=c++98
 RM := rm -f
 
-HEADER = ./include/containers.hpp ./include/vector.hpp ./include/vector_iterator.hpp ./include/type_traits.hpp ./tests/test.hpp
+HEADER = ./include/vector.hpp ./include/stack.hpp ./include/map.hpp \
+		 ./include/iterators/iterator.hpp ./include/iterators/vector_iterator.hpp ./include/iterators/reverse_iterator.hpp\
+		 ./include/utils/type_traits.hpp ./include/utils/compare.hpp ./include/utils/pair.hpp \
+		 ./tests/test.hpp 
 
-SRC = ./main.cpp ./test_vector.cpp
+SRC = ./main.cpp ./test_vector.cpp ./test_stack.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

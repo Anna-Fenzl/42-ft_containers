@@ -6,11 +6,10 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/17 17:29:30 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/18 15:07:17 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// ALSO SWITCHING CONTAINERS
 
 # define NEWLINE std::cout << std::endl;
 # define BORDER std::cout << "------------------------------------------------------------------" << std::endl;
@@ -18,7 +17,10 @@
 # define BOLD std::cout << "\033[0;1m";
 # define RESET std::cout << "\033[0m" << std::endl;
 
-# include "include/containers.hpp"
+# include "./include/vector.hpp"
+# include "./include/utils/compare.hpp"
+# include "./include/utils/pair.hpp"
+
 # include <string>
 # include <vector>
 
@@ -381,7 +383,7 @@ void test_vector()
 		NEWLINE BORDER
 
 		BOLD std::cout << "--> SWAP(def, oth)"; RESET
-		std::swap(def, oth);
+		ft::swap(def, oth);
 		for (size_t i = 0; i < def.size(); i++)
 			std::cout << "DEF[" << i << "] = \'" << def[i] << "\', ";
 		NEWLINE
