@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/18 15:07:17 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/18 15:21:13 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 
 /*
 	TO DO:S
-	// REVERSE ITERATORS
-	-> tests
 	
 	==> look over that again
 	max_size exception

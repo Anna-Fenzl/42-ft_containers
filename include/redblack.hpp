@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.hpp                                           :+:      :+:    :+:   */
+/*   redblack.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 18:14:02 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/18 16:17:43 by afenzl           ###   ########.fr       */
+/*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
+/*   Updated: 2022/12/18 16:18:10 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_HPP
-# define TEST_HPP
-
-void	test_vector();
-void	test_stack();
-void	test_redblack();
+#ifndef REDBLACK_HPP
+# define REDBLACK_HPP
 
 #endif

@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.hpp                                           :+:      :+:    :+:   */
+/*   test_redblack.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 18:14:02 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/18 16:17:43 by afenzl           ###   ########.fr       */
+/*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
+/*   Updated: 2022/12/18 16:20:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_HPP
-# define TEST_HPP
+# define NEWLINE std::cout << std::endl;
+# define BORDER std::cout << "------------------------------------------------------------------" << std::endl;
+# define HEADLINE std::cout << "\033[32;5;81m ";
+# define BOLD std::cout << "\033[0;1m";
+# define RESET std::cout << "\033[0m" << std::endl;
 
-void	test_vector();
-void	test_stack();
-void	test_redblack();
+# include "./include/map.hpp"
 
-#endif
+# include <string>
+# include <vector>
+
+void	test_redblack()
+{
+	
+}

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:23:21 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/18 14:54:49 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/18 16:15:04 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ namespace ft
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
-		typedef Container					container_type;
+		typedef Container							container_type;
 		typedef typename Container::value_type		value_type;
 		typedef typename Container::size_type		size_type;
 		typedef typename Container::reference		reference;
@@ -47,7 +47,7 @@ namespace ft
 		// ----------------------- OPERATOR --------------------
 		
 		// Replaces the contents with a copy of the contents of other. Effectively calls c = other.c;
-		stack& operator=( const stack& other ) { *this = other; return *this; }
+		stack& operator=( const stack& other ) { c = other.c; return *this; }
 
 		// ----------------------- ELEMENT ACCESS --------------
 
@@ -70,43 +70,55 @@ namespace ft
 		void push( const value_type& value )	{ c.push_back(value); }
 
 		// Removes the top element from the stack. Effectively calls c.pop_back()
-		void pop()								{ c.pop_back(); }	
+		void pop()								{ c.pop_back(); }
+
+		// ----------------------- FRIENDS --------------------
+		
+		template< class T1, class Con >
+		friend bool operator==( const ft::stack<T1, Con>& lhs, const ft::stack<T1, Con>& rhs );
+
+		template< class T1, class Con >
+		friend bool operator<( const ft::stack<T1, Con>& lhs, const ft::stack<T1, Con>& rhs );
+
 	};
+
+	// Compares the contents of the underlying containers of two container adaptors.
+	// The comparison is done by applying the corresponding operator to the underlying containers.
 
 	template< class T, class Container >
 	bool operator==( const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs )
 	{
-		return lhs == rhs;
+		return lhs.c == rhs.c;
 	}
 
 	template< class T, class Container >
 	bool operator!=( const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs )
 	{
-		return lhs != rhs;
+		return !(lhs == rhs);
 	}
 
 	template< class T, class Container >
 	bool operator<( const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs )
 	{
-		return lhs < rhs;
+		return lhs.c < rhs.c;
 	}
 
 	template< class T, class Container >
 	bool operator<=( const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs )
 	{
-		return lhs <= rhs;
+		return !(lhs > rhs);
 	}
 
 	template< class T, class Container >
 	bool operator>( const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs )
 	{
-		return lhs > rhs;
+		return rhs < lhs;
 	}
 
 	template< class T, class Container >
 	bool operator>=( const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs )
 	{
-		return lhs >= rhs;
+		return !(lhs < rhs);
 	}
 	
 }	// namespace ft
