@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:34:30 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/21 12:36:32 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@
 namespace ft
 {
 
-	// iterators
+	// 1. Every node is either red or black.
+	// 2. The root is black.
+	// 3. Every leaf (NIL) is black.
+	// 4. If a node is red, then both its children are black.
+	// 5. For each node, all simple paths from the node to descendant leaves contain the
+	// same number of black nodes.
 
-	template<typename _Val, typename _Compare, typename _Alloc = std::allocator<_Val> >
+	template<typename _Key, typename _Val, typename _Compare, typename _Alloc = std::allocator<_Val> >
 	class Rbt_Tree
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -33,6 +38,7 @@ namespace ft
 		public:
 		typedef _Alloc														value_alloc;
 
+		typedef _Key					key_type;
 		typedef _Compare				value_compare;
 		typedef _Val					value_type;
 		typedef _Val*					value_pointer;
@@ -48,19 +54,36 @@ namespace ft
 		// iterators
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
-		private:
+		protected:
 		
 		node_pointer	_root;
+		// node_pointer	_begin;
+		// node_pointer	_end;
+
 		size_type		_size;
 		node_alloc		_node_alloc;
 		value_alloc		_value_alloc;
 		value_compare	_compare;
-		// _end_node && _begin_node
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
-		// ----------------------- CONSTRUCTORS --------------------
+
+		// ----------------------- CONSTRUCTOR --------------------
 		Rbt_Tree(): _root(NULL), _size(0) {}
+
+		// ----------------------- GETTERS ------------------------
+		
+		node_alloc	get_node_alloc()	{ return _node_alloc; }
+
+		value_alloc	get_value_alloc()	{ return _value_alloc; }
+		
+		size_type	size()				{ return _size; }
+
+		node_pointer	root()			{ return _root; }
+		
+		// ----------------------- MODIFY -------------------------
+
+		
 
 		
 
@@ -73,3 +96,5 @@ namespace ft
 }	// namespace ft
 
 #endif
+
+

@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.hpp                                            :+:      :+:    :+:   */
+/*   tests.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 15:20:40 by afenzl           ###   ########.fr       */
+/*   Created: 2022/12/04 18:14:02 by afenzl            #+#    #+#             */
+/*   Updated: 2022/12/21 13:01:39 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_HPP
-# define MAP_HPP
+#ifndef TEST_HPP
+# define TEST_HPP
 
-# include "redblack.hpp"
-# include "utils/pair.hpp"
-
-namespace ft
-{
-	// template< class Key, class T, class Compare = std::less<Key>,
-	// class Allocator = std::allocator<std::pair<const Key, T>>>
-	// class map
-	// {
-		
-	// };
-}
+# include <vector>
+# include <stack>
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:47:47 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/18 16:08:16 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:03:15 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define BOLD std::cout << "\033[0;1m";
 # define RESET std::cout << "\033[0m" << std::endl;
 
-# include "./include/stack.hpp"
+# include "../../include/stack.hpp"
 
 # include <string>
 # include <vector>

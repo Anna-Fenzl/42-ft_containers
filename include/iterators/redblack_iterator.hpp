@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:32:31 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:43:46 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ namespace ft
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
-		typedef T		value_type;
-		typedef T&		reference;
-		typedef T*		pointer;
+		typedef T									value_type;
+		typedef T&									reference;
+		typedef T*									pointer;
 
-		typedef ft::bidirectional_iterator_tag	iterator_category;
-		typedef ptrdiff_t						difference_type;
+		typedef ft::bidirectional_iterator_tag		iterator_category;
+		typedef ptrdiff_t							difference_type;
 
 		typedef Rbt_Iterator<T>						iterator;
 		typedef const Rbt_Iterator<T>				const_iterator;

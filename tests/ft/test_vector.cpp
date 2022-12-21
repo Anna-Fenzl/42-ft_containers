@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/18 16:56:50 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:42:58 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # define BOLD std::cout << "\033[0;1m";
 # define RESET std::cout << "\033[0m" << std::endl;
 
-# include "./include/vector.hpp"
-# include "./include/utils/compare.hpp"
-# include "./include/utils/pair.hpp"
+# include "../../include/vector.hpp"
+# include "../../include/utils/compare.hpp"
+# include "../../include/utils/pair.hpp"
 
 # include <string>
 # include <vector>
