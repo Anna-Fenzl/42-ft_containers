@@ -6,24 +6,24 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2022/12/21 16:10:46 by afenzl           ###   ########.fr        #
+#    Updated: 2022/12/21 16:13:25 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_FT = ./exec/ft_containers 
-NAME_STD = ./exec/std_containers 
+NAME_FT = ft_containers 
+NAME_STD = std_containers 
 
 CPP = c++
 CPP_FLAGS = -Wall -Werror -Wextra -std=c++98
 RM := rm -f
 
-FT_PATH = ./tests/ft/
-STD_PATH = ./tests/std/
-
 HEADER = ./include/vector.hpp ./include/stack.hpp ./include/map.hpp ./include/redblack.hpp\
 		 ./include/iterators/iterator.hpp ./include/iterators/vector_iterator.hpp ./include/iterators/reverse_iterator.hpp ./include/iterators/redblack_iterator.hpp \
 		 ./include/utils/type_traits.hpp ./include/utils/compare.hpp ./include/utils/pair.hpp ./include/utils/rbt_node.hpp \
-		 ./tests/ft/ft_tests.hpp ./tests/std/tests.hpp 
+		 ./tests/ft/ft_tests.hpp ./tests/std/tests.hpp
+
+FT_PATH = ./tests/ft/
+STD_PATH = ./tests/std/
 
 FT_SRC = $(FT_PATH)ft_main.cpp $(FT_PATH)test_vector.cpp $(FT_PATH)test_stack.cpp $(FT_PATH)test_redblack.cpp
 STD_SRC = $(STD_PATH)std_main.cpp

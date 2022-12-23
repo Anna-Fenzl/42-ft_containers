@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/21 12:36:32 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/23 13:29:39 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "./iterators/redblack_iterator.hpp"
 # include "./utils/rbt_node.hpp"
+# include "./utils/pair.hpp"
 # include <stddef.h>
 # include <memory>
 
@@ -30,8 +31,8 @@ namespace ft
 	// 5. For each node, all simple paths from the node to descendant leaves contain the
 	// same number of black nodes.
 
-	template<typename _Key, typename _Val, typename _Compare, typename _Alloc = std::allocator<_Val> >
-	class Rbt_Tree
+	template<typename _Key, typename _Val, typename _Compare=std::less<_Key>, typename _Alloc = std::allocator<_Val> >
+	class Redblack_Tree
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		typedef typename	_Alloc::template rebind<Rbt_Node<_Val> >::other	node_alloc;
@@ -51,6 +52,9 @@ namespace ft
 		typedef	size_t					size_type;
 		typedef	ptrdiff_t				difference_type;
 
+		// just an idea
+		typedef ft::pair<const key_type, value_type>	data_type;
+
 		// iterators
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
@@ -66,10 +70,15 @@ namespace ft
 		value_compare	_compare;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>
+		private:
+
 		public:
 
 		// ----------------------- CONSTRUCTOR --------------------
-		Rbt_Tree(): _root(NULL), _size(0) {}
+		Redblack_Tree(): _root(NULL), _size(0), _compare(_Compare()), _value_alloc(_Alloc())
+		{
+			_node_alloc = std::allocator<Rbt_Node<value_type> >();
+		}
 
 		// ----------------------- GETTERS ------------------------
 		
@@ -83,13 +92,6 @@ namespace ft
 		
 		// ----------------------- MODIFY -------------------------
 
-		
-
-		
-
-		
-		
-		
 	};
 	
 

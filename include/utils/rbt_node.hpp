@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Rbt_Node.hpp                                       :+:      :+:    :+:   */
+/*   rbt_node.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:43:24 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/23 12:56:28 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RBT_NODE_HPP
 # define RBT_NODE_HPP
 
+# include <stdexcept>
+
 namespace ft
 {
-	enum	rbt_colour { RED, BLACK};
+	enum	rbt_colour {RED, BLACK};
+	enum	Side {LEFT, RIGHT};
 
 	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< RBT_NODE >>>>>>>>>>>>>>>>>>>>>>>>>>>
 	template <typename T>
@@ -62,6 +65,22 @@ namespace ft
 			}
 			return *this;
 		}
+
+		// ----------------------- METHODS --------------------------
+
+		value_type	&get_value() const	{ return this->_value; }
+
+		rbt_colour	get_colour() const { return this->_colour; }
+
+		node_type	*get_child( int	side ) const
+		{
+			if (side == LEFT)
+				return this->_left;
+			else if (side == RIGHT)
+				return this->_right;
+			throw std::invalid_argument("only takes value LEFT(0) or RIGHT(1)!");
+		}
+
 	};
 
 }	// namespace ft

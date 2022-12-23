@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/21 15:42:58 by afenzl           ###   ########.fr       */
+/*   Updated: 2022/12/23 13:47:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void test_vector()
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "CATCHED EXCEPTION: "<<  e.what() << std::endl;
+			std::cout << "CATCHED EXCEPTION: "<<  e.what() << std::endl;
 		}
 		NEWLINE NEWLINE
 	}
@@ -220,7 +220,7 @@ void test_vector()
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "CATCHED EXCEPTION: "<<  e.what() << std::endl;
+			std::cout << "CATCHED EXCEPTION: "<<  e.what() << std::endl;
 		}
 		NEWLINE BORDER
 
