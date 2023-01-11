@@ -1,0 +1,6 @@
+
+
+> throw () is an exception specifier that declares that a this funciton will never throw an exception
+	iterator
+		end () throw()	{ return iterator(_end); }
+

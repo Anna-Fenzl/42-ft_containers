@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:08:05 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/23 13:55:42 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/10 14:58:02 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,8 @@ int main()
 {
 	// test_vector();
 	// test_stack();
-
-	ft::vector<char> test;
-	for(int i = 0; i < 99999999; ++i)
-		test.push_back('x');
-	test.clear();
 	
-	// test_redblack();
+	test_redblack();
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2022/12/21 16:13:25 by afenzl           ###   ########.fr        #
+#    Updated: 2023/01/10 15:26:59 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CPP_FLAGS = -Wall -Werror -Wextra -std=c++98
 RM := rm -f
 
 HEADER = ./include/vector.hpp ./include/stack.hpp ./include/map.hpp ./include/redblack.hpp\
-		 ./include/iterators/iterator.hpp ./include/iterators/vector_iterator.hpp ./include/iterators/reverse_iterator.hpp ./include/iterators/redblack_iterator.hpp \
+		 ./include/iterators/iterator.hpp ./include/iterators/vector_iterator.hpp ./include/iterators/reverse_iterator.hpp ./include/iterators/rbt_iterator.hpp \
 		 ./include/utils/type_traits.hpp ./include/utils/compare.hpp ./include/utils/pair.hpp ./include/utils/rbt_node.hpp \
 		 ./tests/ft/ft_tests.hpp ./tests/std/tests.hpp
 

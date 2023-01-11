@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/23 13:47:38 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/10 14:48:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,7 @@ void test_vector()
 		NEWLINE BORDER
 
 		ft::vector<std::string> erase_more(insert_range);
-		BOLD std::cout << "--> .ERASE(ERASE.BEGIN()+2, ERASE.END()-1)(from same vector):\t\t\t\t(range)"; RESET
+		BOLD std::cout << "--> .ERASE(ERASE.BEGIN()+2, ERASE.END()-1)(from same vector):\t\t\t(range)"; RESET
 		ft::vector<std::string>::iterator it1 = erase_more.erase(erase_more.begin()+2, erase_more.end()-1);
 		std::cout << "returned iterator is \"" << *it1 << "\"\n" << std::endl;
 		for (size_t i = 0; i < erase_more.size(); i++)

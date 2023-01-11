@@ -1,1 +1,0 @@
-echo FT: && time ./ft_containers >/dev/null ; echo STD: && time ./std_containers >/dev/null
