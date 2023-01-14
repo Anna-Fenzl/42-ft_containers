@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/11 18:10:35 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/14 14:52:17 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../../include/map.hpp"
 # include "../../include/utils/rbt_node.hpp"
 	# include <map>
+	# include <stdio.h>
 
 void	test_redblack()
 {
@@ -29,25 +30,54 @@ void	test_redblack()
 	// std::cout << "empty is " << test.empty() << std::endl;
 
 	test.insert(1);
-	test.insert(-8);
-	test.insert(4);
+	test.insert(7);
 	test.insert(2);
 	test.insert(5);
-	test.insert(10);
-	test.insert(100);
+	test.insert(4);
+	test.insert(8);
+	test.insert(14);
+	test.insert(15);
+	test.insert(3);
 
-	ft::Rbt_Iterator<int> start = test.begin();
 
+	ft::Rbt_Iterator<int> other = ++++++++++++test.begin();
+
+	test.print_tree();
+	std::cout << "deleting " << *other.base() << std::endl;
+	test.rb_delete(other.base());
+	// test.right_rotate(other.base());
+
+	// test.print_tree();
+	test.clear();
+	// TEST CONST ITERATOR
+
+	// std::cout << "other " << *other << std::endl;
+	// *start = *start + 5;
+	// *other = *other + 5;
+	// std::cout << "other " << *other << std::endl;
+
+
+	// //TEST ITERATOR
 	// while(start != test.end())
 	// {
 	// 	std::cout << *start << std::endl;
 	// 	++start;
 	// }
+	// std::cout << "-------------------" << std::endl;
+	// std::cout << *start << std::endl;
+	// std::cout << *start++ << std::endl;
+	// std::cout << *start << std::endl;
 
-	// std::cout << "\nROOT IS  " << *test.root() << std::endl;
+	// std::cout << (*start == ++--*start);
 
-	// ft::Rbt_Node<char> def;
-	// ft::Rbt_Node<char> des('c', NULL);
+	// std::cout << *start << std::endl;
+	// ++start;
+
+	// std::cout << *start << std::endl;
+	// ++start;
+	// if (start == NULL)
+	// 	std::cout << "NULL\n";
+	// std::cout << *start << std::endl;
 
 
 	// std::cout << test.root()->_value << std::endl;
@@ -56,11 +86,10 @@ void	test_redblack()
 	// map["HEY"] = 10;
 	// map["YOU"] = -1;
 	// map.insert(std::make_pair("this", 55));
+	// printf("%p\n", map.end());
 
 	// system("leaks ft_containers");
 	
 
 	// map.insert(5, 'c');
-
-
 }

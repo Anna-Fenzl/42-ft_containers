@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/11 17:03:51 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:30:24 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ namespace ft
 		{
 			_value = _value_alloc.allocate(1);
 		}
+		
+		// NILL NODE
+		// Rbt_Node(node_pointer ptr)
+		// : _colour(BLACK), _parent(ptr), _left(NULL), _right(NULL), _value(NULL)
+		// {}
 
 		Rbt_Node(value_type val, node_pointer par)
 		: _colour(RED), _left(NULL), _right(NULL)
@@ -102,6 +107,10 @@ namespace ft
 		}
 
 		void		set_parent(node_pointer parent) { _parent = parent; }
+
+		void		set_colour(rbt_colour colour) { _colour = colour; }
+		
+		void		switch_colour() { _colour = (_colour == RED) ? BLACK : RED; }
 
 	};
 
