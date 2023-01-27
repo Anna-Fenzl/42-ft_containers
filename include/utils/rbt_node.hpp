@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/14 13:30:24 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/27 17:11:12 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ namespace ft
 	enum	Side {LEFT, RIGHT};
 
 	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< RBT_NODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	template <typename T, typename _Alloc = std::allocator<T> >
-	class	Rbt_Node
+	template <typename T, typename Alloc = std::allocator<T> >
+	class	RbtNode
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
 		typedef T								value_type;
 		typedef T*								value_pointer;
-		typedef Rbt_Node<value_type>			node_type;
-		typedef	Rbt_Node<value_type>*			node_pointer;
-		typedef const Rbt_Node<value_type>*		const_node_pointer;
+		typedef RbtNode<value_type>				node_type;
+		typedef	RbtNode<value_type>*			node_pointer;
+		typedef const RbtNode<value_type>*		const_node_pointer;
+		typedef Alloc							value_alloc;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
 		value_pointer	_value;
@@ -38,62 +39,88 @@ namespace ft
 		node_pointer	_parent;
 		node_pointer	_left;
 		node_pointer	_right;
-		_Alloc			_value_alloc;
+		value_alloc		_value_alloc;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		// ----------------------- CONSTRUCTORS --------------------------
-		Rbt_Node()
-		: _colour(RED), _parent(NULL), _left(NULL), _right(NULL)
+
+		// default constructor -> everything set to NULL and BLACK
+		RbtNode(): _colour(BLACK), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 		}
-		
-		// NILL NODE
-		// Rbt_Node(node_pointer ptr)
-		// : _colour(BLACK), _parent(ptr), _left(NULL), _right(NULL), _value(NULL)
-		// {}
 
-		Rbt_Node(value_type val, node_pointer par)
-		: _colour(RED), _left(NULL), _right(NULL)
-		{
-			_parent = par;
-			_value = _value_alloc.allocate(1);
-			_value_alloc.construct(_value, val);
-		}
-
-		Rbt_Node(node_type &other)
+		// constructor takes value -> colour set to red
+		RbtNode(const value_type& value): _colour(RED), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
-			*this = other;
+			_value_alloc.construct(_value, value);
 		}
 
-		// NOT SURE IF I NEED TO DESTROY THE VALUE
-		~Rbt_Node()
+		// constructor takes value & parent -> colour set to red
+		RbtNode(const value_type& value, node_pointer parent ): _colour(RED), _parent(parent), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
+		{
+			_value = _value_alloc.allocate(1);
+			_value_alloc.construct(_value, value);
+		}
+
+		// constructor takes value & parent & colour
+		RbtNode(const value_type& value, node_pointer parent, rbt_colour colour): _colour(colour), _parent(parent), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
+		{
+			_value = _value_alloc.allocate(1);
+			_value_alloc.construct(_value, value);
+		}
+
+		RbtNode(node_type& src): _value(NULL)
+		{
+			*this = src;
+		}
+
+		RbtNode(const node_type& src): _value(NULL)
+		{
+			*this = src;
+		}
+
+		~RbtNode()
 		{
 			_value_alloc.destroy(_value);
-			if ( _value != NULL)
-				_value_alloc.deallocate(_value, 1);
+			_value_alloc.deallocate(_value, 1);
 		}
-
+	
 		// ----------------------- =OPERATOR --------------------------
 
 		node_type	&operator=(node_type &src)
 		{
-			// if (*this != src)
-			// {
-				*_value = *(src._value);
+				if (_value)
+					_value_alloc.deallocate(_value, 1);
+				_value_alloc = src._value_alloc;
+				_value = _value_alloc.allocate(1);
+				_value_alloc.construct(_value, src.get_value());
 				_colour = src._colour;
 				_parent = src._parent;
 				_left = src._left;
 				_right = src._right;
-			// }
+			return *this;
+		}
+
+		node_type	&operator=(const node_type &src)
+		{
+				if (_value)
+					_value_alloc.deallocate(_value, 1);
+				_value_alloc = src._value_alloc;
+				_value = _value_alloc.allocate(1);
+				_value_alloc.construct(_value, src.get_value());
+				_colour = src._colour;
+				_parent = src._parent;
+				_left = src._left;
+				_right = src._right;
 			return *this;
 		}
 
 		// ----------------------- METHODS --------------------------
 
-		value_pointer	get_value() const	{ return this->_value; }
+		value_type	get_value() const	{ return *this->_value; }
 
 		rbt_colour		get_colour() const { return this->_colour; }
 
@@ -115,12 +142,13 @@ namespace ft
 	};
 
 	template <typename T>
-	std::ostream&	operator <<(std::ostream& output, const Rbt_Node<T> &node)
+	std::ostream&	operator <<(std::ostream& output, const RbtNode<T> &node)
 	{
-		output << "\n<<<<<<>>>>>>>>\n";
-		output << "COLOR: " << (node.get_colour() ? " BLACK\n" : " RED\n");
-		output << "VALUE " << *node.get_value() << std::endl;
-		output << "<<<<<<>>>>>>>>" << std::endl;
+		std::cout << ((node.get_colour() == RED) ? "\033[0;31m" : "");
+		output << "\n:---------:\n";
+		output << "|VALUE: " << node.get_value() << "";
+		output << "\n:---------:\n";
+		std::cout << ((node.get_colour() == RED) ? "\033[0m" : "");
 		return (output);
 	}
 

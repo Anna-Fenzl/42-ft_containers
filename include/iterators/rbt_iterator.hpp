@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/12 12:05:36 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:38:25 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_min(NodePointer node)
 	{
-		while (node->_left != NULL)
+		while (node && node->_left != NULL)
 			node = node->_left;
 		return node;
 	}
@@ -29,7 +29,7 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_max(NodePointer node)
 	{
-		while (node->_right != NULL)
+		while (node && node->_right != NULL)
 			node = node->_right;
 		return node;
 	}
@@ -76,8 +76,8 @@ namespace ft
 		typedef ft::bidirectional_iterator_tag				iterator_category;
 		typedef std::ptrdiff_t								difference_type;
 
-		typedef typename Rbt_Node<T>::node_pointer			node_pointer;
-		typedef typename Rbt_Node<T>::const_node_pointer	const_node_pointer;
+		typedef typename RbtNode<T>::node_pointer			node_pointer;
+		typedef typename RbtNode<T>::const_node_pointer	const_node_pointer;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>
 		private:
@@ -103,7 +103,7 @@ namespace ft
 		
 		reference	operator*() const	{ return *_ptr->_value; }
 
-		pointer		operator->() const	{ return _ptr->value; }
+		pointer		operator->() const	{ return _ptr->_value; }
 
 		iterator	&operator++() 
 		{
@@ -173,8 +173,8 @@ template< typename T>
 		typedef ft::bidirectional_iterator_tag				iterator_category;
 		typedef std::ptrdiff_t								difference_type;
 
-		typedef typename Rbt_Node<T>::node_pointer			node_pointer;
-		typedef typename Rbt_Node<T>::const_node_pointer	const_node_pointer;
+		typedef typename RbtNode<T>::node_pointer			node_pointer;
+		typedef typename RbtNode<T>::const_node_pointer	const_node_pointer;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>
 		private:

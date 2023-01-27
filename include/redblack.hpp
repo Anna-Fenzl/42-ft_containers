@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/14 14:51:43 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/27 17:18:47 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ namespace ft
 	// 5. For each node, all simple paths from the node to descendant leaves contain the
 	// same number of black nodes.
 
-	template<typename _Val, typename _Compare=std::less<_Val> >
+	template<typename _Val, typename _Compare=std::less<_Val>, typename Alloc = std::allocator<_Val> >
 	class Redblack_Tree
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>>
-		typedef typename	std::allocator<_Val>::template rebind<Rbt_Node<_Val> >::other	node_alloc;
+		typedef typename	Alloc::template rebind<RbtNode<_Val> >::other	node_alloc;
 		public:
-		// typedef _Alloc														value_alloc;
 
 		typedef _Compare						value_compare;
 		typedef _Val							value_type;
@@ -46,19 +45,18 @@ namespace ft
 		typedef const _Val*						const_value_pointer;
 		typedef _Val&							value_reference;
 		typedef const _Val&						const_value_reference;
-		typedef Rbt_Node<_Val>*					node_pointer;
-		typedef const Rbt_Node<_Val>*			const_node_pointer;
+		typedef RbtNode<_Val>*					node_pointer;
+		typedef const RbtNode<_Val>*			const_node_pointer;
 
 		typedef	size_t							size_type;
 		typedef	ptrdiff_t						difference_type;
 
 		// iterators
-		typedef ft::Rbt_Iterator<value_type>				iterator;
+		typedef ft::Rbt_Iterator<value_type>	iterator;
 		// typedef ft::Const_Rbt_Iterator<node_pointer>	const_iterator;
 		
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
 		protected:
-		
 		node_pointer	_root;
 
 		size_type		_size;
@@ -72,58 +70,63 @@ namespace ft
 
 		// ----------------------- CONSTRUCTOR --------------------
 		// default constructor
-		Redblack_Tree(): _root(NULL), _size(0), _compare(_Compare()), _node_alloc(std::allocator<Rbt_Node<value_type> >()) {}
-
-		// copy constructor
-		// Redblack_Tree(Redblack_Tree& src): _compare(_Compare()), _node_alloc(std::allocator<Rbt_Node<value_type> >()
-		// {
-		// 	*this = src;
-		// }
+		Redblack_Tree(): _root(NULL), _size(0), _compare(_Compare()), _node_alloc(std::allocator<RbtNode<value_type> >()) {}
+		
+		Redblack_Tree(const Redblack_Tree& src) {*this = src;}
 
 		~Redblack_Tree()
 		{
 			clear();
 		}
-		
 
+		// ----------------------- OPERATOR ----------------------
+
+		Redblack_Tree& operator=( const Redblack_Tree& other )
+		{
+			if (*this != other)
+			{
+				clear();
+				_root = copy_tree(other._root);
+				_size = other._size;
+				_node_alloc = other._node_alloc;
+				_compare = other._compare;
+			}
+		}
+		
 		// ----------------------- ITERATORS ----------------------
 
-		iterator	begin() 	{ return iterator(red_black_tree_min(_root)); };
+		iterator		begin() 			{ return iterator(red_black_tree_min(_root)); };
 		
-		iterator	end()		{ return NULL; };
+		iterator		end()				{ return NULL; };
 		
 		// ----------------------- CAPACITY -----------------------
 		
-		size_type	size() const			{ return _size; }
+		size_type		size() const		{ return _size; }
 
-		size_type	max_size() const		{ return _node_alloc.max_size(); }
+		size_type		max_size() const	{ return _node_alloc.max_size(); }
 
-		bool		empty() const			{ return _size == 0; }
+		bool			empty() const		{ return _size == 0; }
 
 		// ----------------------- GETTERS ------------------------
 		
-		node_alloc	get_node_alloc()	{ return _node_alloc; }
+		node_alloc		get_node_alloc()	{ return _node_alloc; }
 
-		node_pointer	root()			{ return _root; }
+		node_pointer	root()				{ return _root; }
 		
 		// ----------------------- MODIFY -------------------------
-		private:
-		bool is_equal(value_type value, value_type comp)
-		{
-			return (!_compare(value, comp) && !_compare(comp, value));
-		}
 
-		public:
-		// also need to increase _size
-		void	insert(value_type value)
+		//  (1) return a pair
+		// pair::first set to an iterator pointing to either the newly inserted element or to the element with an equivalent key in the map.
+		// The pair::second element in the pair is set to true if a new element was inserted 
+		ft::pair<iterator, bool>	insert(const value_type& value)
 		{
 			node_pointer move = _root, parent = _root;
-			Rbt_Node<value_type> node(value, parent);
+			RbtNode<value_type> node(value, parent);
 
 			while (move != NULL)
 			{
 				if (is_equal(*(move->_value), value))
-					return;
+					return (ft::make_pair(find(value), false));
 				parent = move;
 				_compare(*(move->_value), value) ? move = move->_right : move = move->_left;
 			}
@@ -136,48 +139,20 @@ namespace ft
 			move->set_parent(parent);
 			
 			insert_fixup(move);
+			return (ft::make_pair(find(value), true));
 		}
 
-		void	rb_delete(node_pointer z)
+		iterator find (const value_type value)
 		{
-			node_pointer x;
-			node_pointer y = z;
-			rbt_colour original_colour = y->get_colour();
-
-			if (z->_left == NULL)
+			for(iterator it = begin(); it != end(); ++it)
 			{
-				x = z->_right;
-				transplant(z, z->_right);
+				if (*it == value)
+					return(it);
 			}
-			else if(z->_right == NULL)
-			{
-				x = z->_left;
-				transplant(z, z->_left);
-			}
-			else
-			{
-				y = red_black_tree_min(z->_right);
-				x = z->_right;
-				if (y->_parent == z)
-					x->_parent = y;
-				else
-				{
-					transplant(y, y->_right);
-					y->_right = z->_right;
-					y->_right->_parent = y;
-				}
-				transplant(z, y);
-				y->_left = z->_left;
-				y->_left->_parent = y;
-				y->set_colour(z->_colour);
-			}
-			if (original_colour == BLACK)
-			{
-				std::cout << "original colour is black\n";
-				delete_fixup(x);
-			}
-			print_tree();
+			return(end());
 		}
+
+		// const_iterator find (const key_type& k) const
 
 		void	clear()
 		{
@@ -188,174 +163,64 @@ namespace ft
 
 		private:
 
-		void	transplant(node_pointer u, node_pointer v)
+		void	insert_fixup(node_pointer n)
 		{
-			if (u == NULL)
-				return;
-	
-			if (u->_parent == NULL)
-				_root = v;
-			else if(u == u->_parent->_left)
-				u->_parent->_left = v;
-			else
-				u->_parent->_right = v;
-			if (v)
-				v->_parent = u; 
-		}
-
-		void	delete_fixup(node_pointer x)
-		{
-			while (x != _root && x->get_colour() == BLACK)
+			while (n != NULL && n->_parent != NULL && n->_parent->_parent != NULL
+				&& n != _root && n->_parent->_colour == RED)
 			{
-				std::cout << "in while" << std::endl;
-				if (x == x->_parent->_left)
+				if (n->_parent->_parent->_right == n->_parent)		// n's parent is a right child
 				{
-					std::cout << "######### PARENT IS LEFT - NODE\n";
-					node_pointer w = x->_parent->_right;
-					if (x->get_colour() == RED)		// if uncle is red
+					if (n->_parent->_parent->_left != NULL
+						&& n->_parent->_parent->_left->_colour == RED)
 					{
-						std::cout << "1\n";
-						w->set_colour(BLACK);
-						w->_parent->set_colour(RED);
-						left_rotate(x->_parent);
-						w = x->_parent->_right;
+						n->_parent->_parent->_left->set_colour(BLACK);
+						n->_parent->set_colour(BLACK);
+						n->_parent->_parent->set_colour(RED);
+						n = n->_parent->_parent;
 					}
-					if (w->_left->get_colour() == BLACK
-					&& w->_right->get_colour() == BLACK)
+					else
 					{
-						std::cout << "2\n";
-						w->set_colour(RED);
-						x = x->_parent;
-					}
-					else if (w->_right->get_colour() == BLACK)
-					{
-						std::cout << "3\n";
-						w->_left->set_colour(BLACK);
-						w->set_colour(RED);
-						right_rotate(w);
-						w = x->_parent->_right;
-					}
-					std::cout << "4\n";
-					w->set_colour(x->_parent->_colour);
-					x->_parent->set_colour(BLACK);
-					w->_right->set_colour(BLACK);
-					left_rotate(x->_parent);
-					x = _root;
-				}
-				else
-				{
-					std::cout << "######### PARENT IS RIGHT - NODE\n";
-					node_pointer w = x->_parent->_left;
-					if (x->get_colour() == RED)		// if uncle is red
-					{
-						std::cout << "1\n";
-						w->set_colour(BLACK);
-						w->_parent->set_colour(RED);
-						left_rotate(x->_parent);
-						w = x->_parent->_left;
-					}
-					if (w->_right->get_colour() == BLACK
-					&& w->_left->get_colour() == BLACK)
-					{
-						std::cout << "2\n";
-						w->set_colour(RED);
-						x = x->_parent;
-					}
-					else if (w->_left->get_colour() == BLACK)
-					{
-						std::cout << "3\n";
-						w->_right->set_colour(BLACK);
-						w->set_colour(RED);
-						right_rotate(w);
-						w = x->_parent->_left;
-					}
-					std::cout << "3\n";
-					w->set_colour(x->_parent->_colour);
-					x->_parent->set_colour(BLACK);
-					w->_left->set_colour(BLACK);
-					left_rotate(x->_parent);
-					x = _root;
-				}
-			}
-			x->set_colour(BLACK);
-		}
-
-		// to rotate and recolour after insertion
-		void	insert_fixup(node_pointer z)
-		{
-			std::cout << "-------------------------------------\n==> inserted: " << *z->_value << std::endl;
-			while (z->_parent && z->_parent->get_colour() == RED)
-			{
-				if (z->_parent->_parent && z->_parent == z->_parent->_parent->_left) // if parent is a LEFT NODE
-				{
-					// std::cout << "######### PARENT IS LEFT - NODE\n";
-					node_pointer y =  z->_parent->_parent->_right; 		// y is uncle of z
-					
-					if (y && y->get_colour() == RED)					// uncle is red
-					{
-						// std::cout << "1\n";
-						z->_parent->set_colour(BLACK);
-						y->set_colour(BLACK);
-						z->_parent->_parent->set_colour(RED);
-						z = z->_parent->_parent;
-					}
-					else if (z == z->_parent->_right)					// z is the right node
-					{
-						// std::cout << "2\n";
-						z = z->_parent;
-						left_rotate(z);
-					}
-					if (z->_parent && z->_parent->_parent)
-					{
-						// std::cout << "3\n";
-						z->_parent->set_colour(BLACK);
-						z->_parent->_parent->set_colour(RED);
-						right_rotate(z->_parent->_parent);
+						if (n->_parent->_left == n)
+						{
+							n = n->_parent;
+							right_rotate(n);
+						}
+						n->_parent->set_colour(BLACK);
+						n->_parent->_parent->set_colour(RED);
+						left_rotate(n->_parent->_parent);
 					}
 				}
-				else if (z->_parent->_parent)							// parent is RIGHT NODE
+				else												// n's parent is a left child
 				{
-					// std::cout << "############ PARENT IS RIGHT - NODE\n";
-					node_pointer y =  z->_parent->_parent->_left; 		// y is uncle of z
-					
-					if (y && y->get_colour() == RED)					// uncle is red
+					if (n->_parent->_parent->_right != NULL
+						&& n->_parent->_parent->_right->_colour == RED)
 					{
-						// std::cout << "1\n";
-						z->_parent->set_colour(BLACK);
-						y->set_colour(BLACK);
-						z->_parent->_parent->set_colour(RED);
-						z = z->_parent->_parent;
+						n->_parent->_parent->_right->set_colour(BLACK);
+						n->_parent->set_colour(BLACK);
+						n->_parent->_parent->set_colour(RED);
+						n = n->_parent->_parent;
 					}
-					else if (z == z->_parent->_left)					// z is the right node
+					else 
 					{
-						// std::cout << "2\n";
-						z = z->_parent;
-						right_rotate(z);
-					}
-					if (z->_parent && z->_parent->_parent)
-					{
-						// std::cout << "3\n";
-						z->_parent->set_colour(BLACK);
-							z->_parent->_parent->set_colour(RED);
-						left_rotate(z->_parent->_parent);
+						if (n->_parent->_right == n)
+						{
+							n = n->_parent;
+							left_rotate(n);
+						}
+						n->_parent->set_colour(BLACK);
+						n->_parent->_parent->set_colour(RED);
+						right_rotate(n->_parent->_parent);
 					}
 				}
 			}
-
-			_root->set_colour(BLACK);
-			// print_tree();
+			_root->_colour = BLACK;
 		}
 
 		void	left_rotate(node_pointer x)
 		{
-			std::cout << "\n<  LEFT ROTATE  >" << std::endl;
 			if ( x == NULL || x->_right == NULL)
 				return;
 
-			// std::cout << "x is " << *x << std::endl;
-			// std::cout << "x right (y) is " << *x->_right << std::endl;
-			// std::cout << "-------------------------------\n";
-	
 			node_pointer y = x->_right;
 			x->_right = y->_left;				// turn y's subtree in x's subtree
 			if (y->_left != NULL)
@@ -373,13 +238,8 @@ namespace ft
 
 		void	right_rotate(node_pointer x)
 		{
-			std::cout << "<  RIGHT ROTATE  >" << std::endl;
 			if ( x == NULL || x->_left == NULL)
 				return;
-			// std::cout << "x is " << *x << std::endl;
-			// std::cout << "x right (y) is " << *x << std::endl;
-			// std::cout << "-------------------------------\n";
-
 	
 			node_pointer y = x->_left;
 			x->_left = y->_right;				// turn y's subtree in x's subtree
@@ -396,18 +256,47 @@ namespace ft
 			x->_parent = y;
 		}
 
-		// deallocate every element from the tree
+		bool is_equal(value_type value, value_type comp)
+		{
+			return (!_compare(value, comp) && !_compare(comp, value));
+		}
+		
+		node_pointer	allocate_node(value_type value)
+		{
+			node_pointer node = _node_alloc.allocate(1);
+			
+			RbtNode<value_type>	set_node(value);
+			_node_alloc.construct(node, set_node);
+			return (node);
+		}
+
+		void	delete_node(node_pointer node)
+		{
+			_node_alloc.destroy(node);
+			_node_alloc.deallocate(node, 1);
+			node = NULL;
+		}
+
+		node_pointer	copy_tree(node_pointer root)
+		{
+			if (root = NULL)
+				return NULL;
+			node_pointer new_node = allocate_node(root->get_value());
+			new_node = root;
+			new_node->_left = _copy_tree(root->_left, new_node);
+			new_node->_right = _copy_tree(root->_right, new_node);
+			return (new_node);
+		}
+		
 		void	clear_tree(node_pointer node)
 		{
 			if (node == NULL)
-				return;
+					return;
 
 			clear_tree(node->_right);
 			clear_tree(node->_left);
-			_node_alloc.destroy(node);
-			_node_alloc.deallocate(node, 1);
+			delete_node(node);
 		}
-
 		// ------------------------------- DEBUG ------------------------------------
 		public:
 		class Trunk
@@ -460,6 +349,7 @@ namespace ft
 			trunk->str = "   |";
 
 			print_tree(root->_left, trunk, false);
+			delete trunk;
 		}
 
 		void print_tree()

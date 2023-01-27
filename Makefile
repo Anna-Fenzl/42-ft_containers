@@ -6,7 +6,7 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2023/01/10 15:26:59 by afenzl           ###   ########.fr        #
+#    Updated: 2023/01/27 14:49:33 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,12 @@ all: $(NAME_FT) $(NAME_STD)
 	@echo " \033[0;31m |    \033[0;32m  |   |\033[0;33m  |   |\033[0;34m  ___/ \033[0;35m  | \033[0;36m  |   \033[0;31m   |    \033[0;32m  |   |\033[0;33m _| "
 	@echo " \033[0;31m\____|\033[0;32m \___/ \033[0;33m _|  _|\033[0;34m _|    \033[0;35m___|\033[0;36m _____|\033[0;31m _____|\033[0;32m ____/ \033[0;33m _) \033[0m"
 	@echo "                                                        "
-	@$(RM) $(FT_OBJ) $(STD_OBJ)
+	@rm -rf $(STD_OBJ) $(FT_OBJ)
 
 $(NAME_FT): $(FT_OBJ) $(HEADER)
 	@$(CPP) $(CPP_FLAGS) $(FT_OBJ) -o $(NAME_FT)
 
-$(NAME_STD): $(STD_OBJ) $(HEADER)
+$(NAME_STD): $(STD_OBJ)
 	@$(CPP) $(CPP_FLAGS) $(STD_OBJ) -o $(NAME_STD)
 
 clean:

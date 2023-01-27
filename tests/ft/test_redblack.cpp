@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/14 14:52:17 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:54:34 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,78 +18,38 @@
 
 # include "../../include/map.hpp"
 # include "../../include/utils/rbt_node.hpp"
+# include "../../include/iterators/rbt_iterator.hpp"
 	# include <map>
 	# include <stdio.h>
 
 void	test_redblack()
 {
-	ft::Redblack_Tree<int> test;
+		ft::Redblack_Tree<int> test;
 
-	// std::cout << "the size is " << test.size() << std::endl;
-	// std::cout << "the maxsize is " << test.max_size() << std::endl;
-	// std::cout << "empty is " << test.empty() << std::endl;
+		ft::pair<ft::Rbt_Iterator<int>, bool> ret = test.insert(1);
+		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
+		// test.print_tree();
+		// ret = test.insert(1);
+		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
+		test.insert(4);
+		test.insert(5);
+		test.insert(6);
+		test.insert(2);
+		test.insert(3);
+		test.insert(1);
+		test.insert(13);
+		test.insert(14);
+		test.insert(17);
+		test.insert(10);
+		test.insert(7);
+		test.insert(9);
+		test.insert(0);
+		test.insert(11);
+		test.print_tree();
 
-	test.insert(1);
-	test.insert(7);
-	test.insert(2);
-	test.insert(5);
-	test.insert(4);
-	test.insert(8);
-	test.insert(14);
-	test.insert(15);
-	test.insert(3);
+			
+		test.clear();
+		test.print_tree();
 
-
-	ft::Rbt_Iterator<int> other = ++++++++++++test.begin();
-
-	test.print_tree();
-	std::cout << "deleting " << *other.base() << std::endl;
-	test.rb_delete(other.base());
-	// test.right_rotate(other.base());
-
-	// test.print_tree();
-	test.clear();
-	// TEST CONST ITERATOR
-
-	// std::cout << "other " << *other << std::endl;
-	// *start = *start + 5;
-	// *other = *other + 5;
-	// std::cout << "other " << *other << std::endl;
-
-
-	// //TEST ITERATOR
-	// while(start != test.end())
-	// {
-	// 	std::cout << *start << std::endl;
-	// 	++start;
-	// }
-	// std::cout << "-------------------" << std::endl;
-	// std::cout << *start << std::endl;
-	// std::cout << *start++ << std::endl;
-	// std::cout << *start << std::endl;
-
-	// std::cout << (*start == ++--*start);
-
-	// std::cout << *start << std::endl;
-	// ++start;
-
-	// std::cout << *start << std::endl;
-	// ++start;
-	// if (start == NULL)
-	// 	std::cout << "NULL\n";
-	// std::cout << *start << std::endl;
-
-
-	// std::cout << test.root()->_value << std::endl;
-
-	// std::map<std::string, int> map;
-	// map["HEY"] = 10;
-	// map["YOU"] = -1;
-	// map.insert(std::make_pair("this", 55));
-	// printf("%p\n", map.end());
-
-	// system("leaks ft_containers");
-	
-
-	// map.insert(5, 'c');
+		// std::cout << "find returns " << *test.find(1) << std::endl;
 }
