@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/27 17:18:47 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/28 14:29:12 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ namespace ft
 		typedef const _Val*						const_value_pointer;
 		typedef _Val&							value_reference;
 		typedef const _Val&						const_value_reference;
+		typedef RbtNode<_Val>					node_type;
 		typedef RbtNode<_Val>*					node_pointer;
 		typedef const RbtNode<_Val>*			const_node_pointer;
 
@@ -58,6 +59,7 @@ namespace ft
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
 		protected:
 		node_pointer	_root;
+		node_type		_loopback;
 
 		size_type		_size;
 		node_alloc		_node_alloc;
@@ -70,7 +72,11 @@ namespace ft
 
 		// ----------------------- CONSTRUCTOR --------------------
 		// default constructor
-		Redblack_Tree(): _root(NULL), _size(0), _compare(_Compare()), _node_alloc(std::allocator<RbtNode<value_type> >()) {}
+		Redblack_Tree(): _root(NULL), _size(0), _compare(_Compare()), _node_alloc(std::allocator<RbtNode<value_type> >())
+		{
+			_loopback._left = &_loopback;
+			std::cout << "loopback is " << _loopback << std::endl;
+		}
 		
 		Redblack_Tree(const Redblack_Tree& src) {*this = src;}
 
@@ -142,12 +148,101 @@ namespace ft
 			return (ft::make_pair(find(value), true));
 		}
 
+		// size_type	erase( value_type value)
+		// {
+		// 	node_pointer	node = find(value).base();
+
+		// 	// OR ENDNOTE == what is endnode/loopback
+		// 	if (!node)
+		// 		return 0;
+		// 	erase_node(node);
+		// 	return 1;
+		// }
+
+		// void	erase_node( node_pointer node )
+		// {
+		// 	node = deletion(node);
+		// 	//case 1
+		// 	if (node->get_colour() == RED)
+		// 		remove_node(node);
+		// 	else
+		// 		fixup_delete(node);
+			
+		// }
+
+		// node_pointer	deletion(node_pointer node)
+		// {
+		// 	node_pointer	next;
+		// 	while (node->_left || node->_right)
+		// 	{
+		// 		if (node == )
+		// 	}
+		// }
+
+		// void	erase(iterator pos)
+		// {
+		// 	if (pos == end())
+		// 		return;
+
+		// 	node_pointer	z = const_cast < node_pointer > (pos.base());
+		// 	std::cout << "********* DELETING **********" << *z << std::endl;
+		// 	node_pointer	y = z;
+		// 	node_pointer	x;
+		// 	rbt_colour		original_colour = y->get_colour();
+
+		// 	if (z->_left == NULL)
+		// 	{
+		// 		std::cout << "1\n";
+		// 		x = z->_right;
+		// 		transplant(z, z->_right);
+		// 	}
+		// 	else if(z->_right == NULL)
+		// 	{
+		// 		std::cout << "2\n";
+		// 		x = z->_left;
+		// 		transplant(z, z->_left);
+		// 		// added this
+		// 		// x->_parent = z->_parent;
+		// 	}
+		// 	else
+		// 	{
+		// 		std::cout << "3\n";
+		// 		y = red_black_tree_min(z->_right);
+		// 		x = z->_right;
+		// 		if (y->_parent == z)
+		// 			x->_parent = y;
+		// 		else
+		// 		{
+		// 			std::cout << "4\n";
+		// 			transplant(y, y->_right);
+		// 			y->_right = z->_right;
+		// 			y->_right->_parent = y;
+		// 		}
+		// 		transplant(z, y);
+		// 		y->_left = z->_left;
+		// 		y->_left->_parent = y;
+		// 		y->set_colour(z->_colour);
+		// 	}
+		// 	// delete_node(z);
+		// 	if (original_colour == BLACK)
+		// 	{
+		// 		std::cout << "original colour is black\n";
+		// 		// delete_fixup(x);
+		// 	}
+		// 	print_tree();
+		// }
+
 		iterator find (const value_type value)
 		{
-			for(iterator it = begin(); it != end(); ++it)
+			node_pointer move = _root;
+			while (move)
 			{
-				if (*it == value)
-					return(it);
+				if (_compare(*move->_value, value))
+					move = move->_right;
+				else if (_compare(value, *move->_value))
+					move = move->_left;
+				else
+					return(iterator(move));
 			}
 			return(end());
 		}
@@ -256,6 +351,21 @@ namespace ft
 			x->_parent = y;
 		}
 
+		void	transplant(node_pointer u, node_pointer v)
+		{
+			if (u == NULL)
+				return;
+
+			if (u->_parent == NULL)
+				_root = v;
+			else if(u == u->_parent->_left)
+				u->_parent->_left = v;
+			else
+				u->_parent->_right = v;
+			if (v)
+				v->_parent = u; 
+		}
+
 		bool is_equal(value_type value, value_type comp)
 		{
 			return (!_compare(value, comp) && !_compare(comp, value));
@@ -279,7 +389,7 @@ namespace ft
 
 		node_pointer	copy_tree(node_pointer root)
 		{
-			if (root = NULL)
+			if (root == NULL)
 				return NULL;
 			node_pointer new_node = allocate_node(root->get_value());
 			new_node = root;

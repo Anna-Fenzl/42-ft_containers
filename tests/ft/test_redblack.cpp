@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/27 16:54:34 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/28 14:09:08 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ void	test_redblack()
 		test.insert(11);
 		test.print_tree();
 
+
+		std::cout << "find returns " << *test.find(7) << std::endl;
+		// test.erase(test.find(7));
+		// test.erase(test.find(9));
+		// test.erase(test.find(4));
+		// std::cout << "hey" << std::endl;
+		// test.find(4);
+		// test.print_tree();
+		// test.erase(test.find(4));
 			
 		test.clear();
 		test.print_tree();
