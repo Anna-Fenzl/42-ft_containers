@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/28 14:09:08 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:03:13 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	test_redblack()
 
 		ft::pair<ft::Rbt_Iterator<int>, bool> ret = test.insert(1);
 		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
-		// test.print_tree();
 		// ret = test.insert(1);
 		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
 		test.insert(4);
@@ -36,7 +35,6 @@ void	test_redblack()
 		test.insert(6);
 		test.insert(2);
 		test.insert(3);
-		test.insert(1);
 		test.insert(13);
 		test.insert(14);
 		test.insert(17);
@@ -45,20 +43,21 @@ void	test_redblack()
 		test.insert(9);
 		test.insert(0);
 		test.insert(11);
+
 		test.print_tree();
 
+		std::cout << "---------------------------[\n" << std::endl;
 
-		std::cout << "find returns " << *test.find(7) << std::endl;
+		// std::cout << "find returns " << *test.find(7) << std::endl;
 		// test.erase(test.find(7));
 		// test.erase(test.find(9));
-		// test.erase(test.find(4));
-		// std::cout << "hey" << std::endl;
+		test.erase(test.find(4));
+		// // std::cout << "hey" << std::endl;
 		// test.find(4);
-		// test.print_tree();
-		// test.erase(test.find(4));
-			
-		test.clear();
 		test.print_tree();
+			
+		// test.clear();
+		// test.print_tree();
 
 		// std::cout << "find returns " << *test.find(1) << std::endl;
 }

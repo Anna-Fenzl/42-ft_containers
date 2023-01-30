@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/27 16:38:25 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/30 16:34:08 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_min(NodePointer node)
 	{
-		while (node && node->_left != NULL)
+		while (node->_left != node->_nil)
 			node = node->_left;
 		return node;
 	}
@@ -29,17 +29,17 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_max(NodePointer node)
 	{
-		while (node && node->_right != NULL)
+		while (node->_right != node->_nil)
 			node = node->_right;
-		return node;
+		return node->_parent;
 	}
 
 	template < typename NodePointer >
 	NodePointer red_black_tree_next(NodePointer node)
 	{
-		if (node->_right != NULL)
+		if (node->_right != node->_nil)
 			return red_black_tree_min(node->_right);
-		while (node->_parent != NULL && node == node->_parent->_right)
+		while (node->_parent != node->_nil && node == node->_parent->_right)
 			node = node->_parent;
 		return node->_parent;
 	}
@@ -47,16 +47,12 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_prev(NodePointer node)
 	{
-		if (node->_left != NULL)
+		if (node->_left != node->_nil)
 			return red_black_tree_max(node->_left);
-		while (node->_parent != NULL && node == node->_parent->_left)
+		while (node->_parent != node->_nil && node == node->_parent->_left)
 			node = node->_parent;
 		return node->_parent;
 	}
-
-
-
-
 
 	template< typename T>
 	struct Const_Rbt_Iterator;

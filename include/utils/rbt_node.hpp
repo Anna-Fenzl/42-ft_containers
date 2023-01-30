@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/27 17:11:12 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/30 16:33:06 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ namespace ft
 		node_pointer	_parent;
 		node_pointer	_left;
 		node_pointer	_right;
+		node_pointer	_nil;
 		value_alloc		_value_alloc;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -46,27 +47,27 @@ namespace ft
 		// ----------------------- CONSTRUCTORS --------------------------
 
 		// default constructor -> everything set to NULL and BLACK
-		RbtNode(): _colour(BLACK), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
-		{
-			_value = _value_alloc.allocate(1);
-		}
+		// RbtNode(): _colour(BLACK), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
+		// {
+		// 	_value = _value_alloc.allocate(1);
+		// }
 
 		// constructor takes value -> colour set to red
-		RbtNode(const value_type& value): _colour(RED), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
+		RbtNode(const value_type& value, node_pointer nil): _colour(RED), _parent(nil), _left(nil), _right(nil), _nil(nil),  _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 			_value_alloc.construct(_value, value);
 		}
 
 		// constructor takes value & parent -> colour set to red
-		RbtNode(const value_type& value, node_pointer parent ): _colour(RED), _parent(parent), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
+		RbtNode(const value_type& value, node_pointer parent, node_pointer nil ): _colour(RED), _parent(parent), _left(nil), _right(nil), _nil(nil), _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 			_value_alloc.construct(_value, value);
 		}
 
 		// constructor takes value & parent & colour
-		RbtNode(const value_type& value, node_pointer parent, rbt_colour colour): _colour(colour), _parent(parent), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
+		RbtNode(const value_type& value, node_pointer parent, const node_pointer nil, rbt_colour colour): _colour(colour), _parent(parent), _left(nil), _right(nil), _nil(nil), _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 			_value_alloc.construct(_value, value);
@@ -101,6 +102,7 @@ namespace ft
 				_parent = src._parent;
 				_left = src._left;
 				_right = src._right;
+				_nil = src._nil;
 			return *this;
 		}
 
