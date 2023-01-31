@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 15:22:46 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 17:08:37 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,34 @@
 
 void	test_redblack()
 {
-		ft::Redblack_Tree<int> test;
+		// ft::Redblack_Tree<int> test;
 
-		ft::pair<ft::Rbt_Iterator<int>, bool> ret = test.insert(1);
+		// test.insert(1);
+		// // ret = test.insert(1);
+		// // std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
+		// test.insert(4);
+		// test.insert(5);
+		// test.insert(6);
+		// test.insert(2);
+		// test.insert(3);
+		// test.insert(13);
+		// test.insert(14);
+		// test.insert(17);
+		// test.insert(10);
+		// test.insert(7);
+		// test.insert(9);
+		// test.insert(0);
+		// test.insert(11);
+
+		ft::map<std::string, int> map;
+
+		ft::pair<ft::Rbt_Iterator<int>, bool> ret = map.insert(ft::make_pair("first test", 11));
 		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
-		// ret = test.insert(1);
+		// ret = map.insert(ft::make_pair("first test", 99));
 		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
-		test.insert(4);
-		test.insert(5);
-		test.insert(6);
-		test.insert(2);
-		test.insert(3);
-		test.insert(13);
-		test.insert(14);
-		test.insert(17);
-		test.insert(10);
-		test.insert(7);
-		test.insert(9);
-		test.insert(0);
-		test.insert(11);
 
-		test.print_tree();
-		std::cout << "---------------------------\n" << std::endl;
+		// map.insert(ft::make_pair("first test", 15));
 
-		// test.erase(test.find(4));
-		// test.erase(test.find(17));
-		// test.erase(test.find(10));
-		// test.erase(test.find(5));
-		// test.erase(test.find(9));
-		// test.erase(test.find(2));
-		// test.erase(test.find(6));
-		// test.erase(test.find(13));
-			
 
-		std::cout << "compare:\n";
-		// test.print_tree();
-		// test.clear();
-		// std::cout << "behind clear" << std::endl;
-		ft::Redblack_Tree<int> copy = test;
-		copy.print_tree();
-		test.print_tree();
-
+		
 }

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 15:26:21 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 15:48:44 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ namespace ft
 		typedef typename	Alloc::template rebind<RbtNode<_Val> >::other	node_alloc;
 		public:
 
-		typedef _Compare						value_compare;
-		typedef _Val							value_type;
-		typedef _Val*							value_pointer;
-		typedef const _Val*						const_value_pointer;
-		typedef _Val&							value_reference;
-		typedef const _Val&						const_value_reference;
-		typedef RbtNode<_Val>					node_type;
-		typedef RbtNode<_Val>*					node_pointer;
-		typedef const RbtNode<_Val>*			const_node_pointer;
+		typedef _Compare								value_compare;
+		typedef _Val									value_type;
+		typedef _Val*									value_pointer;
+		typedef const _Val*								const_value_pointer;
+		typedef _Val&									value_reference;
+		typedef const _Val&								const_value_reference;
+		typedef RbtNode<_Val>							node_type;
+		typedef RbtNode<_Val>*							node_pointer;
+		typedef const RbtNode<_Val>*					const_node_pointer;
 
-		typedef	size_t							size_type;
-		typedef	ptrdiff_t						difference_type;
+		typedef	size_t									size_type;
+		typedef	ptrdiff_t								difference_type;
 
 		// iterators
-		typedef ft::Rbt_Iterator<value_type>	iterator;
+		typedef ft::Rbt_Iterator<value_type>			iterator;
 		typedef ft::Const_Rbt_Iterator<node_pointer>	const_iterator;
 		
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
@@ -66,10 +66,8 @@ namespace ft
 		value_compare	_compare;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>
-		private:
 
 		public:
-
 		// ----------------------- CONSTRUCTOR --------------------
 		// default constructor
 		Redblack_Tree(): _size(0), _compare(_Compare()), _node_alloc(std::allocator<RbtNode<value_type> >())
@@ -81,12 +79,13 @@ namespace ft
 			_root = _nil;
 		}
 		
+		// copy_constructor
 		Redblack_Tree(const Redblack_Tree& src)
 		{
 			_nil = _node_alloc.allocate(1);
 			_nil->set_colour(BLACK);
-	
 			_root = _nil;
+
 			*this = src;
 		}
 
@@ -163,12 +162,15 @@ namespace ft
 			move->_nil = move->_left;
 			
 			insert_fixup(move);
-			// print_tree();
+			++_size;
 			return (ft::make_pair(find(value), true));
 		}
 
 		void	erase(iterator pos)
 		{
+			if (pos == end())
+				return;
+
 			node_pointer	z = pos.base();
 			node_pointer	y = z;
 			node_pointer	x;
@@ -205,6 +207,7 @@ namespace ft
 			if (original_colour == BLACK) {
 				erase_fixup(x);
 			}
+			--_size;
 		}
 
 		iterator find (const value_type& value)
