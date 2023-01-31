@@ -1,0 +1,171 @@
+In file included from tests/ft/test_redblack.cpp:19:
+In file included from tests/ft/../../include/map.hpp:16:
+In file included from tests/ft/../../include/redblack.hpp:18:
+In file included from tests/ft/../../include/./iterators/rbt_iterator.hpp:17:
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:153:16: error: overloaded 'operator<<' must be a binary operator (has 3 parameters)
+        std::ostream&   operator <<(std::ostream& output, const RbtNode<V> &node)
+                        ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:113:3: error: function definition is not allowed here
+                {
+                ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:131:32: error: function definition is not allowed here
+                value_type      get_value() const       { return *this->_value; }
+                                                        ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:133:34: error: function definition is not allowed here
+                rbt_colour              get_colour() const { return this->_colour; }
+                                                           ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:136:3: error: function definition is not allowed here
+                {
+                ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:144:41: error: function definition is not allowed here
+                void            set_parent(node_pointer parent) { _parent = parent; }
+                                                                ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:146:39: error: function definition is not allowed here
+                void            set_colour(rbt_colour colour) { _colour = colour; }
+                                                              ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:148:25: error: function definition is not allowed here
+                void            switch_colour() { _colour = (_colour == RED) ? BLACK : RED; }
+                                                ^
+tests/ft/../../include/./iterators/../utils/rbt_node.hpp:163:2: error: expected ';' after class
+}       // namespace ft
+ ^
+ ;
+In file included from tests/ft/test_redblack.cpp:19:
+In file included from tests/ft/../../include/map.hpp:16:
+In file included from tests/ft/../../include/redblack.hpp:18:
+tests/ft/../../include/./iterators/rbt_iterator.hpp:169:11: error: no type named 'bidirectional_iterator_tag' in namespace 'ft::ft'; did you mean simply 'bidirectional_iterator_tag'?
+                typedef ft::bidirectional_iterator_tag                          iterator_category;
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                        bidirectional_iterator_tag
+tests/ft/../../include/./iterators/iterator.hpp:24:43: note: 'bidirectional_iterator_tag' declared here
+        typedef std::bidirectional_iterator_tag         bidirectional_iterator_tag;
+                                                        ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:91:16: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    if (__x == nullptr)
+               ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:95:25: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    if (__x->__left_ != nullptr && __x->__left_->__parent_ != __x)
+                        ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:98:26: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    if (__x->__right_ != nullptr && __x->__right_->__parent_ != __x)
+                         ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:101:58: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    if (__x->__left_ == __x->__right_ && __x->__left_ != nullptr)
+                                                         ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:126:19: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    if (__root == nullptr)
+                  ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:129:30: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    if (__root->__parent_ == nullptr)
+                             ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:147:28: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    while (__x->__left_ != nullptr)
+                           ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:159:29: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    while (__x->__right_ != nullptr)
+                            ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+In file included from tests/ft/test_redblack.cpp:22:
+In file included from /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:479:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree:170:26: error: no member named '__get_nullptr_t' in namespace 'ft::std::__1'; did you mean '::std::__get_nullptr_t'?
+    if (__x->__right_ != nullptr)
+                         ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:48:17: note: expanded from macro 'nullptr'
+#define nullptr _VSTD::__get_nullptr_t()
+                ^~~~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config:840:15: note: expanded from macro '_VSTD'
+#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+              ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__nullptr:46:62: note: '::std::__get_nullptr_t' declared here
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+                                                             ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make: *** [tests/ft/test_redblack.o] Error 1

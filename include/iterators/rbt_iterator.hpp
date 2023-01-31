@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/30 16:34:08 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 14:50:21 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ namespace ft
 		typedef Rbt_Iterator<T>								iterator;
 		typedef Const_Rbt_Iterator<T>						const_iterator;
 		
-		typedef ft::bidirectional_iterator_tag				iterator_category;
+		typedef bidirectional_iterator_tag					iterator_category;
 		typedef std::ptrdiff_t								difference_type;
 
 		typedef typename RbtNode<T>::node_pointer			node_pointer;
-		typedef typename RbtNode<T>::const_node_pointer	const_node_pointer;
+		typedef typename RbtNode<T>::const_node_pointer		const_node_pointer;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>
 		private:
@@ -170,7 +170,7 @@ template< typename T>
 		typedef std::ptrdiff_t								difference_type;
 
 		typedef typename RbtNode<T>::node_pointer			node_pointer;
-		typedef typename RbtNode<T>::const_node_pointer	const_node_pointer;
+		typedef typename RbtNode<T>::const_node_pointer		const_node_pointer;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>
 		private:

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/30 16:33:06 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 14:52:47 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ namespace ft
 		// }
 
 		// constructor takes value -> colour set to red
-		RbtNode(const value_type& value, node_pointer nil): _colour(RED), _parent(nil), _left(nil), _right(nil), _nil(nil),  _value_alloc(std::allocator<value_type> () )
+		RbtNode(const value_type& value, const node_pointer nil): _colour(RED), _parent(nil), _left(nil), _right(nil), _nil(nil),  _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 			_value_alloc.construct(_value, value);
 		}
 
 		// constructor takes value & parent -> colour set to red
-		RbtNode(const value_type& value, node_pointer parent, node_pointer nil ): _colour(RED), _parent(parent), _left(nil), _right(nil), _nil(nil), _value_alloc(std::allocator<value_type> () )
+		RbtNode(const value_type& value, node_pointer parent, const node_pointer nil ): _colour(RED), _parent(parent), _left(nil), _right(nil), _nil(nil), _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 			_value_alloc.construct(_value, value);
@@ -93,6 +93,8 @@ namespace ft
 
 		node_type	&operator=(node_type &src)
 		{
+			if (this != &src)			//<--- ADDED!
+			{
 				if (_value)
 					_value_alloc.deallocate(_value, 1);
 				_value_alloc = src._value_alloc;
@@ -103,11 +105,14 @@ namespace ft
 				_left = src._left;
 				_right = src._right;
 				_nil = src._nil;
+			}
 			return *this;
 		}
 
 		node_type	&operator=(const node_type &src)
 		{
+			if (this != &src)
+			{
 				if (_value)
 					_value_alloc.deallocate(_value, 1);
 				_value_alloc = src._value_alloc;
@@ -117,6 +122,7 @@ namespace ft
 				_parent = src._parent;
 				_left = src._left;
 				_right = src._right;
+			}
 			return *this;
 		}
 
@@ -143,8 +149,8 @@ namespace ft
 
 	};
 
-	template <typename T>
-	std::ostream&	operator <<(std::ostream& output, const RbtNode<T> &node)
+	template <typename V>
+	std::ostream&	operator <<(std::ostream& output, const RbtNode<V> &node)
 	{
 		std::cout << ((node.get_colour() == RED) ? "\033[0;31m" : "");
 		output << "\n:---------:\n";

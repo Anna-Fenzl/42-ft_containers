@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/30 18:12:34 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 15:26:21 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ namespace ft
 
 		// iterators
 		typedef ft::Rbt_Iterator<value_type>	iterator;
-		// typedef ft::Const_Rbt_Iterator<node_pointer>	const_iterator;
+		typedef ft::Const_Rbt_Iterator<node_pointer>	const_iterator;
 		
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
 		protected:
@@ -81,7 +81,14 @@ namespace ft
 			_root = _nil;
 		}
 		
-		Redblack_Tree(const Redblack_Tree& src) {*this = src;}
+		Redblack_Tree(const Redblack_Tree& src)
+		{
+			_nil = _node_alloc.allocate(1);
+			_nil->set_colour(BLACK);
+	
+			_root = _nil;
+			*this = src;
+		}
 
 		~Redblack_Tree()
 		{
@@ -91,24 +98,29 @@ namespace ft
 
 		// ----------------------- OPERATOR ----------------------
 
-		Redblack_Tree& operator=( const Redblack_Tree& other )
+		Redblack_Tree& operator=(const Redblack_Tree& other )
 		{
-			if (*this != other)
+			if (this != &other)
 			{
 				clear();
-				_nil = other._nil;				// <-- added
-				_root = copy_tree(other._root);
+				_root = copy_tree(other._root, other._nil, other._nil);
 				_size = other._size;
 				_node_alloc = other._node_alloc;
 				_compare = other._compare;
 			}
+			return *this;
 		}
 		
 		// ----------------------- ITERATORS ----------------------
 
 		iterator		begin() 			{ return iterator(red_black_tree_min(_root)); };
 		
-		iterator		end()				{ return NULL; };
+		const_iterator	begin() const		{ return const_iterator(red_black_tree_min(_root)); };
+		
+		iterator		end()				{ return iterator(_nil); };
+
+		const_iterator	end() const			{ return const_iterator(_nil); };
+
 		
 		// ----------------------- CAPACITY -----------------------
 		
@@ -148,16 +160,16 @@ namespace ft
 			else
 				(parent != _nil && _compare(*(parent->_value), value)) ? parent->_right = move: parent->_left = move;
 			move->set_parent(parent);
+			move->_nil = move->_left;
 			
 			insert_fixup(move);
-			print_tree();
+			// print_tree();
 			return (ft::make_pair(find(value), true));
 		}
 
 		void	erase(iterator pos)
 		{
 			node_pointer	z = pos.base();
-			std::cout << "remove " << *z << std::endl;
 			node_pointer	y = z;
 			node_pointer	x;
 			rbt_colour		original_colour = y->get_colour();
@@ -189,78 +201,13 @@ namespace ft
 				y->_left->_parent = y;
 				y->_colour = z->_colour;
 			}
+			delete_node(z);
 			if (original_colour == BLACK) {
 				erase_fixup(x);
 			}
 		}
 
-		void	erase_fixup(node_pointer x)
-		{
-			node_pointer	w;
-			while (x != _root && x->get_colour() == BLACK)
-			{
-				if (x == x->_parent->_left)
-				{
-					w = x->_parent->_right;
-					if (w->get_colour() == RED)
-					{
-						w->set_colour(BLACK);
-						x->_parent->set_colour(RED);
-						left_rotate(x->_parent);
-						w = x->_parent->_right;
-					}
-					if (w->_left->get_colour() == BLACK && w->_right->get_colour() == BLACK)
-					{
-						w->set_colour(RED);
-						x = x->_parent;
-					}
-					else if (w->_right->get_colour() == BLACK)
-					{
-						w->_left->set_colour(BLACK);
-						w->set_colour(RED);
-						right_rotate(w);
-						w = x->_parent->_right;
-					}
-					w->set_colour(x->_parent->_colour);
-					x->_parent->set_colour(BLACK);
-					w->_right->set_colour(BLACK);
-					left_rotate(x->_parent);
-					x = _root;
-				}
-				else
-				{
-					w = x->_parent->_left;
-					if (w->get_colour() == RED)
-					{
-						w->set_colour(BLACK);
-						x->_parent->set_colour(RED);
-						left_rotate(x->_parent);
-						std::cout << "hey" << std::endl;
-						w = x->_parent->_right;
-					}
-					if (w->_right->get_colour() == BLACK && w->_left->get_colour() == BLACK)
-					{
-						w->set_colour(RED);
-						x = x->_parent;
-					}
-					else if (w->_left->get_colour() == BLACK)
-					{
-						w->_right->set_colour(BLACK);
-						w->set_colour(RED);
-						right_rotate(w);
-						w = x->_parent->_left;
-					}
-					w->set_colour(x->_parent->_colour);
-					x->_parent->set_colour(BLACK);
-					w->_left->set_colour(BLACK);
-					left_rotate(x->_parent);
-					x = _root;
-				}
-			}
-			x->_colour = BLACK;
-		}
-
-		iterator find (const value_type value)
+		iterator find (const value_type& value)
 		{
 			node_pointer move = _root;
 			while (move && move != _nil)
@@ -275,12 +222,25 @@ namespace ft
 			return(end());
 		}
 
-		// const_iterator find (const key_type& k) const
+		const_iterator find (const value_type& value) const
+		{
+			node_pointer move = _root;
+			while (move && move != _nil)
+			{
+				if (_compare(*move->_value, value))
+					move = move->_right;
+				else if (_compare(value, *move->_value))
+					move = move->_left;
+				else
+					return(const_iterator(move));
+			}
+			return(end());
+		}
 
 		void	clear()
 		{
 			clear_tree(_root);
-			_root = NULL;
+			_root = _nil;
 			_size = 0;
 		}
 
@@ -338,6 +298,88 @@ namespace ft
 			_root->_colour = BLACK;
 		}
 
+		void	erase_fixup(node_pointer x)
+		{
+			node_pointer	w;
+			while (x != _root && x->get_colour() == BLACK)
+			{
+				if (x == x->_parent->_left)
+				{
+					w = x->_parent->_right;
+					if (w->get_colour() == RED)
+					{
+						w->set_colour(BLACK);
+						x->_parent->set_colour(RED);
+						left_rotate(x->_parent);
+						w = x->_parent->_right;
+					}
+					if (w->_left->get_colour() == BLACK && w->_right->get_colour() == BLACK)
+					{
+						w->set_colour(RED);
+						x = x->_parent;
+					}
+					else
+					{
+						if (w->_right->get_colour() == BLACK)
+						{
+							w->_left->set_colour(BLACK);
+							w->set_colour(RED);
+							right_rotate(w);
+							w = x->_parent->_right;
+						}
+						w->set_colour(x->_parent->_colour);
+						x->_parent->set_colour(BLACK);
+						w->_right->set_colour(BLACK);
+						left_rotate(x->_parent);
+						x = _root;
+					}
+				}
+				else
+				{
+					w = x->_parent->_left;
+					if (w->get_colour() == RED)
+					{
+						w->set_colour(BLACK);
+						x->_parent->set_colour(RED);
+						right_rotate(x->_parent);
+						w = x->_parent->_left;
+					}
+					if (w->_right->get_colour() == BLACK && w->_left->get_colour() == BLACK)
+					{
+						w->set_colour(RED);
+						x = x->_parent;
+					}
+					else
+					{
+						if (w->_left->get_colour() == BLACK)
+						{
+							w->_right->set_colour(BLACK);
+							w->set_colour(RED);
+							left_rotate(w);
+							w = x->_parent->_left;
+						}
+						w->set_colour(x->_parent->_colour);
+						x->_parent->set_colour(BLACK);
+						w->_left->set_colour(BLACK);
+						right_rotate(x->_parent);
+						x = _root;
+					}
+				}
+			}
+			x->_colour = BLACK;
+		}
+
+		void	transplant(node_pointer u, node_pointer v)
+		{
+			if (u->_parent == _nil)
+				_root = v;
+			else if(u == u->_parent->_left)
+				u->_parent->_left = v;
+			else
+				u->_parent->_right = v;
+			v->_parent = u->_parent; 
+		}
+
 		void	left_rotate(node_pointer x)
 		{
 			node_pointer y = x->_right;
@@ -372,27 +414,16 @@ namespace ft
 			x->_parent = y;
 		}
 
-		void	transplant(node_pointer u, node_pointer v)
-		{
-			if (u->_parent == _nil)
-				_root = v;
-			else if(u == u->_parent->_left)
-				u->_parent->_left = v;
-			else
-				u->_parent->_right = v;
-			v->_parent = u->_parent; 
-		}
-
 		bool is_equal(value_type value, value_type comp)
 		{
 			return (!_compare(value, comp) && !_compare(comp, value));
 		}
 		
-		node_pointer	allocate_node(value_type value)
+		node_pointer	allocate_node(node_pointer src)
 		{
 			node_pointer node = _node_alloc.allocate(1);
 			
-			RbtNode<value_type>	set_node(value);
+			RbtNode<value_type>	set_node(*src->_value, src->_parent, _nil, src->get_colour());
 			_node_alloc.construct(node, set_node);
 			return (node);
 		}
@@ -404,26 +435,26 @@ namespace ft
 			node = NULL;
 		}
 
-		node_pointer	copy_tree(node_pointer root)
+		node_pointer	copy_tree(node_pointer node, node_pointer parent, node_pointer nil)
 		{
-			if (root == NULL)
-				return NULL;
-			node_pointer new_node = allocate_node(root->get_value());
-			new_node = root;
-			new_node->_left = _copy_tree(root->_left, new_node);
-			new_node->_right = _copy_tree(root->_right, new_node);
-			return (new_node);
+			if (node == nil )
+				return _nil;
+
+ 			node_pointer	new_node = allocate_node(node);
+			new_node->_left = copy_tree(node->_left, new_node, nil);
+			new_node->_right = copy_tree(node->_right, new_node ,nil);
+			return new_node;
 		}
 		
 		void	clear_tree(node_pointer node)
 		{
-			if (node == _nil)
+			if (node == _nil || node == NULL)
 					return;
-
 			clear_tree(node->_right);
 			clear_tree(node->_left);
 			delete_node(node);
 		}
+
 		// ------------------------------- DEBUG ------------------------------------
 		public:
 		class Trunk
@@ -492,5 +523,3 @@ namespace ft
 
 
 #endif
-
-

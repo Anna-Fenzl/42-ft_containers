@@ -72,7 +72,6 @@ private:
 	void fixDelete(NodePtr x) {
 		NodePtr s;
 		while (x != root && x->color == 0) {
-			std::cout << "HERE" << std::endl;
 			if (x == x->parent->left) {
 				s = x->parent->right;
 				if (s->color == 1) {
@@ -111,6 +110,8 @@ private:
 					x->parent->color = 1;
 					rightRotate(x->parent);
 					s = x->parent->left;
+					// std::cout << "after 1" << std::endl;
+					// prettyPrint();
 				}
 
 				if (s->right->color == 0 && s->right->color == 0) {
@@ -183,7 +184,6 @@ private:
 			y = minimum(z->right);
 			y_original_color = y->color;
 			x = y->right;
-			std::cout << x->data << std::endl;
 			if (y->parent == z) {
 				x->parent = y;
 			} else {
@@ -201,6 +201,8 @@ private:
 		}
 		delete z;
 		if (y_original_color == 0){
+			// std::cout << "before fixup " << std::endl;
+			// prettyPrint();
 			fixDelete(x);
 		}
 	}
@@ -268,13 +270,16 @@ private:
 		      indent += "|    ";
 		   }
             
-           string sColor = root->color?"RED":"BLACK";
-		   cout<<root->data<<"("<<sColor<<")"<<endl;
+        //    string sColor = root->color?"RED":"BLACK";
+		cout << ((root->color) ? "\033[0;31m" : "");
+		   cout<<"[" << root->data << "] " <<endl;
+		cout << ((root->color) ? "\033[0m" : "");
 		   printHelper(root->left, indent, false);
 		   printHelper(root->right, indent, true);
 		}
 		// cout<<root->left->data<<endl;
 	}
+
 
 public:
 	RBTree() {
@@ -453,12 +458,68 @@ public:
 	}
 
 	// delete the node from the tree
-	void deleteNode(int data) {
+	void erase(int data) {
+			std::cout << "remove \n:---------:\n|VALUE: " << data << std::endl;
+			std::cout << ":---------:" << std::endl;
 		deleteNodeHelper(this->root, data);
+		print_tree();
 	}
 
+	class Trunk
+		{
+			public:
+			Trunk *prev;
+			std::string	str;
+			
+			Trunk(Trunk *prev, std::string str): prev(prev), str(str) {}
+		};
+
+		void showTrunks(Trunk *p)
+		{
+			if (p == NULL)
+				return;
+	
+			showTrunks(p->prev);
+			std::cout << p->str;
+		}
+		
+		void print_tree(NodePtr root, Trunk *prev, bool isLeft)
+		{
+			if (root == NULL || root == TNULL)
+				return;
+				
+			std::string prev_str = "    ";
+			Trunk *trunk = new Trunk(prev, prev_str);
+
+			print_tree(root->right, trunk, true);
+			if (!prev)
+				trunk->str = "———";
+			else if (isLeft)
+			{
+				trunk->str = ",———";
+				prev_str = "   |";
+			}
+			else
+			{
+				trunk->str = "`———";
+				prev->str = prev_str;
+			}
+			showTrunks(trunk);
+			std::cout << ((root->color) ? "\033[0;31m" : "");
+			std::cout << "[" << root->data << "]"<< std::endl;
+			std::cout << ((root->color) ? "\033[0m" : "");
+
+
+			if (prev)
+				prev->str = prev_str;
+			trunk->str = "   |";
+
+			print_tree(root->left, trunk, false);
+			delete trunk;
+		}
+
 	// print the tree structure on the screen
-	void prettyPrint() {
+	void print_tree() {
 	    if (root) {
     		printHelper(this->root, "", true);
 	    }
@@ -468,15 +529,33 @@ public:
 
 int main() {
 	RBTree bst;
-	bst.insert(8);
-	bst.insert(18);
+	// bst.insert(8);
+	// bst.insert(18);
+	// bst.insert(5);
+	// bst.insert(15);
+	// bst.insert(17);
+	// bst.insert(25);
+	// bst.insert(40);
+	// bst.insert(80);
+	// bst.deleteNode(25);
+	bst.insert(1);
+	bst.insert(4);
 	bst.insert(5);
-	bst.insert(15);
+	bst.insert(6);
+	bst.insert(2);
+	bst.insert(3);
+	bst.insert(13);
+	bst.insert(14);
 	bst.insert(17);
-	bst.insert(25);
-	bst.insert(40);
-	bst.insert(80);
-	bst.deleteNode(25);
-	bst.prettyPrint();
+	bst.insert(10);
+	bst.insert(7);
+	bst.insert(9);
+	bst.insert(0);
+	bst.insert(11);
+	bst.erase(4);
+	bst.erase(17);
+	bst.erase(10);
+	bst.erase(5);
+	bst.print_tree();
 	return 0;
 }

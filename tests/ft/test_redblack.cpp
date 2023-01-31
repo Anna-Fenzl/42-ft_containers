@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/30 18:03:13 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 15:22:46 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,24 @@ void	test_redblack()
 		test.insert(11);
 
 		test.print_tree();
+		std::cout << "---------------------------\n" << std::endl;
 
-		std::cout << "---------------------------[\n" << std::endl;
-
-		// std::cout << "find returns " << *test.find(7) << std::endl;
-		// test.erase(test.find(7));
+		// test.erase(test.find(4));
+		// test.erase(test.find(17));
+		// test.erase(test.find(10));
+		// test.erase(test.find(5));
 		// test.erase(test.find(9));
-		test.erase(test.find(4));
-		// // std::cout << "hey" << std::endl;
-		// test.find(4);
-		test.print_tree();
+		// test.erase(test.find(2));
+		// test.erase(test.find(6));
+		// test.erase(test.find(13));
 			
-		// test.clear();
-		// test.print_tree();
 
-		// std::cout << "find returns " << *test.find(1) << std::endl;
+		std::cout << "compare:\n";
+		// test.print_tree();
+		// test.clear();
+		// std::cout << "behind clear" << std::endl;
+		ft::Redblack_Tree<int> copy = test;
+		copy.print_tree();
+		test.print_tree();
+
 }
