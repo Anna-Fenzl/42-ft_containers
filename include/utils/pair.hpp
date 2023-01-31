@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 16:21:29 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:43:26 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 17:58:18 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,14 @@ namespace ft
 	{
 		return !(rhs < lhs);
 	}
+
+	template <typename Key, typename Value>
+	std::ostream&	operator <<(std::ostream& output, const pair<Key, Value> data)
+	{
+		output << data.second;
+		return (output);
+	}
+
 
 }	//namespace ft
 

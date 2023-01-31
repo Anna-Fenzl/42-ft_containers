@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 17:09:48 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:27:57 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ namespace ft
 		map( InputIt first, InputIt last, const key_compare& key_comp = key_compare(),
 			const Allocator& alloc = allocator_type() ): _value_alloc(alloc), _compare(key_comp)
 		{
-			
+			insert(first, last);
 		}
 
 		// Copy constructor: Constructs the container with the copy of the contents of other.
@@ -118,7 +118,7 @@ namespace ft
 
 		map& operator=( const map& other)
 		{
-			if (this == &other)
+			if (this != &other)
 			{
 				_value_alloc = other._value_alloc;
 				_compare = other._compare;
@@ -179,18 +179,81 @@ namespace ft
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MODIFIERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+		// Erases all elements from the container.
+		void clear()
+		{
+			_tree.clear();
+		}
+
 		// single element (1)	
 		pair<iterator, bool> insert (const value_type& val)
 		{
 			return _tree.insert(val);
 		}
 
-		// // with hint (2)	
-		// iterator insert (iterator position, const value_type& val);
+		// hint (2)
+		// the function optimizes its insertion time if position points to the element that will precede the inserted element
+		// just a hint and does not force the new element to be inserted at that position within the map container
+		iterator insert (iterator position, const value_type& val)
+		{
+			
+		}
 
-		// // range (3)	
-		// template <class InputIterator>  void insert (InputIterator first, InputIterator last);
-		// };
+		// range (3)	
+		template <class InputIterator>
+		void insert (InputIterator first, InputIterator last)
+		{
+			for (; first != last; ++first)
+				_tree.insert(*first);
+		}
+
+		// single element (1)
+		void erase( iterator pos )
+		{
+			try
+			{
+				_tree.erase(pos);
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << 'ft::map';
+			}
+			
+		}
+
+		// range (2)
+		void erase( iterator first, iterator last )
+		{
+			try
+			{
+				for (; first != last; ++first)
+					_tree.erase(first);
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << "ft::map";
+			}
+			
+		}
+
+		// Removes the element (if one exists) with the key equivalent to key (3)
+		// throws any exceptions thrown by the Compare object.
+		size_type erase( const key_type& key )
+		{
+			return _tree.erase(find(key));
+		}
+
+		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< LOOKUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+		iterator find( const key_type& key )					{ return _tree.find(ft::make_pair(key, mapped_type())); }
+		
+		const_iterator find( const key_type& key ) const		{ return _tree.find(ft::make_pair(key, mapped_type())); }
+
+		void	print()
+		{
+			_tree.print_tree();
+		}
+
 	};
 }
 

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 15:48:44 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:26:02 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,10 +166,10 @@ namespace ft
 			return (ft::make_pair(find(value), true));
 		}
 
-		void	erase(iterator pos)
+		size_type	erase(iterator pos)
 		{
 			if (pos == end())
-				return;
+				return 0;
 
 			node_pointer	z = pos.base();
 			node_pointer	y = z;
@@ -208,6 +208,7 @@ namespace ft
 				erase_fixup(x);
 			}
 			--_size;
+			return 1;
 		}
 
 		iterator find (const value_type& value)

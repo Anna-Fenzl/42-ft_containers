@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 17:08:37 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:26:49 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,24 @@
 
 void	test_redblack()
 {
-		// ft::Redblack_Tree<int> test;
+		ft::Redblack_Tree<ft::pair<char, int> > test;
 
-		// test.insert(1);
-		// // ret = test.insert(1);
-		// // std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
-		// test.insert(4);
-		// test.insert(5);
-		// test.insert(6);
-		// test.insert(2);
-		// test.insert(3);
-		// test.insert(13);
-		// test.insert(14);
-		// test.insert(17);
-		// test.insert(10);
-		// test.insert(7);
-		// test.insert(9);
-		// test.insert(0);
-		// test.insert(11);
+		test.insert(ft::make_pair('a', 1));
+		// ret = test.insert(1);
+		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
+		test.insert(ft::make_pair('d', 4));
+		test.insert(ft::make_pair('e', 5));
+		test.insert(ft::make_pair('f', 90));
+		test.insert(ft::make_pair('g', 80));
+		test.insert(ft::make_pair('k', 14));
+		test.insert(ft::make_pair('b', 11));
 
-		ft::map<std::string, int> map;
+		ft::map<char, int> map(test.begin(), test.end());
 
-		ft::pair<ft::Rbt_Iterator<int>, bool> ret = map.insert(ft::make_pair("first test", 11));
+		map.print();
+		map.print();
+
+		
 		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
 		// ret = map.insert(ft::make_pair("first test", 99));
 		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
