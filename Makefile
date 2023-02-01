@@ -6,7 +6,7 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2023/01/27 14:49:33 by afenzl           ###   ########.fr        #
+#    Updated: 2023/02/01 15:45:31 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADER = ./include/vector.hpp ./include/stack.hpp ./include/map.hpp ./include/re
 FT_PATH = ./tests/ft/
 STD_PATH = ./tests/std/
 
-FT_SRC = $(FT_PATH)ft_main.cpp $(FT_PATH)test_vector.cpp $(FT_PATH)test_stack.cpp $(FT_PATH)test_redblack.cpp
+FT_SRC = $(FT_PATH)ft_main.cpp $(FT_PATH)test_vector.cpp $(FT_PATH)test_stack.cpp $(FT_PATH)test_map.cpp
 STD_SRC = $(STD_PATH)std_main.cpp
 
 STD_OBJ = $(STD_SRC:.cpp=.o)

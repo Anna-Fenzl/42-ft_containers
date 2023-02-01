@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 18:26:02 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:20:36 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,52 @@ namespace ft
 			_root = _nil;
 			_size = 0;
 		}
+
+		// ----------------------- LOOKUP ------------------------
+
+		iterator	lower_bound(const value_type& value)
+		{
+			iterator it = begin();
+			for(; _compare(*it, value); ++it)
+				continue;
+			return it;
+		}
+
+		const_iterator	lower_bound(const value_type& value) const
+		{
+			const_iterator it = begin();
+			for(; _compare(*it, value); ++it)
+				continue;
+			return it;
+		}
+
+		iterator	upper_bound(const value_type& value)
+		{
+			iterator it = lower_bound(value);
+			if (is_equal(*it, value))
+				++it;
+			return it;
+		}
+
+		const_iterator	upper_bound(const value_type& value) const
+		{
+			iterator it = lower_bound(value);
+			if (is_equal(*it, value))
+				++it;
+			return it;
+		}
+
+		std::pair<iterator,iterator> equal_range( const value_type& value)
+		{
+			return (ft::make_pair(lower_bound(value), upper_bound(value)));
+		}
+
+		std::pair<const_iterator,const_iterator> equal_range( const value_type& value) const
+		{
+			return (ft::make_pair(lower_bound(value), upper_bound(value)));
+		}
+
+		// ----------------------- PRIVATE METHODS ------------------------
 
 		private:
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_redblack.cpp                                  :+:      :+:    :+:   */
+/*   test_map.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 18:26:49 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:47:26 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,29 @@
 	# include <map>
 	# include <stdio.h>
 
-void	test_redblack()
+
+void	test_map()
 {
-		ft::Redblack_Tree<ft::pair<char, int> > test;
+	{
+		HEADLINE
+			std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< CONSTRUCTORS >>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+		
+		ft::map<int, std::string> map;
 
-		test.insert(ft::make_pair('a', 1));
-		// ret = test.insert(1);
-		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
-		test.insert(ft::make_pair('d', 4));
-		test.insert(ft::make_pair('e', 5));
-		test.insert(ft::make_pair('f', 90));
-		test.insert(ft::make_pair('g', 80));
-		test.insert(ft::make_pair('k', 14));
-		test.insert(ft::make_pair('b', 11));
-
-		ft::map<char, int> map(test.begin(), test.end());
+		map.insert(ft::make_pair(1, "one"));
+		map.insert(ft::make_pair(7, "seven"));
+		map.insert(ft::make_pair(4, "four"));
+		map.insert(ft::make_pair(2, "two"));
+		map.insert(ft::make_pair(5, "five"));
 
 		map.print();
-		map.print();
+		// map.insert(map.begin(), ft::make_pair(4, "six"));
+		std::cout << map[6] << std::endl;
+		std::cout << "find returns " << *map.find(6) << std::endl;
 
-		
-		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
-		// ret = map.insert(ft::make_pair("first test", 99));
-		// std::cout << "inserted " << *ret.first << "  and bool returns: " << ret.second << std::endl;
+		// std::cout << "count " << map.count(1) << std::endl;
 
-		// map.insert(ft::make_pair("first test", 15));
+	}
 
-
-		
+	
 }
