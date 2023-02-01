@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/01 16:20:36 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/01 18:01:42 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ namespace ft
 
 		typedef _Compare								value_compare;
 		typedef _Val									value_type;
+		typedef const _Val								const_value_type;
 		typedef _Val*									value_pointer;
 		typedef const _Val*								const_value_pointer;
 		typedef _Val&									value_reference;
@@ -54,7 +55,7 @@ namespace ft
 
 		// iterators
 		typedef ft::Rbt_Iterator<value_type>			iterator;
-		typedef ft::Const_Rbt_Iterator<node_pointer>	const_iterator;
+		typedef ft::Const_Rbt_Iterator<const_value_type>	const_iterator;
 		
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
 		protected:

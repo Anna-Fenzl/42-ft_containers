@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/01 16:47:17 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:56:41 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ namespace ft
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER VARIABLES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		private:
 		allocator_type	_value_alloc;
-		value_compare		_compare;
+		value_compare	_compare;
 		redblack_tree	_tree;
 		
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< CONSTRUCTORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -114,6 +114,7 @@ namespace ft
 		// Copy constructor: Constructs the container with the copy of the contents of other.
 		map( const map& other )
 		{
+			
 			*this = other;
 		}
 
@@ -137,9 +138,9 @@ namespace ft
 		
 		const_iterator begin() const			{ return _tree.begin(); }
 
-		iterator end()							{ return _tree.end(); }
+		iterator end()							{ std::cout << "non-const end" << std::endl; return _tree.end(); }
 		
-		const_iterator end() const				{ return _tree.end(); }
+		const_iterator end() const				{ std::cout << "const end" << std::endl; return _tree.end(); }
 
 		reverse_iterator rbegin()				{ return reverse_iterator(end()); }
 
@@ -271,12 +272,18 @@ namespace ft
 		//   > >::value_type>'
 
 		// Number of elements with key that compares equivalent to key or x, which is either 1 or 0.
-		// size_type count( const Key& key ) const											{ return find(key) != end(); }
+		size_type count(const Key& key ) const
+		{
+			size_type ret = 0;
+			if (find(key) != end())
+				ret = 1;
+			return ret;
+		}
 
 		// Finds an element with key equivalent to key.
-		iterator find( const key_type& key )											{ return _tree.find(ft::make_pair(key, mapped_type())); }
+		iterator find( const key_type& key )											{ std::cout << "non-const find" << std::endl; return _tree.find(ft::make_pair(key, mapped_type())); }
 		
-		const_iterator find( const key_type& key ) const								{ return _tree.find(ft::make_pair(key, mapped_type())); }
+		const_iterator find( const key_type& key ) const								{ std::cout << "const find" << std::endl; return _tree.find(ft::make_pair(key, mapped_type())); }
 
 		// Returns a range containing all elements with the given key in the container.
 		std::pair<iterator,iterator> equal_range( const Key& key )						{ return _tree.equal_range(key); }

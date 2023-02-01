@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 14:50:21 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/01 18:14:57 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ template< typename T>
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
 		typedef const T										value_type;
-		typedef const T&											reference;
-		typedef const T*											pointer;
+		typedef const T&									reference;
+		typedef const T*									pointer;
 
 		typedef const Rbt_Iterator<T>						iterator;
 		typedef const Const_Rbt_Iterator<T>					const_iterator;
@@ -174,7 +174,7 @@ template< typename T>
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>
 		private:
-		node_pointer	_ptr;
+		node_pointer const	_ptr;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -182,7 +182,7 @@ template< typename T>
 		// ----------------------- CONSTRUCTORS --------------------
 		Const_Rbt_Iterator(): _ptr(NULL) {}
 		
-		Const_Rbt_Iterator( node_pointer ptr ): _ptr(ptr) {}
+		Const_Rbt_Iterator( node_pointer const ptr ): _ptr(ptr) {}
 
 		Const_Rbt_Iterator( const iterator& rhs): _ptr(rhs.base()) {}
 

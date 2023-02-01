@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/01 16:47:26 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/01 18:08:09 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	test_map()
 		map.print();
 		// map.insert(map.begin(), ft::make_pair(4, "six"));
 		std::cout << map[6] << std::endl;
-		std::cout << "find returns " << *map.find(6) << std::endl;
+		const ft::map<int, std::string> map2(map);
+		map2.end();
+		// std::cout << "find returns " << *map2.find(6) << std::endl;
 
 		// std::cout << "count " << map.count(1) << std::endl;
 
