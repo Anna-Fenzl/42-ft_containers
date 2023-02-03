@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:47:47 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/21 13:03:15 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/03 13:33:15 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@
 void	test_stack()
 {
 	std::cout << std::boolalpha;
+	
+	HEADLINE
+	std::cout << "----------------------------------------------------------------------\n";
+	std::cout << "|                              STACK                                 |\n";
+	std::cout << "----------------------------------------------------------------------\n";
+	RESET
 
 	{
+	std::cout << "\n<<<<<<<<<<<<<<< ELEMENT_ACCESS && MODIFIERS >>>>>>>>>>>>>>>>>>>>>>"; RESET
 		HEADLINE
-		std::cout << "\n<<<<<<<<<<<<<<< ELEMENT_ACCESS && MODIFIERS >>>>>>>>>>>>>>>>>>>>>>"; RESET
 	
 		ft::stack<std::string> stack;
 

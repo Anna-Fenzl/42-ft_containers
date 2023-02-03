@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/01 17:56:41 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/03 17:27:08 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ namespace ft
 		typedef typename Allocator::const_pointer					const_pointer;
 
 		typedef ft::Rbt_Iterator<value_type>						iterator;
-		typedef ft::Const_Rbt_Iterator<const value_type>			const_iterator;
+		typedef ft::Const_Rbt_Iterator<value_type>				const_iterator;
 		typedef ft::reverse_iterator<iterator>						reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
@@ -138,9 +138,9 @@ namespace ft
 		
 		const_iterator begin() const			{ return _tree.begin(); }
 
-		iterator end()							{ std::cout << "non-const end" << std::endl; return _tree.end(); }
+		iterator end()							{ return _tree.end(); }
 		
-		const_iterator end() const				{ std::cout << "const end" << std::endl; return _tree.end(); }
+		const_iterator end() const				{ return _tree.end(); }
 
 		reverse_iterator rbegin()				{ return reverse_iterator(end()); }
 
@@ -165,22 +165,22 @@ namespace ft
 		// If no such element exists, an exception of type std::out_of_range is thrown.
 		mapped_type&	at(const key_type& k)
 		{
-			const_iterator	it = _tree.find(k);
+			const_iterator	it = _tree.find(ft::make_pair(k, mapped_type()));
 
 			if ( it == _tree.end() )
 				throw std::out_of_range("ft::map");
 			
-			return *it.second;
+			return (*it).second;
 		}
 
 		const mapped_type& at(const key_type& k) const
 		{
-			const_iterator	it = _tree.find(k);
+			const_iterator	it = _tree.find(ft::make_pair(k, mapped_type()));
 
 			if ( it == _tree.end() )
 				throw std::out_of_range("ft::map");
-			
-			return *it.second;
+
+			return (*it).second;
 		}
 
 		// Returns a reference to the value that is mapped to a key equivalent to key, performing an insertion if such key does not already exist.
@@ -281,9 +281,9 @@ namespace ft
 		}
 
 		// Finds an element with key equivalent to key.
-		iterator find( const key_type& key )											{ std::cout << "non-const find" << std::endl; return _tree.find(ft::make_pair(key, mapped_type())); }
+		iterator find( const key_type& key )											{ return _tree.find(ft::make_pair(key, mapped_type())); }
 		
-		const_iterator find( const key_type& key ) const								{ std::cout << "const find" << std::endl; return _tree.find(ft::make_pair(key, mapped_type())); }
+		const_iterator find( const key_type& key ) const								{ return _tree.find(ft::make_pair(key, mapped_type())); }
 
 		// Returns a range containing all elements with the given key in the container.
 		std::pair<iterator,iterator> equal_range( const Key& key )						{ return _tree.equal_range(key); }

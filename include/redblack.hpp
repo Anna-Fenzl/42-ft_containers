@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/01 18:01:42 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/03 14:49:27 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ namespace ft
 
 		// iterators
 		typedef ft::Rbt_Iterator<value_type>			iterator;
-		typedef ft::Const_Rbt_Iterator<const_value_type>	const_iterator;
+		typedef ft::Const_Rbt_Iterator<value_type>		const_iterator;
 		
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
+		node_pointer	_nil;
 		protected:
 		node_pointer	_root;
-		node_pointer	_nil;
 
 		size_type		_size;
 		node_alloc		_node_alloc;
@@ -73,18 +73,14 @@ namespace ft
 		// default constructor
 		Redblack_Tree(): _size(0), _compare(_Compare()), _node_alloc(std::allocator<RbtNode<value_type> >())
 		{
-			_nil = _node_alloc.allocate(1);
-			_nil->set_colour(BLACK);
-			_nil->_left = _nil;
-			_nil->_right = _nil;
+			alloc_nil();
 			_root = _nil;
 		}
 		
 		// copy_constructor
 		Redblack_Tree(const Redblack_Tree& src)
 		{
-			_nil = _node_alloc.allocate(1);
-			_nil->set_colour(BLACK);
+			alloc_nil();
 			_root = _nil;
 
 			*this = src;
@@ -479,6 +475,14 @@ namespace ft
 			return (node);
 		}
 
+		void	alloc_nil()
+		{
+			_nil = _node_alloc.allocate(1);
+			_nil->set_colour(BLACK);
+			_nil->_left = _nil;
+			_nil->_right = _nil;
+		}
+
 		void	delete_node(node_pointer node)
 		{
 			_node_alloc.destroy(node);
@@ -530,7 +534,7 @@ namespace ft
 		{
 			if (root == NULL || root == _nil)
 				return;
-				
+			
 			std::string prev_str = "    ";
 			Trunk *trunk = new Trunk(prev, prev_str);
 

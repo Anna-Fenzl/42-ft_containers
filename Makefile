@@ -6,7 +6,7 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2023/02/01 15:45:31 by afenzl           ###   ########.fr        #
+#    Updated: 2023/02/03 14:41:39 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME_FT = ft_containers
 NAME_STD = std_containers 
 
 CPP = c++
-CPP_FLAGS = -Wall -Werror -Wextra -std=c++98
+CPP_FLAGS = -Wall -Werror -Wextra -fsanitize=address -g -std=c++98
 RM := rm -f
 
 HEADER = ./include/vector.hpp ./include/stack.hpp ./include/map.hpp ./include/redblack.hpp\

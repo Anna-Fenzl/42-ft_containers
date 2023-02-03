@@ -6,3 +6,6 @@
 	iterator
 		end () throw()	{ return iterator(_end); }
 
+has a problem when using a copied map
+
+at const/non const problem
