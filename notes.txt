@@ -8,4 +8,10 @@
 
 has a problem when using a copied map
 
-at const/non const problem
+def.erase(++def.begin(), def.end());
+		def.print();
+erases whole tree
+--> ++ operators fucked
+
+insert.erase(--insert.end());
+runs endlessly in rbt_max

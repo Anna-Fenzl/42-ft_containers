@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/03 14:49:27 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/05 13:36:02 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -570,6 +570,7 @@ namespace ft
 		{
 			std::cout << "<  THE WHOLE TREE  >" << std::endl;
 			print_tree(_root , NULL, false);
+
 		}
 		
 	};

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/03 17:27:08 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/05 14:27:26 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ namespace ft
 		// If no such element exists, an exception of type std::out_of_range is thrown.
 		mapped_type&	at(const key_type& k)
 		{
-			const_iterator	it = _tree.find(ft::make_pair(k, mapped_type()));
+			iterator	it = _tree.find(ft::make_pair(k, mapped_type()));
 
 			if ( it == _tree.end() )
 				throw std::out_of_range("ft::map");
