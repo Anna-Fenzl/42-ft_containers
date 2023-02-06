@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 14:52:47 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/06 17:15:01 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define RBT_NODE_HPP
 # include <stdexcept>
 # include <iostream>
+
+# include <unistd.h>
 
 namespace ft
 {

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/05 13:48:17 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/06 13:20:59 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ namespace ft
 	{
 		while (node->_right != node->_nil)
 			node = node->_right;
-		return node->_parent;
+		return node;
 	}
 
 	template < typename NodePointer >

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/05 13:36:02 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/06 17:03:33 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ namespace ft
 		{
 			if (pos == end())
 				return 0;
-
 			node_pointer	z = pos.base();
 			node_pointer	y = z;
 			node_pointer	x;
@@ -238,6 +237,15 @@ namespace ft
 			return(end());
 		}
 
+		void	swap( Redblack_Tree& other )
+		{
+			ft::swap(_node_alloc, other._node_alloc);
+			ft::swap(_compare, other._compare);
+			ft::swap(_size, other._size);
+			ft::swap(_root, other._root);
+			ft::swap(_nil, other._nil);
+		}
+
 		void	clear()
 		{
 			clear_tree(_root);
@@ -279,12 +287,12 @@ namespace ft
 			return it;
 		}
 
-		std::pair<iterator,iterator> equal_range( const value_type& value)
+		ft::pair<iterator,iterator> equal_range( const value_type& value)
 		{
 			return (ft::make_pair(lower_bound(value), upper_bound(value)));
 		}
 
-		std::pair<const_iterator,const_iterator> equal_range( const value_type& value) const
+		ft::pair<const_iterator,const_iterator> equal_range( const value_type& value) const
 		{
 			return (ft::make_pair(lower_bound(value), upper_bound(value)));
 		}
@@ -503,7 +511,7 @@ namespace ft
 		
 		void	clear_tree(node_pointer node)
 		{
-			if (node == _nil || node == NULL)
+			if (node == _nil || node == NULL || node == node->_left || node == node->_right)
 					return;
 			clear_tree(node->_right);
 			clear_tree(node->_left);

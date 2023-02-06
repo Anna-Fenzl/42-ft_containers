@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 16:21:29 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/01 15:29:32 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/06 14:53:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,13 @@ namespace ft
 		return (output);
 	}
 
+	template< class T >
+	void	swap( T& lhs, T& rhs )
+	{
+		T	tmp(lhs);
+		lhs = rhs;
+		rhs = tmp;
+	}
 
 }	//namespace ft
 

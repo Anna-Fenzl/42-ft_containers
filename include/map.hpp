@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/05 14:27:26 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/06 16:30:57 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,8 +238,15 @@ namespace ft
 		{
 			try
 			{
-				for (; first != last; ++first)
+				iterator it;
+				while ( first != last)
+				{
+					it = first;
+					++it;
 					_tree.erase(first);
+					first = it;
+				}
+				std::cout << std::endl;
 			}
 			catch(const std::exception& e)
 			{
@@ -258,9 +265,9 @@ namespace ft
 		// Exchanges the contents of the container with those of other
 		void swap( map& other )
 		{
-			swap(_compare, other._compare);
-			swap(_value_alloc, other._value_alloc);
-			_tree.swap(other);
+			ft::swap(_compare, other._compare);
+			ft::swap(_value_alloc, other._value_alloc);
+			_tree.swap(other._tree);
 		}
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< LOOKUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -286,9 +293,9 @@ namespace ft
 		const_iterator find( const key_type& key ) const								{ return _tree.find(ft::make_pair(key, mapped_type())); }
 
 		// Returns a range containing all elements with the given key in the container.
-		std::pair<iterator,iterator> equal_range( const Key& key )						{ return _tree.equal_range(key); }
+		ft::pair<iterator,iterator> equal_range( const Key& key )						{ return _tree.equal_range(ft::make_pair(key, mapped_type())); }
 		
-		std::pair<const_iterator,const_iterator> equal_range( const Key& key ) const	{ return _tree.equal_range(key); }
+		ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const	{ return _tree.equal_range(ft::make_pair(key, mapped_type())); }
 
 		// Returns an iterator pointing to the first element that is not less than (i.e. greater or equal to) key
 		iterator lower_bound( const Key& key )											{ return _tree.lower_bound(ft::make_pair(key, mapped_type())); }
@@ -359,6 +366,7 @@ namespace ft
 		return (!(lhs < rhs));
 	}
 
+	//  Specializes the ft::swap algorithm for ft::map. Swaps the contents of lhs and rhs
 	template< class Key, class T, class Compare, class Alloc >
 	void    swap( ft::map< Key, T, Compare, Alloc >& lhs,
 				ft::map< Key, T, Compare, Alloc >& rhs )

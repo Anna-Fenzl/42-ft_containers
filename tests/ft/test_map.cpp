@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/05 14:28:01 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/06 17:00:32 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,26 @@
 # include "../../include/map.hpp"
 # include "../../include/utils/rbt_node.hpp"
 # include "../../include/iterators/rbt_iterator.hpp"
-	# include <map>
-	# include <stdio.h>
+# include <map>
+# include <stdio.h>
+# include <chrono>
+# include <sys/time.h>
 
+long	get_current_time_ms(void)
+{
+	struct timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+}
 
 void	test_map()
 {
 	std::cout << std::boolalpha << std::endl;
 	HEADLINE
-	std::cout << "----------------------------------------------------------------------\n";
-	std::cout << "|                                MAP                                 |\n";
-	std::cout << "----------------------------------------------------------------------";
+	std::cout << "------------------------------------------------------------------\n";
+	std::cout << "|                                MAP                             |\n";
+	std::cout << "------------------------------------------------------------------";
 	RESET
 	{
 		HEADLINE
@@ -94,53 +103,90 @@ void	test_map()
 		def.insert(ft::make_pair('o', true));
 		def.insert(ft::make_pair('s', false));
 		def.insert(ft::make_pair('f', true));
-		def.print();
+
+		BOLD std::cout << "DEFAULT:" << std::endl; RESET
+		def.print(); NEWLINE BORDER
+
+		BOLD std::cout << "CLEAR()"; RESET
+		ft::map<char, bool> clear(def);
+		clear.clear();
+		clear.print(); NEWLINE BORDER
 		
-		NEWLINE
-		def.erase(++def.begin(), def.end());
-		std::cout << "def is empty: " << def.empty() << std::endl;
-		def.print();
+		ft::map<char, bool> insert;
+		BOLD std::cout << "INSERT(ft::pair('l', true))\t\t\t(single element)"; RESET
+		insert.insert(ft::make_pair('l', true));
+		insert.print(); NEWLINE BORDER
 
-		std::map<char, bool> comp;
-		comp.insert(std::make_pair('a', false));
-		comp.insert(std::make_pair('k', true));
-		comp.insert(std::make_pair('o', true));
-		comp.insert(std::make_pair('s', false));
-		comp.insert(std::make_pair('f', true));
+		BOLD std::cout << "INSERT(def.begin(), def.end())\t\t\t(range)"; RESET
+		insert.insert(def.begin(), def.end());
+		insert.print(); NEWLINE BORDER
 
-		comp.erase(++comp.begin(), comp.end());
-		std::cout << "comp is empty: " << comp.empty() << std::endl;
+		BOLD std::cout << "ERASE('l')\t\t\t\t\t(single element, compare object could throw exeptions)"; RESET
+		insert.erase('l');
+		insert.print(); NEWLINE BORDER
 
+		BOLD std::cout << "ERASE(begin())\t\t\t\t\t(single element)"; RESET
+		insert.erase(insert.begin());
+		insert.print(); NEWLINE BORDER
 
-		// BOLD std::cout << "DEFAULT:" << std::endl; RESET
-		// def.print(); NEWLINE BORDER
+		BOLD std::cout << "ERASE(++begin(); end())\t\t\t\t(range)"; RESET
+		insert.erase((++insert.begin()), insert.end());
+		insert.print(); NEWLINE BORDER
 
-		// BOLD std::cout << "CLEAR()"; RESET
-		// ft::map<char, bool> clear(def);
-		// clear.clear();
-		// clear.print(); NEWLINE BORDER
+		BOLD std::cout << "SWAP(def)"; RESET
+		insert.swap(def);
+		insert.print(); NEWLINE
+		def.print(); NEWLINE BORDER
+	}
+
+	{
+		HEADLINE
+		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<<< LOOKUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+		ft::map<int, int> look;
+		look.insert(ft::make_pair(1, 1));
+		look.insert(ft::make_pair(7, 1));
+		look.insert(ft::make_pair(3, 1));
+		look.insert(ft::make_pair(2, 1));
+		look.insert(ft::make_pair(9, 1));
+		BOLD std::cout << "DEFAULT:" << std::endl; RESET
+		look.print(); NEWLINE BORDER
+
+		BOLD std::cout << "COUNT(), Amount of times key is found"; RESET
+		std::cout << "key found     = " << look.count(1) << std::endl;
+		std::cout << "key not found = " << look.count(2) << std::endl;
+		NEWLINE BORDER
 		
-		// ft::map<char, bool> insert;
-		// BOLD std::cout << "INSERT(ft::pair('l', true))\t\t\t(single element)"; RESET
-		// insert.insert(ft::make_pair('l', true));
-		// insert.print(); NEWLINE BORDER
+		BOLD std::cout << "LOWER_BOUND()"; RESET
+		std::cout << "Iterator pointing to the first element that is not less than\nkey(3) :" << *look.lower_bound(3) << std::endl; 
+		std::cout << "key(5) :" << *look.lower_bound(5) << std::endl; NEWLINE BORDER
 
-		// BOLD std::cout << "INSERT(def.begin(), def.end())\t\t\t(range)"; RESET
-		// insert.insert(def.begin(), def.end());
-		// insert.print(); NEWLINE BORDER
+		BOLD std::cout << "UPPER_BOUND()"; RESET
+		std::cout << "Iterator pointing to the first element that is greater than\nkey(3)" << *look.upper_bound(3) << std::endl;
+		std::cout << "key(5)" << *look.upper_bound(5) << std::endl; NEWLINE BORDER
 
-		// BOLD std::cout << "ERASE('l')\t\t\t\t\t(single element, compare object could throw exeptions)"; RESET
-		// insert.erase('l');
-		// insert.print(); NEWLINE BORDER
+		BOLD std::cout << "EQUAL_RANGE()"; RESET
+		std::cout << "returns a pair, first element that is not less than key and another pointing to the first element greater than key" << std::endl;
+		std::cout << "key(3) :" << *look.equal_range(3).first << ", " << *look.equal_range(3).second << std::endl;
+		std::cout << "key(5) :" << *look.equal_range(5).first << ", " << *look.equal_range(5).second << std::endl;
 
-		// BOLD std::cout << "ERASE(begin())\t\t\t\t\t(single element)"; RESET
-		// insert.erase(insert.begin());
-		// insert.print(); NEWLINE
-
-		// BOLD std::cout << "ERASE(begin(); end())\t\t\t\t(range)"; RESET
-		// std::cout << "(++insert.begin() is " << *(++insert.begin()) << std::endl;
-		// insert.erase((++insert.begin()), insert.end());
-		// insert.print(); NEWLINE
 		
+	}
+
+	{
+		HEADLINE
+		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<<< BIG SIZE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+		ft::map<int, int> size;
+
+		srand(get_current_time_ms());
+		for (size_t i = 0; i < 50; i++)
+		{
+			size.insert(ft::make_pair(rand() % (100 + 1), rand() % 14));
+		}
+		size.print(); NEWLINE BORDER
+		ft::map<int, int> other(size);
+		std::cout << "***************** size: " << other.size() << std::endl;
+		other.erase(5);
+		// other.insert(ft::make_pair(10, 5));
+		other.clear();
 	}
 }

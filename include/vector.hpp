@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/10 15:13:27 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:00:31 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./iterators/vector_iterator.hpp"
 # include "./iterators/reverse_iterator.hpp"
 # include "./utils/type_traits.hpp"
+# include "./utils/pair.hpp"
 # include <iostream>
 # include <stdexcept>
 # include <limits>
@@ -379,27 +380,10 @@ namespace ft
 		// swap -> Exchanges the contents of the container with those of the other
 		void	swap( vector& other )
 		{
-			allocator_type tmp_alloc = _alloc;
-			_alloc = other._alloc;
-			other._alloc = tmp_alloc;
-			
-			pointer tmp_data = _data;
-			_data = other._data;
-			other._data = tmp_data;
-			
-			if (_size != other.size())
-			{
-				_size ^= other._size;
-				other._size ^= _size;
-				_size ^= other._size;
-			}
-
-			if (_capacity != other.capacity())
-			{
-				_capacity ^= other._capacity;
-				other._capacity ^= _capacity;
-				_capacity ^= other._capacity;
-			}
+			ft::swap(_alloc, other._alloc);
+			ft::swap(_data, other._data);
+			ft::swap(_size, other._size);
+			ft::swap(_capacity, other._capacity);
 		}
 
 		// clear -> clears the elements
