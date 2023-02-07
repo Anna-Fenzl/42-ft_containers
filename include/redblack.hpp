@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/06 17:03:33 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/07 14:12:08 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ namespace ft
 			if (this != &other)
 			{
 				clear();
-				_root = copy_tree(other._root, other._nil, other._nil);
-				_size = other._size;
 				_node_alloc = other._node_alloc;
 				_compare = other._compare;
+				_size = other._size;
+				_root = copy_tree(other._root, _nil, other._nil);
 			}
 			return *this;
 		}
@@ -474,11 +474,11 @@ namespace ft
 			return (!_compare(value, comp) && !_compare(comp, value));
 		}
 		
-		node_pointer	allocate_node(node_pointer src)
+		node_pointer	allocate_node(node_pointer src, node_pointer parent)
 		{
 			node_pointer node = _node_alloc.allocate(1);
 			
-			RbtNode<value_type>	set_node(*src->_value, src->_parent, _nil, src->get_colour());
+			RbtNode<value_type>	set_node(*src->_value, parent, _nil, src->get_colour());
 			_node_alloc.construct(node, set_node);
 			return (node);
 		}
@@ -491,24 +491,24 @@ namespace ft
 			_nil->_right = _nil;
 		}
 
-		void	delete_node(node_pointer node)
-		{
-			_node_alloc.destroy(node);
-			_node_alloc.deallocate(node, 1);
-			node = NULL;
-		}
-
 		node_pointer	copy_tree(node_pointer node, node_pointer parent, node_pointer nil)
 		{
-			if (node == nil )
+			if (node == nil)
 				return _nil;
 
- 			node_pointer	new_node = allocate_node(node);
+ 			node_pointer	new_node = allocate_node(node, parent);
 			new_node->_left = copy_tree(node->_left, new_node, nil);
 			new_node->_right = copy_tree(node->_right, new_node ,nil);
 			return new_node;
 		}
 		
+		void	delete_node(node_pointer node)
+		{
+			_node_alloc.destroy(node);
+			_node_alloc.deallocate(node, 1);
+			node = _nil;
+		}
+
 		void	clear_tree(node_pointer node)
 		{
 			if (node == _nil || node == NULL || node == node->_left || node == node->_right)

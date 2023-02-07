@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/06 17:15:01 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/07 13:59:58 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ namespace ft
 		}
 
 		// constructor takes value & parent & colour
-		RbtNode(const value_type& value, node_pointer parent, const node_pointer nil, rbt_colour colour): _colour(colour), _parent(parent), _left(nil), _right(nil), _nil(nil), _value_alloc(std::allocator<value_type> () )
+		RbtNode(const value_type&  value, node_pointer parent, const node_pointer nil, rbt_colour colour): _colour(colour), _parent(parent), _left(nil), _right(nil), _nil(nil), _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 			_value_alloc.construct(_value, value);

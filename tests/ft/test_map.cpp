@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/06 17:00:32 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/07 14:51:58 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@
 # include "../../include/iterators/rbt_iterator.hpp"
 # include <map>
 # include <stdio.h>
-# include <chrono>
+// # include <chrono>
 # include <sys/time.h>
+# include <stdlib.h>
 
-long	get_current_time_ms(void)
-{
-	struct timeval	current_time;
+// long	get_current_time_ms(void)
+// {
+// 	struct timeval	current_time;
 
-	gettimeofday(&current_time, NULL);
-	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
-}
+// 	gettimeofday(&current_time, NULL);
+// 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+// }
 
 void	test_map()
 {
@@ -168,8 +169,6 @@ void	test_map()
 		std::cout << "returns a pair, first element that is not less than key and another pointing to the first element greater than key" << std::endl;
 		std::cout << "key(3) :" << *look.equal_range(3).first << ", " << *look.equal_range(3).second << std::endl;
 		std::cout << "key(5) :" << *look.equal_range(5).first << ", " << *look.equal_range(5).second << std::endl;
-
-		
 	}
 
 	{
@@ -177,16 +176,38 @@ void	test_map()
 		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<<< BIG SIZE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 		ft::map<int, int> size;
 
-		srand(get_current_time_ms());
-		for (size_t i = 0; i < 50; i++)
+		srand(2745896);
+		for (size_t i = 0; i < 30; i++)
 		{
 			size.insert(ft::make_pair(rand() % (100 + 1), rand() % 14));
 		}
 		size.print(); NEWLINE BORDER
-		ft::map<int, int> other(size);
-		std::cout << "***************** size: " << other.size() << std::endl;
-		other.erase(5);
-		// other.insert(ft::make_pair(10, 5));
-		other.clear();
+		// ft::map<int, int> other(size);
+		// other.print();
+		// std::cout << "***************** size: " << other.size() << std::endl;/
+		// other.erase(5);
+		// other.clear();
+	}
+
+	{
+		HEADLINE
+		std::cout <<  "\n<<<<<<<<<<<<<<<<<<<<<<<<<< ITERATORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+		ft::map<char, int> iter;
+		iter.insert(ft::make_pair('f', 11));
+		iter.insert(ft::make_pair('s', 11));
+		iter.insert(ft::make_pair('k', 11));
+		iter.insert(ft::make_pair('d', 11));
+		iter.insert(ft::make_pair('a', 11));
+		iter.insert(ft::make_pair('p', 11));
+		iter.insert(ft::make_pair('w', 11));
+
+		BOLD std::cout << "DEFAULT:" << std::endl; RESET
+		iter.print(); NEWLINE BORDER
+		
+		BOLD std::cout << "RBEGIN()"; RESET
+		for (ft::map<char, int>::reverse_iterator it = iter.rbegin(); it != iter.rend(); ++it )
+		{
+			std::cout << *it << std::endl;
+		}
 	}
 }
