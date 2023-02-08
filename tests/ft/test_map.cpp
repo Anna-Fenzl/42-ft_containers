@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/07 14:51:58 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/08 15:02:26 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,34 @@ void	test_map()
 		ft::map<int, std::string> range(empty.begin(), empty.end());
 		BOLD std::cout << "--> RANGE MAP:"; RESET 
 		range.print(); NEWLINE BORDER
+	}
+
+		{
+		HEADLINE
+		std::cout <<  "\n<<<<<<<<<<<<<<<<<<<<<<<<<< ITERATORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+		ft::map<char, int> iter;
+		iter.insert(ft::make_pair('f', 11));
+		iter.insert(ft::make_pair('s', 11));
+		iter.insert(ft::make_pair('k', 11));
+		iter.insert(ft::make_pair('d', 11));
+		iter.insert(ft::make_pair('a', 11));
+		iter.insert(ft::make_pair('p', 11));
+		iter.insert(ft::make_pair('w', 11));
+
+		BOLD std::cout << "DEFAULT:" << std::endl; RESET
+		iter.print(); NEWLINE BORDER
+		
+		BOLD std::cout << "BEGIN()"; RESET
+		for (ft::map<char, int>::iterator it = iter.begin(); it != iter.end(); ++it )
+		{
+			std::cout << *it << std::endl;
+		} NEWLINE BORDER
+
+		BOLD std::cout << "RBEGIN()"; RESET
+		for (ft::map<char, int>::reverse_iterator it = iter.rbegin(); it != iter.rend(); ++it )
+		{
+			std::cout << *it << std::endl;
+		} NEWLINE BORDER
 	}
 
 	{
@@ -177,37 +205,14 @@ void	test_map()
 		ft::map<int, int> size;
 
 		srand(2745896);
-		for (size_t i = 0; i < 30; i++)
+		for (size_t i = 0; i < 5000000; i++)
 		{
-			size.insert(ft::make_pair(rand() % (100 + 1), rand() % 14));
+			size.insert(ft::make_pair(rand() % (50000000 + 1), rand() % 14));
 		}
-		size.print(); NEWLINE BORDER
-		// ft::map<int, int> other(size);
-		// other.print();
-		// std::cout << "***************** size: " << other.size() << std::endl;/
-		// other.erase(5);
-		// other.clear();
+		// size.print();
+
+		std::cout << "size: " << size.size() << std::endl;
+		NEWLINE BORDER
 	}
 
-	{
-		HEADLINE
-		std::cout <<  "\n<<<<<<<<<<<<<<<<<<<<<<<<<< ITERATORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
-		ft::map<char, int> iter;
-		iter.insert(ft::make_pair('f', 11));
-		iter.insert(ft::make_pair('s', 11));
-		iter.insert(ft::make_pair('k', 11));
-		iter.insert(ft::make_pair('d', 11));
-		iter.insert(ft::make_pair('a', 11));
-		iter.insert(ft::make_pair('p', 11));
-		iter.insert(ft::make_pair('w', 11));
-
-		BOLD std::cout << "DEFAULT:" << std::endl; RESET
-		iter.print(); NEWLINE BORDER
-		
-		BOLD std::cout << "RBEGIN()"; RESET
-		for (ft::map<char, int>::reverse_iterator it = iter.rbegin(); it != iter.rend(); ++it )
-		{
-			std::cout << *it << std::endl;
-		}
-	}
 }

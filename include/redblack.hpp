@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/07 14:12:08 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/08 14:57:59 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ namespace ft
 		~Redblack_Tree()
 		{
 			clear();
+			_node_alloc.destroy(_nil);
 			_node_alloc.deallocate(_nil, 1);
 		}
 
@@ -116,7 +117,6 @@ namespace ft
 		iterator		end()				{ return iterator(_nil); };
 
 		const_iterator	end() const			{ return const_iterator(_nil); };
-
 		
 		// ----------------------- CAPACITY -----------------------
 		
@@ -140,7 +140,7 @@ namespace ft
 		ft::pair<iterator, bool>	insert(const value_type& value)
 		{
 			node_pointer move = _root, parent = _root;
-			RbtNode<value_type> node(value, parent, _nil);
+			node_type node(value, parent, _nil);
 
 			while (move != _nil)
 			{
@@ -157,9 +157,10 @@ namespace ft
 				(parent != _nil && _compare(*(parent->_value), value)) ? parent->_right = move: parent->_left = move;
 			move->set_parent(parent);
 			move->_nil = move->_left;
-			
 			insert_fixup(move);
 			++_size;
+			if (move == red_black_tree_max(_root) )
+				_nil->_parent = move;
 			return (ft::make_pair(find(value), true));
 		}
 
@@ -485,8 +486,11 @@ namespace ft
 
 		void	alloc_nil()
 		{
+			node_type	end_node;
+
 			_nil = _node_alloc.allocate(1);
-			_nil->set_colour(BLACK);
+			_node_alloc.construct(_nil, end_node);
+			_nil->_nil = _nil;
 			_nil->_left = _nil;
 			_nil->_right = _nil;
 		}

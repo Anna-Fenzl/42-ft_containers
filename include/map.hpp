@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/06 16:30:57 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/08 12:43:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ namespace ft
 		// Copy constructor: Constructs the container with the copy of the contents of other.
 		map( const map& other )
 		{
-			
 			*this = other;
 		}
 

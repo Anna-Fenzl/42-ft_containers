@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/07 13:59:58 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/08 11:35:22 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ namespace ft
 		// ----------------------- CONSTRUCTORS --------------------------
 
 		// default constructor -> everything set to NULL and BLACK
-		// RbtNode(): _colour(BLACK), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
-		// {
-		// 	_value = _value_alloc.allocate(1);
-		// }
+		RbtNode(const value_type& value = value_type()): _colour(BLACK), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
+		{
+			_value = _value_alloc.allocate(1);
+			_value_alloc.construct(_value, value);
+		}
 
 		// constructor takes value -> colour set to red
 		RbtNode(const value_type& value, const node_pointer nil): _colour(RED), _parent(nil), _left(nil), _right(nil), _nil(nil),  _value_alloc(std::allocator<value_type> () )

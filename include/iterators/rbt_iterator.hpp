@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/06 13:20:59 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/08 14:58:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_max(NodePointer node)
 	{
-		while (node->_right != node->_nil)
+		while (node->_right != node->_nil && node->_right != node)
 			node = node->_right;
 		return node;
 	}
@@ -48,9 +48,13 @@ namespace ft
 	NodePointer red_black_tree_prev(NodePointer node)
 	{
 		if (node->_left != node->_nil)
+		{
 			return red_black_tree_max(node->_left);
+		}
 		while (node->_parent != node->_nil && node == node->_parent->_left)
+		{
 			node = node->_parent;
+		}
 		return node->_parent;
 	}
 
