@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/08 14:58:38 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:21:11 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,11 @@ namespace ft
 	NodePointer red_black_tree_prev(NodePointer node)
 	{
 		if (node->_left != node->_nil)
-		{
 			return red_black_tree_max(node->_left);
-		}
+		if (node == node->_nil)
+			return node->_parent;
 		while (node->_parent != node->_nil && node == node->_parent->_left)
-		{
 			node = node->_parent;
-		}
 		return node->_parent;
 	}
 
@@ -192,15 +190,11 @@ template< typename T>
 
 		~Const_Rbt_Iterator( void ) {}
 
-		// ----------------------- ACCESSORS -----------------------
-
-		node_pointer base() const	{ return _ptr; }
-
 		// ------------------- OPERATOR OVERLOADS ------------------
 		
 		reference	operator*() const	{ return *_ptr->_value; }
 
-		pointer		operator->() const	{ return _ptr->value; }
+		pointer		operator->() const	{ return _ptr->_value; }
 
 		const_iterator	&operator++() 
 		{
@@ -230,12 +224,12 @@ template< typename T>
 
 		bool	operator==( const iterator& other) const
 		{
-			return (_ptr == other.base());
+			return (_ptr == other._ptr);
 		}
 		
 		bool	operator==( const const_iterator& other) const
 		{
-			return (_ptr == other.base());
+			return (_ptr == other._ptr);
 		}
 
 		bool	operator!=( const iterator& other) const

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/08 11:41:08 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 13:55:55 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,21 +170,23 @@ namespace ft
 
 		// max_size -> 	Return maximum size
 		// In most implementations, alloc.max_size() returns std::numeric_limits<size_type>::max() / sizeof(value_type)
-		size_type	max_size() const
-		{
-			size_type max_size = _alloc.max_size();
-			if (max_size < std::numeric_limits< size_type >::max() / sizeof(value_type))
-			{
-				return (max_size);
-			}
-			return (std::numeric_limits< size_type >::max() / sizeof(value_type));
-		}
+		size_type	max_size() const	{ return _alloc.max_size(); }
+		// {
+		// 	size_type max_size = _alloc.max_size();
+		// 	if (max_size < std::numeric_limits< size_type >::max() / sizeof(value_type))
+		// 	{
+		// 		return (max_size);
+		// 	}
+		// 	return (std::numeric_limits< size_type >::max() / sizeof(value_type));
+		// }
 
 		// resize -> Resizes the container
 		void resize (size_type n, value_type val = value_type())
 		{
-			if (n > _capacity)
+			if (n > _capacity * 2)
 				reserve(n);
+			else if (n > _capacity)
+				reserve(_capacity * 2);
 			if (n > _size)
 			{
 				while (n != _size)

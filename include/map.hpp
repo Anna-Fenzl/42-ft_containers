@@ -6,14 +6,14 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/08 12:43:38 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:28:18 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# include "redblack.hpp"
+# include "utils/redblack.hpp"
 # include "utils/pair.hpp"
 # include "./iterators/reverse_iterator.hpp"
 # include "./utils/compare.hpp"
@@ -28,8 +28,7 @@ namespace ft
 	class Compare = std::less<Key>,
 	class Allocator = std::allocator<std::pair<const Key, T> >
 	> class map
-	
-	
+
 	{
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
@@ -49,7 +48,7 @@ namespace ft
 		typedef typename Allocator::const_pointer					const_pointer;
 
 		typedef ft::Rbt_Iterator<value_type>						iterator;
-		typedef ft::Const_Rbt_Iterator<value_type>				const_iterator;
+		typedef ft::Const_Rbt_Iterator<value_type>					const_iterator;
 		typedef ft::reverse_iterator<iterator>						reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
@@ -167,7 +166,7 @@ namespace ft
 			iterator	it = _tree.find(ft::make_pair(k, mapped_type()));
 
 			if ( it == _tree.end() )
-				throw std::out_of_range("ft::map");
+				throw std::out_of_range("ft::map::at key not found");
 			
 			return (*it).second;
 		}
@@ -177,7 +176,7 @@ namespace ft
 			const_iterator	it = _tree.find(ft::make_pair(k, mapped_type()));
 
 			if ( it == _tree.end() )
-				throw std::out_of_range("ft::map");
+				throw std::out_of_range("ft::map::at key not found");
 
 			return (*it).second;
 		}
@@ -315,10 +314,10 @@ namespace ft
 		value_compare value_comp() const												{ return _compare; }
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DEBUG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		void	print()
-		{
-			_tree.print_tree();
-		}
+		// void	print() const
+		// {
+		// 	_tree.print_tree();
+		// }
 	};
 
 	//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< NON_MEMBER FUNCTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -375,3 +374,4 @@ namespace ft
 }
 
 #endif
+

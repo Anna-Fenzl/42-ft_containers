@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/08 14:57:59 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/08 16:25:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 // https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01067_source.html
 
-# include "./iterators/rbt_iterator.hpp"
-# include "./utils/rbt_node.hpp"
-# include "./utils/pair.hpp"
+# include "../iterators/rbt_iterator.hpp"
+# include "rbt_node.hpp"
+# include "pair.hpp"
 # include <stddef.h>
 # include <iostream>
 # include <memory>
@@ -58,8 +58,8 @@ namespace ft
 		typedef ft::Const_Rbt_Iterator<value_type>		const_iterator;
 		
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
-		node_pointer	_nil;
 		protected:
+		node_pointer	_nil;
 		node_pointer	_root;
 
 		size_type		_size;
@@ -533,7 +533,7 @@ namespace ft
 			Trunk(Trunk *prev, std::string str): prev(prev), str(str) {}
 		};
 
-		void showTrunks(Trunk *p)
+		void showTrunks(Trunk *p) const 
 		{
 			if (p == NULL)
 				return;
@@ -542,7 +542,7 @@ namespace ft
 			std::cout << p->str;
 		}
 		
-		void print_tree(node_pointer root, Trunk *prev, bool isLeft)
+		void print_tree(node_pointer root, Trunk *prev, bool isLeft) const
 		{
 			if (root == NULL || root == _nil)
 				return;
@@ -578,11 +578,10 @@ namespace ft
 			delete trunk;
 		}
 
-		void print_tree()
+		void print_tree() const
 		{
 			std::cout << "<  THE WHOLE TREE  >" << std::endl;
 			print_tree(_root , NULL, false);
-
 		}
 		
 	};

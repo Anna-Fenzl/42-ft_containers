@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_vector.cpp                                    :+:      :+:    :+:   */
+/*   std_vector.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 13:24:08 by afenzl           ###   ########.fr       */
+/*   Created: 2023/02/09 13:23:58 by afenzl            #+#    #+#             */
+/*   Updated: 2023/02/09 13:45:44 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 # define NEWLINE std::cout << std::endl;
 # define BORDER std::cout << "------------------------------------------------------------------" << std::endl;
@@ -17,22 +16,7 @@
 # define BOLD std::cout << "\033[0;1m";
 # define RESET std::cout << "\033[0m" << std::endl;
 
-# include "../../include/vector.hpp"
-# include "../../include/utils/compare.hpp"
-# include "../../include/utils/pair.hpp"
-
-# include <string>
-# include <vector>
-
-/*
-	TO DO:S
-	
-	==> look over that again
-	max_size exception
-	const_iterator for insert
-	try catch for allocation
-	ig *this != other operator=
-*/
+# include "tests.hpp"
 
 void test_vector()
 {
@@ -46,25 +30,25 @@ void test_vector()
 		HEADLINE
 		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< CONSTRUCTORS >>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 
-		ft::vector<std::string> empty;								// -> default constructor
+		std::vector<std::string> empty;								// -> default constructor
 		BOLD std::cout << "--> EMPTY VECTOR:"; RESET
 		for (size_t i = 0; i < empty.size(); i++)
 			std::cout << "EMPTY[" << i << "] = " << empty[i] << ", ";
 		NEWLINE BORDER
 
-		ft::vector<char> fill(5, 'X'); 								// -> fill constructor
+		std::vector<char> fill(5, 'X'); 								// -> fill constructor
 		BOLD std::cout << "--> FILL VECTOR:"; RESET 
 		for (size_t i = 0; i < fill.size(); i++)
 			std::cout << "FILL[" << i << "] = " << fill[i] << ", ";
 		NEWLINE BORDER
 		
-		ft::vector<char> range(fill.begin()+1, fill.end());			// -> range constructor
+		std::vector<char> range(fill.begin()+1, fill.end());			// -> range constructor
 		BOLD std::cout << "--> RANGE VECTOR:\t(fill.begin()+1, fill.end())"; RESET
 		for (size_t i = 0; i < range.size(); i++)
 			std::cout << "RANGE[" << i << "] = " << range[i] << ", ";
 		NEWLINE BORDER
 		
-		ft::vector<char> copy(fill);								// -> copy constructor
+		std::vector<char> copy(fill);								// -> copy constructor
 		BOLD std::cout << "--> COPIED VECTOR:\t(from fill)"; RESET 
 		for (size_t i = 0; i < copy.size(); i++)
 			std::cout << "COPY[" << i << "] = " << copy[i] << ", ";
@@ -72,12 +56,12 @@ void test_vector()
 	}
 
 
-	
+
 	{
 		HEADLINE
 		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<<<< ITERATORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 
-		ft::vector<int> vec(5, 6);
+		std::vector<int> vec(5, 6);
 		vec[0] = 0;
 		vec[1] = 1;
 		vec[2] = 2;
@@ -92,39 +76,39 @@ void test_vector()
 
 		BOLD std::cout << "INCREMENT ITERATOR:"; RESET
 		std::cout << "for ( it = VEC.BEGIN(); it != VEC.END(); ++IT ) :" << std::endl;
-		for (ft::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
+		for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
 			std::cout  << *it << ", ";
 		NEWLINE NEWLINE
 
 		BOLD std::cout << "DECREMENT ITERATOR:"; RESET
 		std::cout << "for ( it = --VEC.END(); it != --VEC.BEGIN(); --IT ) :" << std::endl;
-		for (ft::vector<int>::iterator it = --vec.end(); it != --vec.begin(); --it)
+		for (std::vector<int>::iterator it = --vec.end(); it != --vec.begin(); --it)
 			std::cout  << *it << ", ";
 		NEWLINE NEWLINE
 
 		BOLD std::cout << "INCREMENT REVERSE ITERATOR:"; RESET
 		std::cout << "for ( it = VEC.RBEGIN(); it != VEC.REND(); ++IT ) :" << std::endl;
-		for (ft::vector<int>::reverse_iterator it = vec.rbegin(); it != vec.rend(); ++it)
+		for (std::vector<int>::reverse_iterator it = vec.rbegin(); it != vec.rend(); ++it)
 			std::cout  << *it << ", ";
 		NEWLINE NEWLINE
 
 		BOLD std::cout << "DECREMENT REVERSE ITERATOR:"; RESET
 		std::cout << "for ( it = VEC.REND(); it != VEC.RBEGIN(); --IT ) :" << std::endl;
-		for (ft::vector<int>::reverse_iterator it = --vec.rend(); it != --vec.rbegin(); --it)
+		for (std::vector<int>::reverse_iterator it = --vec.rend(); it != --vec.rbegin(); --it)
 			std::cout  << *it << ", ";
 		NEWLINE NEWLINE
 	
 		BOLD std::cout << "[] OPERATOR:\t\t\t\t(forward iterator))"; RESET
-		ft::vector<int>::iterator it0(vec.begin());
+		std::vector<int>::iterator it0(vec.begin());
 		std::cout << "it(vec.begin());       print it[3]: \'" << it0[3] << "\'" << std::endl;
-		ft::vector<int>::iterator it1(++vec.begin());
+		std::vector<int>::iterator it1(++vec.begin());
 		std::cout << "it(&vec[1]);           print it[3]: \'" << it1[3] << "\'" << std::endl;
 		NEWLINE
 
 		BOLD std::cout << "[] OPERATOR:\t\t\t\t(reverse iterator))"; RESET
-		ft::vector<int>::reverse_iterator it2(vec.rbegin());
+		std::vector<int>::reverse_iterator it2(vec.rbegin());
 		std::cout << "it(vec.rbegin());       print it[3]: \'" << it2[3] << "\'" << std::endl;
-		ft::vector<int>::reverse_iterator it3(++vec.rbegin());
+		std::vector<int>::reverse_iterator it3(++vec.rbegin());
 		std::cout << "it(&vec[1]);           print it[3]: \'" << it3[3] << "\'" << std::endl;
 		NEWLINE NEWLINE
 	}
@@ -137,7 +121,7 @@ void test_vector()
 
 		std::cout << std::boolalpha;
 		
-		ft::vector<char> cap(5, '!');
+		std::vector<char> cap(5, '!');
 		BOLD std::cout << "--> DEFAULT VECTOR:"; RESET
 		for (size_t i = 0; i < cap.size(); i++)
 			std::cout << "D[" << i << "] = \'" << cap[i] << "\', ";
@@ -149,7 +133,7 @@ void test_vector()
 		std::cout << "empty()    = " << cap.empty() << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<char> empty;
+		std::vector<char> empty;
 		BOLD std::cout << "--> EMPTY VECTOR:" << std::endl; RESET
 		std::cout << "size()     = " << empty.size() << std::endl;
 		std::cout << "max_size() = " << empty.max_size() << std::endl;
@@ -157,7 +141,7 @@ void test_vector()
 		std::cout << "empty()    = " << empty.empty() << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<char> resize(cap);
+		std::vector<char> resize(cap);
 		BOLD std::cout << "--> RESIZE VECTOR:\t\t\t\t" << std::endl; RESET
 		std::cout << "> resize to smaller size (2)" << std::endl;
 		resize.resize(2);
@@ -175,7 +159,7 @@ void test_vector()
 			std::cout << "RES[" << i << "] = \'" << resize[i] << "\', ";
 		NEWLINE NEWLINE BORDER
 
-		ft::vector<char> res(cap);
+		std::vector<char> res(cap);
 		BOLD std::cout << "--> RESERVE VECTOR:\t\t\t\t(throws when requested capacity > max_size())" << std::endl; RESET
 		std::cout << "reserving 1000 for DEFAULT" << std::endl;
 		try
@@ -200,20 +184,20 @@ void test_vector()
 		HEADLINE
 		std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< ELEMENT ACCESS >>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 
-		ft::vector<std::string> def(3, "DEFAULT STRING");
+		std::vector<std::string> def(3, "DEFAULT STRING");
 		BOLD std::cout << "--> DEFAULT VECTOR:"; RESET
 		for (size_t i = 0; i < def.size(); i++)
 			std::cout << "DEF[" << i << "] = \"" << def[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> mod(def);
+		std::vector<std::string> mod(def);
 		BOLD std::cout << "--> []OPERATOR:\t\t\t\t(undefined behavior when out of bounds)" << std::endl; RESET
 		mod[1] = "non default, used: mod[i]";
 		for (size_t i = 0; i < mod.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << mod[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> op(def);
+		std::vector<std::string> op(def);
 		BOLD std::cout << "--> .AT():\t\t\t\t(throws when out of bounds)" << std::endl; RESET
 		op.at(1) = "non default, used: mod.at(i)";
 		for (size_t i = 0; i < op.size(); i++)
@@ -230,7 +214,7 @@ void test_vector()
 		}
 		NEWLINE BORDER
 
-		ft::vector<std::string> ends(def);
+		std::vector<std::string> ends(def);
 		ends[0] = "first string";
 		ends[2] = "last string";
 
@@ -251,34 +235,34 @@ void test_vector()
 		HEADLINE
 		std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<< MODIFIERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 
-		ft::vector<std::string> def(3, "DEFAULT STRING");
+		std::vector<std::string> def(3, "DEFAULT STRING");
 		BOLD std::cout << "--> DEFAULT VECTOR:"; RESET
 		for (size_t i = 0; i < def.size(); i++)
 			std::cout << "DEF[" << i << "] = \"" << def[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> clear(def);
+		std::vector<std::string> clear(def);
 		BOLD std::cout << "--> .CLEAR():"; RESET
 		clear.clear();
 		for (size_t i = 0; i < clear.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << clear[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> as(def);
+		std::vector<std::string> as(def);
 		BOLD std::cout << "--> .ASSIGN(4, \"assigned string\"):\t\t\t(fill version)"; RESET
 		as.assign(4, "assigned string (fill)");
 		for (size_t i = 0; i < as.size(); i++)
 			std::cout << "FILL[" << i << "] = \"" << as[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> range(def);
+		std::vector<std::string> range(def);
 		BOLD std::cout << "--> .ASSIGN(as.begin()+1, as.end()):\t\t\t(range version)"; RESET
 		range.assign(def.begin()+1, def.end());
 		for (size_t i = 0; i < range.size(); i++)
 			std::cout << "RANGE[" << i << "] = \"" << range[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> push(def);
+		std::vector<std::string> push(def);
 		BOLD std::cout << "--> .PUSH_BACK(\"pushed string\"):"; RESET
 		push.push_back("pushed string");
 		push.push_back("another pushed string");
@@ -286,51 +270,51 @@ void test_vector()
 			std::cout << "PUSH[" << i << "] = \"" << push[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> pop(push);
+		std::vector<std::string> pop(push);
 		BOLD std::cout << "--> .POP_BACK():"; RESET
 		push.pop_back();
 		for (size_t i = 0; i < push.size(); i++)
 			std::cout << "POP[" << i << "] = \"" << push[i] << "\"" << std::endl;
 		NEWLINE BORDER
 		
-		ft::vector<std::string> other(2, "Other stuff");
+		std::vector<std::string> other(2, "Other stuff");
 		BOLD std::cout << "--> OTHER VECTOR:"; RESET
 		for (size_t i = 0; i < other.size(); i++)
 			std::cout << "OTH[" << i << "] = \"" << other[i] << "\"" << std::endl;
 		NEWLINE BORDER
 		
-		ft::vector<std::string> insert_one(def);
+		std::vector<std::string> insert_one(def);
 		BOLD std::cout << "--> .INSERT( .BEGIN()+1, \"->inserted string\"):\t\t\t\t(one element)"; RESET
 		insert_one.insert(insert_one.begin()+1, " ------ inserted string");
 		for (size_t i = 0; i < insert_one.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << insert_one[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> insert_more(def);
+		std::vector<std::string> insert_more(def);
 		BOLD std::cout << "--> .INSERT( .BEGIN(), 5,\"->inserted string\"):\t\t\t\t(multible elements)"; RESET
 		insert_more.insert(insert_more.begin()+1, 5, " ------ inserted string");
 		for (size_t i = 0; i < insert_more.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << insert_more[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> insert_range(def);
+		std::vector<std::string> insert_range(def);
 		BOLD std::cout << "--> .INSERT(BEGIN()+1, OTHER.BEGIN(), OTHER.END()):\t\t\t(range)"; RESET
 		insert_range.insert(insert_range.begin()+1, other.begin(), other.end());
 		for (size_t i = 0; i < insert_range.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << insert_range[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> erase_one(insert_range);
+		std::vector<std::string> erase_one(insert_range);
 		BOLD std::cout << "--> .ERASE(ERASE.BEGIN()+1)(from vector above):\t\t\t\t(single element)"; RESET
-		ft::vector<std::string>::iterator it0 = erase_one.erase(erase_one.begin()+1);
+		std::vector<std::string>::iterator it0 = erase_one.erase(erase_one.begin()+1);
 		std::cout << "returned iterator is \"" << *it0 << "\"\n" << std::endl;
 		for (size_t i = 0; i < erase_one.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << erase_one[i] << "\"" << std::endl;
 		NEWLINE BORDER
 
-		ft::vector<std::string> erase_more(insert_range);
+		std::vector<std::string> erase_more(insert_range);
 		BOLD std::cout << "--> .ERASE(ERASE.BEGIN()+2, ERASE.END()-1)(from same vector):\t\t\t(range)"; RESET
-		ft::vector<std::string>::iterator it1 = erase_more.erase(erase_more.begin()+2, erase_more.end()-1);
+		std::vector<std::string>::iterator it1 = erase_more.erase(erase_more.begin()+2, erase_more.end()-1);
 		std::cout << "returned iterator is \"" << *it1 << "\"\n" << std::endl;
 		for (size_t i = 0; i < erase_more.size(); i++)
 			std::cout << "MOD[" << i << "] = \"" << erase_more[i] << "\"" << std::endl;
@@ -352,7 +336,7 @@ void test_vector()
 		HEADLINE
 		std::cout << "<<<<<<<<<<<<<<<<<<<<<<< NON-MEMBER FUNCTIONS >>>>>>>>>>>>>>>>>>>>>>"; RESET
 	
-		ft::vector<char>	def;
+		std::vector<char>	def;
 		def.push_back('a');
 		def.push_back('b');
 		def.push_back('c');
@@ -364,7 +348,7 @@ void test_vector()
 			std::cout << "DEF[" << i << "] = \'" << def[i] << "\', ";
 		NEWLINE NEWLINE
 
-		ft::vector<char>	oth;
+		std::vector<char>	oth;
 		oth.push_back('a');
 		oth.push_back('g');
 		BOLD std::cout << "--> OTHER VECTOR:"; RESET
@@ -388,7 +372,7 @@ void test_vector()
 		NEWLINE BORDER
 
 		BOLD std::cout << "--> SWAP(def, oth)"; RESET
-		ft::swap(def, oth);
+		std::swap(def, oth);
 		for (size_t i = 0; i < def.size(); i++)
 			std::cout << "DEF[" << i << "] = \'" << def[i] << "\', ";
 		NEWLINE
@@ -397,4 +381,3 @@ void test_vector()
 		NEWLINE NEWLINE BORDER
 	}
 }
-

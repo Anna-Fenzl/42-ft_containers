@@ -6,12 +6,16 @@
 	iterator
 		end () throw()	{ return iterator(_end); }
 
-has a problem when using a copied map
+==> print shouldnt be public -> different tests
+==> check the code again, make it cleaner if possible
+==> check out the const problem again, maybe opertor overloads are not complete
+==> compare output to original map
+==> run testers, like unitest(2 segfault on default)
 
-def.erase(++def.begin(), def.end());
-		def.print();
-erases whole tree
---> ++ operators fucked
+==> make set( basically map )
 
-insert.erase(--insert.end());
-runs endlessly in rbt_max
+
+
+---------------- DONE ---------------
+==> also tree should be hidden in map
+	ie. size.begin().base().

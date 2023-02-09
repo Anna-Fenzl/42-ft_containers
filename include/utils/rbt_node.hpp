@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/08 11:35:22 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 12:52:46 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,8 @@ namespace ft
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		// ----------------------- CONSTRUCTORS --------------------------
-
 		// default constructor -> everything set to NULL and BLACK
 		RbtNode(const value_type& value = value_type()): _colour(BLACK), _parent(NULL), _left(NULL), _right(NULL), _value_alloc(std::allocator<value_type> () )
-		{
-			_value = _value_alloc.allocate(1);
-			_value_alloc.construct(_value, value);
-		}
-
-		// constructor takes value -> colour set to red
-		RbtNode(const value_type& value, const node_pointer nil): _colour(RED), _parent(nil), _left(nil), _right(nil), _nil(nil),  _value_alloc(std::allocator<value_type> () )
 		{
 			_value = _value_alloc.allocate(1);
 			_value_alloc.construct(_value, value);
@@ -131,25 +123,14 @@ namespace ft
 
 		// ----------------------- METHODS --------------------------
 
-		value_type	get_value() const	{ return *this->_value; }
+		value_type		get_value() const	{ return *this->_value; }
 
 		rbt_colour		get_colour() const { return this->_colour; }
 
-		node_type		*get_child( int	side ) const
-		{
-			if (side == LEFT)
-				return this->_left;
-			else if (side == RIGHT)
-				return this->_right;
-			throw std::invalid_argument("only takes value LEFT(0) or RIGHT(1)!");
-		}
+		void			set_parent(node_pointer parent) { _parent = parent; }
 
-		void		set_parent(node_pointer parent) { _parent = parent; }
-
-		void		set_colour(rbt_colour colour) { _colour = colour; }
+		void			set_colour(rbt_colour colour) { _colour = colour; }
 		
-		void		switch_colour() { _colour = (_colour == RED) ? BLACK : RED; }
-
 	};
 
 	template <typename V>
