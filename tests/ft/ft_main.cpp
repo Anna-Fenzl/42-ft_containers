@@ -6,19 +6,27 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:08:05 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 16:58:05 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:48:49 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "./ft_tests.hpp"
 
+# include "../../include/vector.hpp"
+# include "../../include/utils/compare.hpp"
+# include "../../include/utils/pair.hpp"
+
 int main()
 {
-	test_other();
-	test_vector();
-	test_stack();
-	test_map();
-	test_set();
+	// test_other();
+	// test_vector();
+	// test_stack();
+	// test_map();
+	// test_set();
+
+	ft::vector<int, std::allocator<int> > test;
+	
+	
 	return (0);
 }
 

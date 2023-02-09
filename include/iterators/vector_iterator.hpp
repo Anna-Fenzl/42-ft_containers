@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:10:48 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:43:32 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:37:53 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 namespace ft
 {
 	template< typename T >
-	class VectorIterator
+	class vector_iterator
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>
 		private:
@@ -38,15 +38,15 @@ namespace ft
 		public:
 		
 		// ----------------------- CONSTRUCTORS -------------------------
-		VectorIterator(pointer ptr) :_ptr(ptr) {}
+		vector_iterator(pointer ptr) :_ptr(ptr) {}
 
-		VectorIterator(const VectorIterator &src) :_ptr(src._ptr) {}
+		vector_iterator(const vector_iterator &src) :_ptr(src._ptr) {}
 
 		// ---------------------------- METHOD --------------------------
 		
 		pointer	base() const		{ return _ptr; }
 		
-		void			swap(VectorIterator &other)
+		void			swap(vector_iterator &other)
 		{
 			pointer tmp = _ptr;
 			_ptr = other.ptr;
@@ -60,23 +60,23 @@ namespace ft
 
 		reference		operator*()			{return *_ptr; }
 
-		VectorIterator	&operator++() 		{ _ptr++; return *this; }
+		vector_iterator	&operator++() 		{ _ptr++; return *this; }
 
-		VectorIterator	&operator--()		{ _ptr--; return *this; }
+		vector_iterator	&operator--()		{ _ptr--; return *this; }
 
-		VectorIterator	operator++(int)		{VectorIterator cpy(*this); ++(*this); return cpy; }
+		vector_iterator	operator++(int)		{vector_iterator cpy(*this); ++(*this); return cpy; }
 
-		VectorIterator	operator--(int)		{VectorIterator cpy(*this); --(*this); return cpy; }
+		vector_iterator	operator--(int)		{vector_iterator cpy(*this); --(*this); return cpy; }
 
-		VectorIterator	&operator+=(difference_type n)	{ _ptr += n; return *this; }
+		vector_iterator	&operator+=(difference_type n)	{ _ptr += n; return *this; }
 
-		VectorIterator	&operator-=(difference_type n)	{ _ptr -= n; return *this; }
+		vector_iterator	&operator-=(difference_type n)	{ _ptr -= n; return *this; }
 
-		VectorIterator	operator+(difference_type n ) const	{ return _ptr + n; }
+		vector_iterator	operator+(difference_type n ) const	{ return _ptr + n; }
 
-		VectorIterator	operator-(difference_type n ) const	{ return _ptr - n; }
+		vector_iterator	operator-(difference_type n ) const	{ return _ptr - n; }
 
-		VectorIterator	&operator=(const VectorIterator &other )
+		vector_iterator	&operator=(const vector_iterator &other )
 		{
 			if (_ptr != other.base())
 			{
@@ -89,115 +89,115 @@ namespace ft
 		// ----------------------- OPERATOR OVERLOAD --------------------
 		
 		template< typename T >
-		bool	operator==( const VectorIterator< T >& lhs, const VectorIterator< T >& rhs )
+		bool	operator==( const vector_iterator< T >& lhs, const vector_iterator< T >& rhs )
 		{
 			return (lhs.base() == rhs.base());
 		}
 
 		template< typename T1, typename T2 >
-		bool	operator==( const VectorIterator< T1 >& lhs, const VectorIterator< T2 >& rhs )
+		bool	operator==( const vector_iterator< T1 >& lhs, const vector_iterator< T2 >& rhs )
 		{
 			return (lhs.base() == rhs.base());
 		}
 
 		template< typename T >
-		bool	operator!=( const VectorIterator< T >& lhs, const VectorIterator< T >& rhs )
+		bool	operator!=( const vector_iterator< T >& lhs, const vector_iterator< T >& rhs )
 		{
 			return (!(lhs == rhs));
 		}
 
 		template< typename T1, typename T2 >
-		bool	operator!=( const VectorIterator< T1 >& lhs, const VectorIterator< T2 >& rhs )
+		bool	operator!=( const vector_iterator< T1 >& lhs, const vector_iterator< T2 >& rhs )
 		{
 			return (!(lhs == rhs));
 		}
 
 		template< typename T >
-		bool	operator<( const VectorIterator< T >& lhs, const VectorIterator< T >& rhs )
+		bool	operator<( const vector_iterator< T >& lhs, const vector_iterator< T >& rhs )
 		{
 			return (lhs.base() < rhs.base());
 		}
 
 		template< typename T1, typename T2 >
-		bool	operator<( const VectorIterator< T1 >& lhs, const VectorIterator< T2 >& rhs )
+		bool	operator<( const vector_iterator< T1 >& lhs, const vector_iterator< T2 >& rhs )
 		{
 			return (lhs.base() < rhs.base());
 		}
 
 		template< typename T >
-		bool	operator<=( const VectorIterator< T >& lhs, const VectorIterator< T >& rhs )
+		bool	operator<=( const vector_iterator< T >& lhs, const vector_iterator< T >& rhs )
 		{
 			return (!(rhs < lhs));
 		}
 
 		template< typename T1, typename T2 >
-		bool	operator<=( const VectorIterator< T1 >& lhs, const VectorIterator< T2 >& rhs )
+		bool	operator<=( const vector_iterator< T1 >& lhs, const vector_iterator< T2 >& rhs )
 		{
 			return (!(rhs < lhs));
 		}
 
 		template< typename T >
-		bool	operator>( const VectorIterator< T >& lhs, const VectorIterator< T >& rhs )
+		bool	operator>( const vector_iterator< T >& lhs, const vector_iterator< T >& rhs )
 		{
 			return (rhs < lhs);
 		}
 
 		template< typename T1, typename T2 >
-		bool	operator>( const VectorIterator< T1 >& lhs, const VectorIterator< T2 >& rhs )
+		bool	operator>( const vector_iterator< T1 >& lhs, const vector_iterator< T2 >& rhs )
 		{
 			return (rhs < lhs);
 		}
 
 		template< typename T >
-		bool	operator>=( const VectorIterator< T >& lhs, const VectorIterator< T >& rhs )
+		bool	operator>=( const vector_iterator< T >& lhs, const vector_iterator< T >& rhs )
 		{
 			return (!(lhs < rhs));
 		}
 
 		template< typename T1, typename T2 >
-		bool	operator>=( const VectorIterator< T1 >& lhs, const VectorIterator< T2 >& rhs )
+		bool	operator>=( const vector_iterator< T1 >& lhs, const vector_iterator< T2 >& rhs )
 		{
 			return (!(lhs < rhs));
 		}
 
 		template< typename T >
-		VectorIterator< T >	operator+( const typename VectorIterator< T >::difference_type& i,
-											const VectorIterator< T >& iter )
+		vector_iterator< T >	operator+( const typename vector_iterator< T >::difference_type& i,
+											const vector_iterator< T >& iter )
 		{
-			return (VectorIterator< T >(iter.base() + i));
+			return (vector_iterator< T >(iter.base() + i));
 		}
 
 		template< typename T >
-		VectorIterator< T >	operator-( const typename VectorIterator< T >::difference_type& i,
-											const VectorIterator< T >& iter )
+		vector_iterator< T >	operator-( const typename vector_iterator< T >::difference_type& i,
+											const vector_iterator< T >& iter )
 		{
-			return (VectorIterator< T >(iter.base() - i));
+			return (vector_iterator< T >(iter.base() - i));
 		}
 
 		template< typename T >
-		typename VectorIterator< T >::difference_type	operator+( const VectorIterator< T >& lhs,
-																	const VectorIterator< T >& rhs )
+		typename vector_iterator< T >::difference_type	operator+( const vector_iterator< T >& lhs,
+																	const vector_iterator< T >& rhs )
 		{
 			return (lhs.base() + rhs.base());
 		}
 
 		template< typename T >
-		typename VectorIterator< T >::difference_type	operator-( const VectorIterator< T >& lhs,
-																	const VectorIterator< T >& rhs )
+		typename vector_iterator< T >::difference_type	operator-( const vector_iterator< T >& lhs,
+																	const vector_iterator< T >& rhs )
 		{
 			return (lhs.base() - rhs.base());
 		}
 
 		template< typename T1, typename T2 >
-		typename VectorIterator< T1 >::difference_type	operator+( const VectorIterator< T1 >& lhs,
-																	const VectorIterator< T2 >& rhs )
+		typename vector_iterator< T1 >::difference_type	operator+( const vector_iterator< T1 >& lhs,
+																	const vector_iterator< T2 >& rhs )
 		{
 			return (lhs.base() + rhs.base());
 		}
 
 		template< typename T1, typename T2 >
-		typename VectorIterator< T1 >::difference_type	operator-( const VectorIterator< T1 >& lhs,
-																	const VectorIterator< T2 >& rhs )
+		typename vector_iterator< T1 >::difference_type	operator-( const vector_iterator< T1 >& lhs,
+																	const vector_iterator< T2 >& rhs )
 		{
 			return (lhs.base() - rhs.base());
 		}

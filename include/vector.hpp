@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 13:55:55 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 18:10:31 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,6 @@
 
 namespace ft
 {
-
-
-// □ constructores					✓
-	//  "Substitution Failure Is Not An Error" -> SFINAE
-// □ iteratores						✓
-// □ capacity 						✓
-// □ element access					✓
-// □ modifiers						✓
-// □ allocator						✓
-// □ std::enable if					✓
-// □ std::is_integral				✓
-// □ std::pair						✓
-// □ std::make_pair					✓
-// □ std::equal						✓
-// □ std::lexicographical_compare	✓
-// □ non_member function overloads	✓
 
 	//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< VECTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>
 	
@@ -59,8 +43,8 @@ namespace ft
 			typedef T*			pointer;
 			typedef const T*	const_pointer;
 			
-			typedef ft::VectorIterator<value_type>			iterator;
-			typedef ft::VectorIterator<value_type const>	const_iterator;
+			typedef ft::vector_iterator<value_type>			iterator;
+			typedef ft::vector_iterator<value_type const>	const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
@@ -171,14 +155,6 @@ namespace ft
 		// max_size -> 	Return maximum size
 		// In most implementations, alloc.max_size() returns std::numeric_limits<size_type>::max() / sizeof(value_type)
 		size_type	max_size() const	{ return _alloc.max_size(); }
-		// {
-		// 	size_type max_size = _alloc.max_size();
-		// 	if (max_size < std::numeric_limits< size_type >::max() / sizeof(value_type))
-		// 	{
-		// 		return (max_size);
-		// 	}
-		// 	return (std::numeric_limits< size_type >::max() / sizeof(value_type));
-		// }
 
 		// resize -> Resizes the container
 		void resize (size_type n, value_type val = value_type())

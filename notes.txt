@@ -7,9 +7,29 @@
 
 ==> check the code again, make it cleaner if possible
 ==> run testers, like unitest(2 segfault on default)
-==> make set( basically map )
+
+VECTOR:
+DOESNT COMPILE
+
+STACK:
+fine ✓
+
+MAP:
+compare class failed
+timeout lower bound && upper_bound
+using allocator failed
+> && <= operator failed
+
+SET:
+compare class failed
+timeout lower bound && upper_bound
+using allocator failed
+> && <= operator failed
+--> (same thing)
+
 
 ---------------- DONE ---------------
+==> make set( basically map )
 ==> compare output to original map
 ==> check out the const problem again, maybe operator overloads are not complete
 ==> print shouldnt be public -> different tests
