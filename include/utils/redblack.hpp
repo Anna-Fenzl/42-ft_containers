@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/08 16:25:38 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:55:41 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ namespace ft
 		public:
 		// ----------------------- CONSTRUCTOR --------------------
 		// default constructor
-		Redblack_Tree(): _size(0), _compare(_Compare()), _node_alloc(std::allocator<RbtNode<value_type> >())
+		Redblack_Tree(): _size(0), _node_alloc(node_alloc()), _compare(value_compare())
 		{
 			alloc_nil();
 			_root = _nil;

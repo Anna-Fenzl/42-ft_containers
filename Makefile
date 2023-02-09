@@ -6,7 +6,7 @@
 #    By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 15:03:12 by afenzl            #+#    #+#              #
-#    Updated: 2023/02/09 14:13:04 by afenzl           ###   ########.fr        #
+#    Updated: 2023/02/09 14:41:27 by afenzl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ HEADER = ./include/vector.hpp ./include/stack.hpp ./include/map.hpp \
 FT_PATH = ./tests/ft/
 STD_PATH = ./tests/std/
 
-FT_SRC = $(FT_PATH)ft_main.cpp $(FT_PATH)test_vector.cpp $(FT_PATH)test_stack.cpp $(FT_PATH)test_map.cpp $(FT_PATH)test_other.cpp
+FT_SRC = $(FT_PATH)ft_main.cpp $(FT_PATH)ft_vector.cpp $(FT_PATH)ft_stack.cpp $(FT_PATH)ft_map.cpp $(FT_PATH)ft_other.cpp
 STD_SRC = $(STD_PATH)std_main.cpp $(STD_PATH)std_vector.cpp $(STD_PATH)std_stack.cpp $(STD_PATH)std_map.cpp $(STD_PATH)std_other.cpp
 
 STD_OBJ = $(STD_SRC:.cpp=.o)
@@ -40,7 +40,7 @@ all: $(NAME_FT) $(NAME_STD)
 	@echo " \033[0;31m |    \033[0;32m  |   |\033[0;33m  |   |\033[0;34m  ___/ \033[0;35m  | \033[0;36m  |   \033[0;31m   |    \033[0;32m  |   |\033[0;33m _| "
 	@echo " \033[0;31m\____|\033[0;32m \___/ \033[0;33m _|  _|\033[0;34m _|    \033[0;35m___|\033[0;36m _____|\033[0;31m _____|\033[0;32m ____/ \033[0;33m _) \033[0m"
 	@echo "                                                        "
-	@rm -rf $(STD_OBJ) $(FT_OBJ)
+	@# @rm -rf $(STD_OBJ) $(FT_OBJ)
 
 $(NAME_FT): $(FT_OBJ) $(HEADER)
 	@$(CPP) $(CPP_FLAGS) $(FT_OBJ) -o $(NAME_FT)

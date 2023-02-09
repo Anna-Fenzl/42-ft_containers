@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:23:21 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:43:14 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:57:02 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ namespace ft
 		typedef typename Container::const_reference	const_reference;
 
 		// <<<<<<<<<<<<<<<<<<<<<< MEMBER VARIABLES >>>>>>>>>>>>>>>>>>>>>>
-		private:
+		protected:
 		container_type	c;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<< METHODS >>>>>>>>>>>>>>>>>>>>>>>>>>>>
