@@ -1,21 +1,17 @@
 
 > MAKFILE RELINKS RN
 
-
 > throw () is an exception specifier that declares that a this funciton will never throw an exception
 	iterator
 		end () throw()	{ return iterator(_end); }
 
-==> print shouldnt be public -> different tests
 ==> check the code again, make it cleaner if possible
-==> check out the const problem again, maybe opertor overloads are not complete
-==> compare output to original map
 ==> run testers, like unitest(2 segfault on default)
-
 ==> make set( basically map )
 
-
-
 ---------------- DONE ---------------
+==> compare output to original map
+==> check out the const problem again, maybe operator overloads are not complete
+==> print shouldnt be public -> different tests
 ==> also tree should be hidden in map
 	ie. size.begin().base().

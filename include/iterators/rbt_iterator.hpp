@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 14:21:11 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:04:53 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ namespace ft
 	}
 
 	template< typename T>
-	struct Const_Rbt_Iterator;
+	struct const_rbt_iterator;
 
 	template< typename T>
-	struct Rbt_Iterator
+	struct rbt_iterator
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
@@ -68,14 +68,14 @@ namespace ft
 		typedef T&											reference;
 		typedef T*											pointer;
 
-		typedef Rbt_Iterator<T>								iterator;
-		typedef Const_Rbt_Iterator<T>						const_iterator;
+		typedef rbt_iterator<T>								iterator;
+		typedef const_rbt_iterator<T>						const_iterator;
 		
 		typedef bidirectional_iterator_tag					iterator_category;
 		typedef std::ptrdiff_t								difference_type;
 
-		typedef typename RbtNode<T>::node_pointer			node_pointer;
-		typedef typename RbtNode<T>::const_node_pointer		const_node_pointer;
+		typedef typename rbt_node<T>::node_pointer			node_pointer;
+		typedef typename rbt_node<T>::const_node_pointer		const_node_pointer;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>
 		private:
@@ -85,13 +85,13 @@ namespace ft
 
 		public:
 		// ----------------------- CONSTRUCTORS --------------------
-		Rbt_Iterator(): _ptr(NULL) {}
+		rbt_iterator(): _ptr(NULL) {}
 		
-		Rbt_Iterator( node_pointer ptr ): _ptr(ptr) {}
+		rbt_iterator( node_pointer ptr ): _ptr(ptr) {}
 
-		Rbt_Iterator( const iterator& rhs): _ptr(rhs.base()) {}
+		rbt_iterator( const iterator& rhs): _ptr(rhs.base()) {}
 
-		~Rbt_Iterator( void ) {}
+		~rbt_iterator( void ) {}
 
 		// ----------------------- ACCESSORS -----------------------
 
@@ -157,7 +157,7 @@ namespace ft
 
 
 template< typename T>
-	struct Const_Rbt_Iterator
+	struct const_rbt_iterator
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
@@ -165,14 +165,14 @@ template< typename T>
 		typedef const T&									reference;
 		typedef const T*									pointer;
 
-		typedef const Rbt_Iterator<T>						iterator;
-		typedef const Const_Rbt_Iterator<T>					const_iterator;
+		typedef const rbt_iterator<T>						iterator;
+		typedef const const_rbt_iterator<T>					const_iterator;
 		
 		typedef ft::bidirectional_iterator_tag				iterator_category;
 		typedef std::ptrdiff_t								difference_type;
 
-		typedef typename RbtNode<T>::node_pointer			node_pointer;
-		typedef typename RbtNode<T>::const_node_pointer		const_node_pointer;
+		typedef typename rbt_node<T>::node_pointer			node_pointer;
+		typedef typename rbt_node<T>::const_node_pointer		const_node_pointer;
 
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>
 		private:
@@ -182,13 +182,13 @@ template< typename T>
 
 		public:
 		// ----------------------- CONSTRUCTORS --------------------
-		Const_Rbt_Iterator(): _ptr(NULL) {}
+		const_rbt_iterator(): _ptr(NULL) {}
 		
-		Const_Rbt_Iterator( node_pointer const ptr ): _ptr(ptr) {}
+		const_rbt_iterator( node_pointer const ptr ): _ptr(ptr) {}
 
-		Const_Rbt_Iterator( const iterator& rhs): _ptr(rhs.base()) {}
+		const_rbt_iterator( const iterator& rhs): _ptr(rhs.base()) {}
 
-		~Const_Rbt_Iterator( void ) {}
+		~const_rbt_iterator( void ) {}
 
 		// ------------------- OPERATOR OVERLOADS ------------------
 		

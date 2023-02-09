@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 14:28:18 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:05:16 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ namespace ft
 		typedef typename Allocator::pointer							pointer;
 		typedef typename Allocator::const_pointer					const_pointer;
 
-		typedef ft::Rbt_Iterator<value_type>						iterator;
-		typedef ft::Const_Rbt_Iterator<value_type>					const_iterator;
+		typedef ft::rbt_iterator<value_type>						iterator;
+		typedef ft::const_rbt_iterator<value_type>					const_iterator;
 		typedef ft::reverse_iterator<iterator>						reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
@@ -85,7 +85,7 @@ namespace ft
 			}
 		};
 		
-		typedef	Redblack_Tree<value_type, value_compare>					redblack_tree;
+		typedef	redblack_tree<value_type, value_compare>					redblack_tree;
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER VARIABLES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		private:
@@ -190,12 +190,9 @@ namespace ft
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MODIFIERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		// Erases all elements from the container.
-		void clear()
-		{
-			_tree.clear();
-		}
+		void clear()	{ _tree.clear(); }
 
-		// single element (1)	
+		// single element (1)
 		pair<iterator, bool> insert (const value_type& val)
 		{
 			return _tree.insert(val);
@@ -244,7 +241,6 @@ namespace ft
 					_tree.erase(first);
 					first = it;
 				}
-				std::cout << std::endl;
 			}
 			catch(const std::exception& e)
 			{
@@ -270,12 +266,6 @@ namespace ft
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< LOOKUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
-		// DOESN"T COMPILE no viable conversion from returned value of type 'Const_Rbt_Iterator<ft::Redblack_Tree<ft::pair<const char, int>,
-		//   ft::map<char, int, std::__1::less<char>, std::__1::allocator<std::__1::pair<const char, int> > >::value_compare, std::__1::allocator<ft::pair<const char, int> >
-		//   >::node_pointer>' to function return type 'Const_Rbt_Iterator<const ft::map<char, int, std::__1::less<char>, std::__1::allocator<std::__1::pair<const char, int>
-		//   > >::value_type>'
-
 		// Number of elements with key that compares equivalent to key or x, which is either 1 or 0.
 		size_type count(const Key& key ) const
 		{
@@ -293,7 +283,7 @@ namespace ft
 		// Returns a range containing all elements with the given key in the container.
 		ft::pair<iterator,iterator> equal_range( const Key& key )						{ return _tree.equal_range(ft::make_pair(key, mapped_type())); }
 		
-		ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const	{ return _tree.equal_range(ft::make_pair(key, mapped_type())); }
+		ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const		{ return _tree.equal_range(ft::make_pair(key, mapped_type())); }
 
 		// Returns an iterator pointing to the first element that is not less than (i.e. greater or equal to) key
 		iterator lower_bound( const Key& key )											{ return _tree.lower_bound(ft::make_pair(key, mapped_type())); }

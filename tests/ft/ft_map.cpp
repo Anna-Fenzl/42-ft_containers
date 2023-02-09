@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_map.cpp                                       :+:      :+:    :+:   */
+/*   ft_map.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 14:20:35 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 15:30:45 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "../../include/map.hpp"
 # include "../../include/utils/rbt_node.hpp"
 # include "../../include/iterators/rbt_iterator.hpp"
-# include <map>
 # include <stdio.h>
 # include <sys/time.h>
 # include <stdlib.h>

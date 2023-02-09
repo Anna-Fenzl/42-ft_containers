@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 14:55:41 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:06:14 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ namespace ft
 	// same number of black nodes.
 
 	template<typename _Val, typename _Compare=std::less<_Val>, typename Alloc = std::allocator<_Val> >
-	class Redblack_Tree
+	class redblack_tree
 	{
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< ALIASES >>>>>>>>>>>>>>>>>>>>>>>>>>>
-		typedef typename	Alloc::template rebind<RbtNode<_Val> >::other	node_alloc;
+		typedef typename	Alloc::template rebind<rbt_node<_Val> >::other	node_alloc;
 		public:
 
 		typedef _Compare								value_compare;
@@ -46,16 +46,16 @@ namespace ft
 		typedef const _Val*								const_value_pointer;
 		typedef _Val&									value_reference;
 		typedef const _Val&								const_value_reference;
-		typedef RbtNode<_Val>							node_type;
-		typedef RbtNode<_Val>*							node_pointer;
-		typedef const RbtNode<_Val>*					const_node_pointer;
+		typedef rbt_node<_Val>							node_type;
+		typedef rbt_node<_Val>*							node_pointer;
+		typedef const rbt_node<_Val>*					const_node_pointer;
 
 		typedef	size_t									size_type;
 		typedef	ptrdiff_t								difference_type;
 
 		// iterators
-		typedef ft::Rbt_Iterator<value_type>			iterator;
-		typedef ft::Const_Rbt_Iterator<value_type>		const_iterator;
+		typedef ft::rbt_iterator<value_type>			iterator;
+		typedef ft::const_rbt_iterator<value_type>		const_iterator;
 		
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER_VARIABLES >>>>>>>>>>>>>>>>>>
 		protected:
@@ -71,14 +71,14 @@ namespace ft
 		public:
 		// ----------------------- CONSTRUCTOR --------------------
 		// default constructor
-		Redblack_Tree(): _size(0), _node_alloc(node_alloc()), _compare(value_compare())
+		redblack_tree(): _size(0), _node_alloc(node_alloc()), _compare(value_compare())
 		{
 			alloc_nil();
 			_root = _nil;
 		}
 		
 		// copy_constructor
-		Redblack_Tree(const Redblack_Tree& src)
+		redblack_tree(const redblack_tree& src)
 		{
 			alloc_nil();
 			_root = _nil;
@@ -86,7 +86,7 @@ namespace ft
 			*this = src;
 		}
 
-		~Redblack_Tree()
+		~redblack_tree()
 		{
 			clear();
 			_node_alloc.destroy(_nil);
@@ -95,7 +95,7 @@ namespace ft
 
 		// ----------------------- OPERATOR ----------------------
 
-		Redblack_Tree& operator=(const Redblack_Tree& other )
+		redblack_tree& operator=(const redblack_tree& other )
 		{
 			if (this != &other)
 			{
@@ -238,7 +238,7 @@ namespace ft
 			return(end());
 		}
 
-		void	swap( Redblack_Tree& other )
+		void	swap( redblack_tree& other )
 		{
 			ft::swap(_node_alloc, other._node_alloc);
 			ft::swap(_compare, other._compare);
@@ -479,7 +479,7 @@ namespace ft
 		{
 			node_pointer node = _node_alloc.allocate(1);
 			
-			RbtNode<value_type>	set_node(*src->_value, parent, _nil, src->get_colour());
+			rbt_node<value_type>	set_node(*src->_value, parent, _nil, src->get_colour());
 			_node_alloc.construct(node, set_node);
 			return (node);
 		}
