@@ -6,13 +6,13 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 15:21:03 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:43:29 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/14 15:00:10 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMPARE_HPP
 # define COMPARE_HPP
-
+# include <iostream>
 namespace ft
 {
 	// <<<<<<<<<<<<<<<<<<<<<<<<<< LEXICOGRAPHICAL_COMPARE >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -27,7 +27,7 @@ namespace ft
 		{
 			if (*first1 < *first2)
 				return true;
-			if (*first1 > *first2)
+			if (*first2 < *first1)
 				return false;
 		}
 		return (first1 == last1) && (first2 != last2);

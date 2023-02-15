@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 16:21:29 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/08 16:08:57 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/14 15:10:21 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,14 @@ namespace ft
 	template< class T1, class T2 >
 		bool operator<( const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs )
 	{
-		return lhs.first < rhs.first || (!(lhs.first < rhs.first) && lhs.second < rhs.second);
+		if (lhs.first < rhs.first)
+			return true;
+		else if (rhs.first < lhs.first)
+			return false;
+		else if (lhs.second < rhs.second)
+			return true;
+		else
+			return false;
 	}
 
 	template< class T1, class T2 >

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:23:58 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 13:45:44 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:35:07 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ void test_vector()
 			std::cout << "capacity() = " << res.capacity() << std::endl;
 			for (size_t i = 0; i < res.size(); i++)
 				std::cout << "RES[" << i << "] = \'" << res[i] << "\', ";
-			res.reserve(res.max_size() + 2);
 		}
 		catch(const std::exception& e)
 		{

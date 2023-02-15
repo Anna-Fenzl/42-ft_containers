@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 18:10:31 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:41:11 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ namespace ft
 		// ----------------------- CONSTRUCTORS --------------------
 
 		// empty container constructor  XXXX should i allocate here or put data as a null_ptr??
-		explicit vector(const allocator_type& alloc = allocator_type())
-			: _alloc(alloc), _size(0), _capacity(0)
-		{
-			_data = _alloc.allocate(_capacity);
-		}
+		vector() : _alloc(), _data(NULL), _size(0), _capacity(0) {}
+
+		explicit vector(const allocator_type& alloc) : _alloc(alloc), _data(NULL), _size(0), _capacity(0) {}
 		
 		// fill constructor
 		explicit vector(size_type n, value_type val ,const allocator_type& alloc = allocator_type())
@@ -95,7 +93,7 @@ namespace ft
 		}
 
 		// copy constructor -> creates a container that keeps and uses a copy of src's allocator
-		explicit vector( const vector &src)
+		vector( const vector &src)
 			: _alloc(src.get_allocator()), _size(src.size()), _capacity(src.capacity())
 		{
 			_data = _alloc.allocate(_capacity);
@@ -135,6 +133,7 @@ namespace ft
 		vector& operator=( const vector& other )
 		{
 			clear();
+			if (_data)
 			_alloc.deallocate(_data, _capacity);
 
 			_alloc = other.get_allocator();
@@ -287,10 +286,10 @@ namespace ft
 				_alloc.construct(&new_data[i], _data[i - count]);
 
 			clear();
-			_alloc.deallocate(_data, _capacity);
+			if (_data)
+				_alloc.deallocate(_data, _capacity);
 		
-			if (_capacity < new_size)
-				_capacity = new_size;
+			_capacity = new_size;
 			_size = new_size;
 			_data = new_data;
 

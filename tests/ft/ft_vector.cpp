@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_vector.cpp                                    :+:      :+:    :+:   */
+/*   ft_vector.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:14:51 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 13:24:08 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:34:56 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ void test_vector()
 			std::cout << "capacity() = " << res.capacity() << std::endl;
 			for (size_t i = 0; i < res.size(); i++)
 				std::cout << "RES[" << i << "] = \'" << res[i] << "\', ";
-			res.reserve(res.max_size() + 2);
 		}
 		catch(const std::exception& e)
 		{

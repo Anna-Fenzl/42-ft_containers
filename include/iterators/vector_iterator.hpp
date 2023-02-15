@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:10:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 17:37:53 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/15 16:52:39 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ namespace ft
 		private:
 			typedef typename ft::Iterator<ft::random_access_iterator_tag , T> Iterator;
 		public:
-			typedef typename Iterator::value_type			value_type;
 			typedef typename Iterator::pointer				pointer;
 			typedef typename Iterator::reference			reference;
+			typedef typename Iterator::value_type			value_type;
+			typedef typename Iterator::pointer				iterator_type;
 			typedef typename Iterator::difference_type		difference_type;
 			typedef	typename Iterator::iterator_category	iterator_category;
 		
@@ -38,6 +39,8 @@ namespace ft
 		public:
 		
 		// ----------------------- CONSTRUCTORS -------------------------
+		vector_iterator() : _ptr(NULL) {}
+		
 		vector_iterator(pointer ptr) :_ptr(ptr) {}
 
 		vector_iterator(const vector_iterator &src) :_ptr(src._ptr) {}

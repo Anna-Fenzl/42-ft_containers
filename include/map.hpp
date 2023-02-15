@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 17:05:16 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/15 13:50:41 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ namespace ft
 			}
 		};
 		
-		typedef	redblack_tree<value_type, value_compare>					redblack_tree;
+		typedef	redblack_tree<value_type, value_compare, allocator_type>		rb_tree;
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER VARIABLES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		private:
 		allocator_type	_value_alloc;
 		value_compare	_compare;
-		redblack_tree	_tree;
+		rb_tree			_tree;
 		
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< CONSTRUCTORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:
@@ -364,4 +364,3 @@ namespace ft
 }
 
 #endif
-

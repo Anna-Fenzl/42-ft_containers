@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:08:53 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 17:05:41 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/15 13:21:58 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ namespace ft
 		typedef size_t														size_type;
 		
 		private:
-		typedef	redblack_tree<value_type, value_compare>			redblack_tree;
+		typedef	redblack_tree<value_type, value_compare, allocator_type>	rb_tree;
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER VARIABLES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		private:
 		value_compare	_compare;
 		allocator_type	_value_alloc;
-		redblack_tree	_tree;
+		rb_tree			_tree;
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< CONSTRUCTORS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		public:

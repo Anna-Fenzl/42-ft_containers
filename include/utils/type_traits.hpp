@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:07:21 by afenzl            #+#    #+#             */
-/*   Updated: 2022/12/19 13:43:21 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:39:00 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ namespace ft
 	template< class T, T v >
 	struct integral_constant
 	{
-		static const T  value = v;
-		typedef T       value_type;
+		static const T	value = v;
+		typedef T		value_type;
 	};
 
 	typedef struct integral_constant<bool, true>	true_type;
@@ -160,6 +160,13 @@ namespace ft
 	struct enable_if<true, T> {
 		typedef T type;
 	};
+
 }
+
+	template< typename T >
+	bool operator==( const T& lhs, const T& rhs)
+	{
+		return (lhs.value == rhs.value) ;
+	}
 
 #endif

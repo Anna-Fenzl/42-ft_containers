@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export MallocDebugReport=crash # to supress the error message wich comes straight from Apple's libmalloc (in std::vector.reserve(max_size + 1))
-
 selected_files="$@"
 
 if [ "$1" = "" ]; then

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 17:06:14 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:11:29 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,16 +259,16 @@ namespace ft
 		iterator	lower_bound(const value_type& value)
 		{
 			iterator it = begin();
-			for(; _compare(*it, value); ++it)
-				continue;
+			while (_compare(*it, value) && it.base() != _nil)
+				++it;
 			return it;
 		}
 
 		const_iterator	lower_bound(const value_type& value) const
 		{
 			const_iterator it = begin();
-			for(; _compare(*it, value); ++it)
-				continue;
+			while (_compare(*it, value) && it.base() != _nil )
+				++it;
 			return it;
 		}
 
