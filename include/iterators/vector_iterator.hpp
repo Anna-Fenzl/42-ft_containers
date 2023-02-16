@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:10:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/15 16:52:39 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/16 13:27:14 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ namespace ft
 		vector_iterator(pointer ptr) :_ptr(ptr) {}
 
 		vector_iterator(const vector_iterator &src) :_ptr(src._ptr) {}
+		
+		vector_iterator(vector_iterator &src) :_ptr(src._ptr) {}
 
 		// ---------------------------- METHOD --------------------------
 		
