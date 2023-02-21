@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/16 13:25:57 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/21 12:12:05 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ namespace ft
 		explicit vector(const allocator_type& alloc) : _alloc(alloc), _data(NULL), _size(0), _capacity(0) {}
 		
 		// fill constructor
-		explicit vector(size_type n, value_type val ,const allocator_type& alloc = allocator_type())
+		vector(size_type n, value_type val ,const allocator_type& alloc = allocator_type())
 			: _alloc(alloc), _size(0), _capacity(n)
 		{
 			_data = _alloc.allocate(_capacity);
@@ -84,7 +84,7 @@ namespace ft
 
 		// range constructor
 		template <class InputIterator>
-		explicit vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+		vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
 			: _alloc(alloc), _size(0), _capacity(0)
 		{
@@ -273,7 +273,8 @@ namespace ft
 			
 			size_type	position = ft::distance(begin(), pos);
 			size_type	new_size = _size + count;
-			pointer		new_data = _alloc.allocate(new_size);
+			size_type	new_capacity = (new_size > _capacity * 2) ? new_size : _capacity * 2 ;
+			pointer		new_data = _alloc.allocate(new_capacity);
 
 			size_type	i = 0;
 			for (; i != position; ++i)
@@ -289,7 +290,7 @@ namespace ft
 			if (_data)
 				_alloc.deallocate(_data, _capacity);
 		
-			_capacity = new_size;
+			_capacity = new_capacity;
 			_size = new_size;
 			_data = new_data;
 
@@ -307,7 +308,8 @@ namespace ft
 			
 			size_type	position = ft::distance(begin(), pos);
 			size_type	new_size = _size + count;
-			pointer		new_data = _alloc.allocate(new_size);
+			size_type	new_capacity = (new_size > _capacity * 2) ? new_size : _capacity * 2 ;
+			pointer		new_data = _alloc.allocate(new_capacity);
 
 			size_type	i = 0;
 			for (; i != position; ++i)
@@ -322,8 +324,7 @@ namespace ft
 			clear();
 			_alloc.deallocate(_data, _capacity);
 		
-			if (_capacity < new_size)
-				_capacity = new_size;
+			_capacity = new_capacity;
 			_size = new_size;
 			_data = new_data;
 
