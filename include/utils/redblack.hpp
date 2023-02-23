@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/14 14:11:29 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:18:21 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ namespace ft
 
 		const_iterator	upper_bound(const value_type& value) const
 		{
-			iterator it = lower_bound(value);
+			const_iterator it = lower_bound(value);
 			if (is_equal(*it, value))
 				++it;
 			return it;
@@ -470,7 +470,7 @@ namespace ft
 			x->_parent = y;
 		}
 
-		bool is_equal(value_type value, value_type comp)
+		bool is_equal(value_type value, value_type comp) const
 		{
 			return (!_compare(value, comp) && !_compare(comp, value));
 		}

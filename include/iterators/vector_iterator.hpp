@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:10:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/16 13:27:14 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/23 13:36:37 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,29 @@ namespace ft
 		public:
 		
 		// ----------------------- CONSTRUCTORS -------------------------
-		vector_iterator() : _ptr(NULL) {}
+		vector_iterator(pointer ptr = NULL) :_ptr(ptr) {}
 		
-		vector_iterator(pointer ptr) :_ptr(ptr) {}
+		vector_iterator(const vector_iterator &src)
+		{
+			*this = src;
+		}
 
-		vector_iterator(const vector_iterator &src) :_ptr(src._ptr) {}
+	~vector_iterator() {}
+
+		// ---------------------------- ASSIGNMENT OPERATOR -------------
+
+		vector_iterator &operator=( const vector_iterator &other )
+		{
+			if (this != &other)
+				this->_ptr = other.base();
+			return (*this);
+		}
 		
-		vector_iterator(vector_iterator &src) :_ptr(src._ptr) {}
-
 		// ---------------------------- METHOD --------------------------
 		
-		pointer	base() const		{ return _ptr; }
+		pointer base() const		{ return _ptr; }
 		
-		void			swap(vector_iterator &other)
+		void swap(vector_iterator &other)
 		{
 			pointer tmp = _ptr;
 			_ptr = other.ptr;
@@ -59,11 +69,17 @@ namespace ft
 		}
 
 	// ----------------------- OPERATOR OVERLOAD --------------------
-		reference		operator[](int idx)	{ return *(_ptr + idx); }
 
-		reference		operator->()		{ return _ptr; }
+		operator vector_iterator< const T >( void ) const
+		{
+			return (vector_iterator< const T >(_ptr));
+		}
+	
+		reference		operator[](int idx) const	{ return *(_ptr + idx); }
 
-		reference		operator*()			{return *_ptr; }
+		reference		operator*() const	{return *_ptr; }
+
+		pointer			operator->() const	{ return (&(*_ptr)); }
 
 		vector_iterator	&operator++() 		{ _ptr++; return *this; }
 
@@ -81,18 +97,10 @@ namespace ft
 
 		vector_iterator	operator-(difference_type n ) const	{ return _ptr - n; }
 
-		vector_iterator	&operator=(const vector_iterator &other )
-		{
-			if (_ptr != other.base())
-			{
-				_ptr = other.base();
-			}
-			return *this;
-		}
 	};
 		
 		// ----------------------- OPERATOR OVERLOAD --------------------
-		
+	
 		template< typename T >
 		bool	operator==( const vector_iterator< T >& lhs, const vector_iterator< T >& rhs )
 		{

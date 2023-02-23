@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:42:06 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/15 13:50:41 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:36:11 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ namespace ft
 		typedef Allocator											allocator_type;
 	
 		typedef value_type&											reference;
-		typedef const value_type&									const_reverence;
+		typedef const value_type&									const_reference;
 		typedef typename Allocator::pointer							pointer;
 		typedef typename Allocator::const_pointer					const_pointer;
 
@@ -52,7 +52,6 @@ namespace ft
 		typedef ft::reverse_iterator<iterator>						reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
-		private:
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER CLASS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		// binary_function is a base class for creating function objects with two arguments.
 		// template< class Arg1, class Arg2, class Result > struct binary_function;
@@ -88,7 +87,7 @@ namespace ft
 		typedef	redblack_tree<value_type, value_compare, allocator_type>		rb_tree;
 
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER VARIABLES >>>>>>>>>>>>>>>>>>>>>>>>>>>
-		private:
+		protected:
 		allocator_type	_value_alloc;
 		value_compare	_compare;
 		rb_tree			_tree;
@@ -97,7 +96,7 @@ namespace ft
 		public:
 
 		// default constructor: Constructs an empty container.
-		map(const allocator_type& alloc = allocator_type(), const key_compare& key_comp = key_compare())
+		explicit map(const key_compare& key_comp = key_compare(), const allocator_type& alloc = allocator_type())
 		: _value_alloc(alloc), _compare(key_comp) {}
 
 		// Constructs the container with the contents of the range [first, last).
@@ -105,7 +104,7 @@ namespace ft
 		// it is unspecified which element is inserted
 		template< class InputIt >
 		map( InputIt first, InputIt last, const key_compare& key_comp = key_compare(),
-			const Allocator& alloc = allocator_type() ): _value_alloc(alloc), _compare(key_comp)
+			const allocator_type& alloc = allocator_type() ): _value_alloc(alloc), _compare(key_comp)
 		{
 			insert(first, last);
 		}
@@ -303,6 +302,7 @@ namespace ft
 		// Returns a function object that compares objects of type ft::map::value_type (key-value pairs) by using key_comp to compare the first components of the pairs.
 		value_compare value_comp() const												{ return _compare; }
 
+		allocator_type get_allocator() const											{ return _value_alloc; }
 		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DEBUG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		// void	print() const
 		// {

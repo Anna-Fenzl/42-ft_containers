@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 17:04:53 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:11:54 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
 	{
 		if (node->_right != node->_nil)
 			return red_black_tree_min(node->_right);
-		while (node->_parent != node->_nil && node == node->_parent->_right)
+		while (node != node->_nil && node->_parent != node->_nil && node == node->_parent->_right)
 			node = node->_parent;
 		return node->_parent;
 	}
@@ -190,6 +190,10 @@ template< typename T>
 
 		~const_rbt_iterator( void ) {}
 
+		// ------------------- ACCESS ------------------
+
+		node_pointer base() const	{ return _ptr; }
+	
 		// ------------------- OPERATOR OVERLOADS ------------------
 		
 		reference	operator*() const	{ return *_ptr->_value; }
@@ -224,12 +228,12 @@ template< typename T>
 
 		bool	operator==( const iterator& other) const
 		{
-			return (_ptr == other._ptr);
+			return (_ptr == other.base());
 		}
 		
 		bool	operator==( const const_iterator& other) const
 		{
-			return (_ptr == other._ptr);
+			return (_ptr == other.base());
 		}
 
 		bool	operator!=( const iterator& other) const

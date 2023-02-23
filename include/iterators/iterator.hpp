@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:26:08 by afenzl            #+#    #+#             */
-/*   Updated: 2023/01/31 14:49:35 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/23 13:20:24 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ namespace ft
 	{
 		return do_distance(first, last, typename iterator_traits<It>::iterator_category());
 	}
+
 }	//namespace ft
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:07:21 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/15 17:39:00 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/22 16:35:30 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,11 +162,5 @@ namespace ft
 	};
 
 }
-
-	template< typename T >
-	bool operator==( const T& lhs, const T& rhs)
-	{
-		return (lhs.value == rhs.value) ;
-	}
 
 #endif
