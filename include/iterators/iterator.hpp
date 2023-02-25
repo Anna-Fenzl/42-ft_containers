@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:26:08 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/23 13:20:24 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/24 14:06:04 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ namespace ft
 	struct iterator_traits < const T* >
 	{
 		typedef T									value_type;
-		typedef T*									pointer;
-		typedef T&									reference;
+		typedef const T*							pointer;
+		typedef const T&							reference;
 		typedef std::ptrdiff_t						difference_type;
 		typedef ft::random_access_iterator_tag		iterator_category;
 	};

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:23:58 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/15 17:35:07 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/25 15:28:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,12 @@ void test_vector()
 		std::cout << "it(vec.rbegin());       print it[3]: \'" << it2[3] << "\'" << std::endl;
 		std::vector<int>::reverse_iterator it3(++vec.rbegin());
 		std::cout << "it(&vec[1]);           print it[3]: \'" << it3[3] << "\'" << std::endl;
+		NEWLINE NEWLINE
+
+		std::vector<int>::const_iterator const_it = vec.begin();
+		std::vector<int>::iterator it = vec.begin();
+		BOLD std::cout << "COMPARING ITERATOR TO CONST_ITERATOR"; RESET
+		std::cout << "vec.begin() == const_vec.begin(): " << (it == const_it) << std::endl;
 		NEWLINE NEWLINE
 	}
 

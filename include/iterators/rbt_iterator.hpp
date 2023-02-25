@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/23 15:11:54 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/25 16:04:42 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_min(NodePointer node)
 	{
-		while (node->_left != node->_nil)
+		while (node->_left != node->_nil && node->_left != node)
 			node = node->_left;
 		return node;
 	}
@@ -48,13 +48,35 @@ namespace ft
 	NodePointer red_black_tree_prev(NodePointer node)
 	{
 		if (node->_left != node->_nil)
+		{
 			return red_black_tree_max(node->_left);
-		if (node == node->_nil)
-			return node->_parent;
-		while (node->_parent != node->_nil && node == node->_parent->_left)
+		}
+		while (node != node->_nil && node->_parent != node->_nil && node == node->_parent->_left)
+		{
 			node = node->_parent;
+		}
 		return node->_parent;
 	}
+
+// 	template < class NodePtr >
+// NodePtr red_black_tree_prev(NodePtr x)
+// {
+//     if (x->left != NULL)
+//         return red_black_tree_max(x->left);
+//     while (x == x->parent->left)
+//         x = x->parent;
+//     return x->parent;
+// }
+
+// template < class NodePtr >
+// NodePtr red_black_tree_next(NodePtr x)
+// {
+//     if (x->right != NULL)
+//         return red_black_tree_min(x->right);
+//     while (x == x->parent->right)
+//         x = x->parent;
+//     return x->parent;
+// }
 
 	template< typename T>
 	struct const_rbt_iterator;

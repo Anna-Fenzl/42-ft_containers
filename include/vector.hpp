@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/23 14:00:02 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/24 16:47:03 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ namespace ft
 	public:
 	
 		typedef size_t									size_type;
-		typedef ptrdiff_t								difference_type;
+		typedef typename Alloc::difference_type 		difference_type;
 
 		typedef T										value_type;
 		typedef Alloc									allocator_type;

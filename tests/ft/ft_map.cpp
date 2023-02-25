@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/16 13:31:09 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/25 15:56:55 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,24 @@ void	test_map()
 		HEADLINE
 		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< TEST CONST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 
+		ft::map<int, int> look;
+		look.insert(ft::make_pair(1, 1));
+		look.insert(ft::make_pair(7, 1));
+		look.insert(ft::make_pair(3, 1));
+		look.insert(ft::make_pair(2, 1));
+		look.insert(ft::make_pair(9, 1));
+
+		ft::map<int, int>::iterator it = look.begin();
+		look.erase(7);
+		look.erase(2);
+
+		std::cout << "iterator after erase: " << (*it).first << "/" << (*it).second << std::endl;
+	}
+
+	{
+		HEADLINE
+		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< TEST CONST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+
 		ft::map<int, std::string> coins;
 		coins.insert(ft::make_pair(100, "dollar"));
 		coins.insert(ft::make_pair(25, "quarter"));
@@ -240,6 +258,7 @@ void	test_map()
 		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<<< BIG SIZE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
 		ft::map<int, int> size;
 
+		std::cout << "~5000000 insertions" << std::endl;
 		srand(2745896);
 		for (size_t i = 0; i < 5000000; i++)
 		{

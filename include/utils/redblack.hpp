@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/23 15:18:21 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/25 12:58:06 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,18 +156,20 @@ namespace ft
 			else
 				(parent != _nil && _compare(*(parent->_value), value)) ? parent->_right = move: parent->_left = move;
 			move->set_parent(parent);
-			move->_nil = move->_left;
+			move->set_nil(_nil);
 			insert_fixup(move);
 			++_size;
 			if (move == red_black_tree_max(_root) )
 				_nil->_parent = move;
+			// std::cout << "after insert move's nil is " << move->_nil << std::endl;
 			return (ft::make_pair(find(value), true));
 		}
 
-		size_type	erase(iterator pos)
+		size_type	erase(const_iterator pos)
 		{
 			if (pos == end())
 				return 0;
+
 			node_pointer	z = pos.base();
 			node_pointer	y = z;
 			node_pointer	x;
@@ -481,6 +483,7 @@ namespace ft
 			
 			rbt_node<value_type>	set_node(*src->_value, parent, _nil, src->get_colour());
 			_node_alloc.construct(node, set_node);
+			node->set_nil(_nil);
 			return (node);
 		}
 
