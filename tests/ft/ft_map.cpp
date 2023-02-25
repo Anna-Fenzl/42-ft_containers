@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:20:12 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/25 15:56:55 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/25 16:09:39 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void	test_map()
 
 	{
 		HEADLINE
-		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< TEST CONST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"; RESET
+		std::cout << "\n<<<<<<<<<<<<<<<<<<<<<<<<< ITERATOR INVALIDATION >>>>>>>>>>>>>>>>>>>>"; RESET
 
 		ft::map<int, int> look;
 		look.insert(ft::make_pair(1, 1));
