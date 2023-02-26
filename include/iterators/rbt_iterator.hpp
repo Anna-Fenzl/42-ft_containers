@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/25 16:04:42 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/26 14:53:25 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ namespace ft
 	template < typename NodePointer >
 	NodePointer red_black_tree_prev(NodePointer node)
 	{
+		// std::cout << "_nils parent is " << *node->_nil->_parent << std::endl;
 		if (node->_left != node->_nil)
 		{
 			return red_black_tree_max(node->_left);

@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 16:17:48 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/25 12:58:06 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/26 15:17:05 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ namespace ft
 			if (original_colour == BLACK) {
 				erase_fixup(x);
 			}
+			_nil->_parent = red_black_tree_max(_root);
 			--_size;
 			return 1;
 		}
@@ -435,7 +436,7 @@ namespace ft
 				u->_parent->_left = v;
 			else
 				u->_parent->_right = v;
-			v->_parent = u->_parent; 
+			v->_parent = u->_parent;
 		}
 
 		void	left_rotate(node_pointer x)
@@ -567,10 +568,10 @@ namespace ft
 				prev->str = prev_str;
 			}
 			showTrunks(trunk);
-			std::cout << ((root->get_colour() == RED) ? "\033[0;31m" : "");
+			// std::cout << ((root->get_colour() == RED) ? "\033[0;31m" : "");
 			if (root->_value)
 				std::cout << "[" << *root->_value << "]"<< std::endl;
-			std::cout << ((root->get_colour() == RED) ? "\033[0m" : "");
+			// std::cout << ((root->get_colour() == RED) ? "\033[0m" : "");
 
 
 			if (prev)
