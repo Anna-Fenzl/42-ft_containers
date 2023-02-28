@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:08:53 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/15 13:21:58 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/28 14:37:43 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,23 @@ namespace ft
 		typedef Compare														value_compare;
 		typedef Allocator													allocator_type;
 	
-		typedef typename Allocator::reference								reference;
-		typedef typename Allocator::const_reference							const_reference;
+		typedef value_type&													reference;
+		typedef const value_type&											const_reference;
 		typedef typename Allocator::pointer									pointer;
 		typedef typename Allocator::const_pointer							const_pointer;
 
-		typedef ft::rbt_iterator<value_type>								iterator;
-		typedef ft::const_rbt_iterator<value_type>							const_iterator;
+		private:
+		typedef	redblack_tree<value_type, value_compare, allocator_type>	rb_tree;
+
+		public:
+		typedef typename rb_tree::const_iterator							iterator;
+		typedef typename rb_tree::const_iterator							const_iterator;
 		typedef ft::reverse_iterator<iterator>								reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 	
 		typedef typename ft::iterator_traits<iterator>::difference_type		difference_type;
 		typedef size_t														size_type;
 		
-		private:
-		typedef	redblack_tree<value_type, value_compare, allocator_type>	rb_tree;
-
 		//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<< MEMBER VARIABLES >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		private:
 		value_compare	_compare;

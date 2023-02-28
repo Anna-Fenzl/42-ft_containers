@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:01:50 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/26 14:53:25 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/28 15:12:34 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,6 @@ namespace ft
 		}
 		return node->_parent;
 	}
-
-// 	template < class NodePtr >
-// NodePtr red_black_tree_prev(NodePtr x)
-// {
-//     if (x->left != NULL)
-//         return red_black_tree_max(x->left);
-//     while (x == x->parent->left)
-//         x = x->parent;
-//     return x->parent;
-// }
-
-// template < class NodePtr >
-// NodePtr red_black_tree_next(NodePtr x)
-// {
-//     if (x->right != NULL)
-//         return red_black_tree_min(x->right);
-//     while (x == x->parent->right)
-//         x = x->parent;
-//     return x->parent;
-// }
 
 	template< typename T>
 	struct const_rbt_iterator;

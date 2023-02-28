@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:23:21 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/09 14:57:02 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/28 14:13:47 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ namespace ft
 		// This is also the default constructor
 		explicit stack( const Container& cont = Container() ) : c(cont) {}
 
+		stack( const stack& other)
+		{
+			c = other.c;
+		}
+		
 		~stack() {}
 
 		// ----------------------- OPERATOR --------------------
@@ -52,9 +57,9 @@ namespace ft
 		// ----------------------- ELEMENT ACCESS --------------
 
 		// Returns reference to the top element in the stack. This is the most recently pushed element
-		reference top()				{ return c[c.size() - 1]; }
+		reference top()				{ return c.back(); }
 		
-		const_reference top() const	{ return c[c.size() - 1]; }
+		const_reference top() const	{ return c.back(); }
 		
 		// ----------------------- CAPACITY --------------------
 

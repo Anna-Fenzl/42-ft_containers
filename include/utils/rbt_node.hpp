@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 13:19:47 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/25 11:50:11 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/28 14:57:54 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ namespace ft
 		public:
 		typedef T								value_type;
 		typedef T*								value_pointer;
-		typedef rbt_node<value_type>				node_type;
+		typedef rbt_node<value_type>			node_type;
 		typedef	rbt_node<value_type>*			node_pointer;
 		typedef const rbt_node<value_type>*		const_node_pointer;
 		typedef Alloc							value_alloc;
