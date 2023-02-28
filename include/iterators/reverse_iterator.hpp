@@ -6,7 +6,7 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:48:51 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/23 13:47:46 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/02/28 15:37:49 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,56 +87,6 @@ namespace ft
 		reference			operator[](difference_type n) const { return *(*this + n); }
 
 	};
-
-	// template <class Iterator>
-	// 	bool operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	// {
-	// 	return lhs.base() == rhs.base();
-	// }
-	
-	// template <class Iterator>
-	// 	bool operator!= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	// {
-	// 	return lhs.base() != rhs.base();
-	// }
-	
-	// template <class Iterator>
-	// 	bool operator<  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	// {
-	// 	return lhs.base() < rhs.base();
-	// }
-	
-	// template <class Iterator>
-	// 	bool operator>  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	// {
-	// 	return lhs.base() > rhs.base();
-	// }
-	
-	// template <class Iterator>
-	// 	bool operator<= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	// {
-	// 	return !(lhs > rhs);
-	// }
-	
-	// template <class Iterator>
-	// 	bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	// {
-	// 	return !(lhs < rhs);
-	// }
-	
-	// template <class Iterator>
-	// reverse_iterator<Iterator> operator+
-	// 	(typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& rev_it)
-	// {
-	// 	return reverse_iterator<Iterator>(rev_it.base() - n);
-	// }
-
-	// template <class Iterator>
-	// reverse_iterator<Iterator> operator-
-	// 	(typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& rev_it)
-	// {
-	// 	return reverse_iterator<Iterator>(rev_it.base() + n);
-	// }
 
 	template < class InputIt, class Distance >
 	void    advance( InputIt& it, Distance n )
