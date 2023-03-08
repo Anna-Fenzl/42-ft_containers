@@ -6,17 +6,18 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:12:00 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/24 16:47:03 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/03/08 12:05:33 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
 # include "./iterators/vector_iterator.hpp"
 # include "./iterators/reverse_iterator.hpp"
-# include "./utils/type_traits.hpp"
-# include "./utils/pair.hpp"
+# include "./utils/utility.hpp"
 # include <iostream>
 # include <stdexcept>
 # include <limits>
@@ -420,7 +421,7 @@ namespace ft
 	bool operator==( const ft::vector<T,Alloc>& lhs,
 					const ft::vector<T,Alloc>& rhs )
 	{
-		return (lhs.size() == rhs.size() && std::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
 
 	template< class T, class Alloc >

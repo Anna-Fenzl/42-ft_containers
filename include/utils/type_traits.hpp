@@ -6,9 +6,11 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:07:21 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/22 16:35:30 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/03/07 12:21:01 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #ifndef SFINAE_HPP
 # define SFINAE_HPP

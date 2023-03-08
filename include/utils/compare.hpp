@@ -6,13 +6,17 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 15:21:03 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/14 15:00:10 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/03/07 12:20:47 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #ifndef COMPARE_HPP
 # define COMPARE_HPP
+
 # include <iostream>
+
 namespace ft
 {
 	// <<<<<<<<<<<<<<<<<<<<<<<<<< LEXICOGRAPHICAL_COMPARE >>>>>>>>>>>>>>>>>>>>>>>>>>

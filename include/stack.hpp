@@ -6,9 +6,11 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:23:21 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/28 14:13:47 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/03/07 12:48:26 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #ifndef STACK_HPP
 # define STACK_HPP

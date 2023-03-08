@@ -6,9 +6,11 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 16:21:29 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/14 15:10:21 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/03/07 12:20:50 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #ifndef PAIR_HPP
 # define PAIR_HPP

@@ -6,9 +6,11 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:08:53 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/28 14:37:43 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/03/07 12:19:30 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #ifndef SET_HPP
 # define SET_HPP

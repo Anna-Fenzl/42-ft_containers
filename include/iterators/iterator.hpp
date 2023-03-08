@@ -6,9 +6,11 @@
 /*   By: afenzl <afenzl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:26:08 by afenzl            #+#    #+#             */
-/*   Updated: 2023/02/24 14:06:04 by afenzl           ###   ########.fr       */
+/*   Updated: 2023/03/07 12:19:38 by afenzl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #ifndef ITERATOR_HPP
 # define ITERATOR_HPP
