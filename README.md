@@ -1,5 +1,5 @@
 # 42-ft_containers
-This is a project for [42Heilbronn](https://www.42heilbronn.de/en/curriculum/) school's curriculum.
+This was a project for [42Heilbronn](https://www.42heilbronn.de/en/curriculum/) school's curriculum.
 
 The goal of this project is to __implement the STL containers__ - vector, map, stack and set - as well as some additional utilities.  
 The containers are implemented in the ft namespace and use std::allocator as the default allocator.
