@@ -25,6 +25,6 @@ The underlying data structure of map and set is a [red-black-tree](https://en.wi
 
 This creates two executables: ft_containers and std_containers.
 
-by running `./compare.sh` the ouputs of both binaries are compared.
+by running `./compare.sh` the outputs of both binaries are compared.
 
 by running `./speedtest.sh` the runtimes of both programs are compared.
