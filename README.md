@@ -31,3 +31,5 @@ This creates two executables: ft_containers and std_containers.
 by running `./compare.sh` the outputs of both binaries are compared.
 
 by running `./speedtest.sh` the runtimes of both programs are compared.
+
+All the implemantations are located in the include folder.
